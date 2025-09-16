@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bishal Mandal - Portfolio</title>
+    <link rel="shortcut icon" type="image/webp" href="assets/logo/logo.png">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts - Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <!-- External CSS file -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <!-- Particles.js CDN for background animation -->
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+</head>
+
+<body class="min-h-screen bg-gray-900 text-gray-100">
+
+    <!-- Navigation Bar -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-gray-800 bg-opacity-90 shadow-lg p-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <img src="assets/Hlogo/Hlogo.png" alt="Bishal Mandal Logo" class="logo-header">
+                <div class="text-2xl font-bold text-blue-400 logo-text">Bishal Mandal</div>
+            </div>
+            <!-- Hamburger menu button for mobile -->
+            <button id="mobile-menu-button" class="md:hidden text-gray-300 hover:text-blue-300 focus:outline-none"
+                aria-label="Toggle navigation menu">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-4 6h4">
+                    </path>
+                </svg>
+            </button>
+            <!-- Navigation links container (hidden on mobile, flex row on desktop) -->
+            <div id="nav-links" class="hidden md:flex md:flex-row md:space-x-6">
+                <a href="#home"
+                    class="nav-link text-lg font-medium text-gray-300 hover:text-blue-300 py-2 px-3 rounded-md transition duration-300 ease-in-out">Home</a>
+                <a href="#about"
+                    class="nav-link text-lg font-medium text-gray-300 hover:text-blue-300 py-2 px-3 rounded-md transition duration-300 ease-in-out">About</a>
+                <a href="#skills"
+                    class="nav-link text-lg font-medium text-gray-300 hover:text-blue-300 py-2 px-3 rounded-md transition duration-300 ease-in-out">Skills</a>
+                <a href="#projects"
+                    class="nav-link text-lg font-medium text-gray-300 hover:text-blue-300 py-2 px-3 rounded-md transition duration-300 ease-in-out">Projects</a>
+                <a href="#resume"
+                    class="nav-link text-lg font-medium text-gray-300 hover:text-blue-300 py-2 px-3 rounded-md transition duration-300 ease-in-out">Resume</a>
+                <a href="#contact"
+                    class="nav-link text-lg font-medium text-gray-300 hover:text-blue-300 py-2 px-3 rounded-md transition duration-300 ease-in-out">Contact</a>
+            </div>
+        </div>
+        <!-- Mobile menu container (full width, hidden by default, shown when toggled) -->
+        <div id="mobile-menu-overlay" class="md:hidden hidden w-full mt-4">
+            <div class="flex flex-col items-center space-y-3">
+                <a href="#home"
+                    class="nav-link text-lg font-medium text-gray-300 hover:text-blue-300 py-2 px-3 rounded-md transition duration-300 ease-in-out w-full text-center">Home</a>
+                <a href="#about"
+                    class="nav-link text-lg font-medium text-gray-300 hover:text-blue-300 py-2 px-3 rounded-md transition duration-300 ease-in-out w-full text-center">About</a>
+                <a href="#skills"
+                    class="nav-link text-lg font-medium text-gray-300 hover:text-blue-300 py-2 px-3 rounded-md transition duration-300 ease-in-out w-full text-center">Skills</a>
+                <a href="#projects"
+                    class="nav-link text-lg font-medium text-gray-300 hover:text-blue-300 py-2 px-3 rounded-md transition duration-300 ease-in-out w-full text-center">Projects</a>
+                <a href="#resume"
+                    class="nav-link text-lg font-medium text-gray-300 hover:text-blue-300 py-2 px-3 rounded-md transition duration-300 ease-in-out w-full text-center">Resume</a>
+                <a href="#contact"
+                    class="nav-link text-lg font-medium text-gray-300 hover:text-blue-300 py-2 px-3 rounded-md transition duration-300 ease-in-out w-full text-center">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home"
+        class="relative flex items-center justify-center min-h-screen bg-gradient-to-r from-gray-800 to-gray-900 text-center px-4 pt-64 md:px-8 md:pt-20 overflow-hidden">
+        <!-- Particles.js background -->
+        <div id="particles-js" class="absolute inset-0 z-0"></div>
+        <div class="relative z-10 max-w-4xl mx-auto">
+            <img src="assets/img/profile.jpg" alt="Profile Picture of Your Name"
+                class="w-36 h-36 rounded-full mx-auto mb-6 border-4 border-blue-400 shadow-lg"
+                onerror="this.onerror=null;this.src='https://placehold.co/150x150/0000FF/FFFFFF?text=Profile';" />
+            <h1 class="text-5xl font-extrabold mb-4 text-white leading-tight">
+                Hey there, I'm your <span class="text-blue-400">Bishal</span>
+            </h1>
+            <p class="text-xl text-gray-300 mb-8">
+                A passionate <span id="typing-text" class="font-semibold text-blue-300"></span> with a focus on creating
+                impactful web applications.
+            </p>
+            <button onclick="document.getElementById('projects').scrollIntoView({ behavior: 'smooth' });"
+                class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transform transition duration-300 hover:scale-105">
+                View My Work
+            </button>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 px-4 sm:px-8 bg-gray-900 scroll-reveal">
+        <div class="container mx-auto max-w-4xl">
+            <h2 class="text-4xl font-bold text-center text-white mb-12">About Me</h2>
+            <div class="flex flex-col md:flex-row items-center md:space-x-8">
+                <div class="md:w-1/3 mb-8 md:mb-0">
+                    <img src="assets/img/About_Me.jpg" alt="Illustration representing 'About Me' section"
+                        class="w-full h-auto rounded-lg shadow-xl border-2 border-blue-500"
+                        onerror="this.onerror=null;this.src='https://placehold.co/300x300/0000FF/FFFFFF?text=About+Me';" />
+                </div>
+                <div class="md:w-2/3 text-lg text-gray-300 leading-relaxed">
+                    <p class="mb-4">
+                        Hello! I'm a dedicated software developer with a strong foundation in front-end and back-end
+                        technologies. My journey in tech began with a curiosity for how things work, which quickly
+                        evolved into a passion for building innovative solutions.
+                    </p>
+                    <p class="mb-4">
+                        I specialize in creating responsive, user-friendly, and efficient web applications. I enjoy
+                        tackling complex problems and I am always eager to learn new technologies and improve my skills.
+                    </p>
+                    <p>
+                        When I'm not coding, you can find me exploring new technology, also I loved listen to music and
+                        storys or
+                        experimenting with new recipes in the kitchen. I believe in continuous learning and growth, both
+                        professionally and personally.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 px-4 sm:px-8 bg-gray-800 scroll-reveal">
+        <div class="container mx-auto max-w-4xl">
+            <h2 class="text-4xl font-bold text-center text-white mb-12">My Skills</h2>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+                <!-- Skill Card 1 -->
+                <div
+                    class="bg-gray-700 p-6 rounded-lg shadow-md flex flex-col items-center justify-center text-center transform transition duration-300 hover:scale-105 hover:bg-gray-600">
+                    <div class="text-5xl mb-4">C</div>
+                    <h3 class="text-xl font-semibold text-white">Programing</h3>
+                </div>
+                <!-- Skill Card 2 -->
+                <div
+                    class="bg-gray-700 p-6 rounded-lg shadow-md flex flex-col items-center justify-center text-center transform transition duration-300 hover:scale-105 hover:bg-gray-600">
+                    <div class="text-5xl mb-4">C++</div>
+                    <h3 class="text-xl font-semibold text-white">Programing</h3>
+                </div>
+                <!-- Skill Card 3 -->
+                <div
+                    class="bg-gray-700 p-6 rounded-lg shadow-md flex flex-col items-center justify-center text-center transform transition duration-300 hover:scale-105 hover:bg-gray-600">
+                    <div class="text-5xl mb-4">🐍</div>
+                    <h3 class="text-xl font-semibold text-white">Python</h3>
+                </div>
+                <!-- Skill Card 4 -->
+                <div
+                    class="bg-gray-700 p-6 rounded-lg shadow-md flex flex-col items-center justify-center text-center transform transition duration-300 hover:scale-105 hover:bg-gray-600">
+                    <div class="text-5xl mb-4">🚀</div>
+                    <h3 class="text-xl font-semibold text-white">RESTful APIs</h3>
+                </div>
+                <!-- Skill Card 5 -->
+                <div
+                    class="bg-gray-700 p-6 rounded-lg shadow-md flex flex-col items-center justify-center text-center transform transition duration-300 hover:scale-105 hover:bg-gray-600">
+                    <div class="text-5xl mb-4">🌐</div>
+                    <h3 class="text-xl font-semibold text-white">HTML5</h3>
+                </div>
+                <!-- Skill Card 6 -->
+                <div
+                    class="bg-gray-700 p-6 rounded-lg shadow-md flex flex-col items-center justify-center text-center transform transition duration-300 hover:scale-105 hover:bg-gray-600">
+                    <div class="text-5xl mb-4">🎨</div>
+                    <h3 class="text-xl font-semibold text-white">CSS3 / Tailwind CSS</h3>
+                </div>
+                <!-- Skill Card 7 -->
+                <div
+                    class="bg-gray-700 p-6 rounded-lg shadow-md flex flex-col items-center justify-center text-center transform transition duration-300 hover:scale-105 hover:bg-gray-600">
+                    <div class="text-5xl mb-4">💡</div>
+                    <h3 class="text-xl font-semibold text-white">JavaScript</h3>
+                </div>
+                <!-- Skill Card 8 -->
+                <div
+                    class="bg-gray-700 p-6 rounded-lg shadow-md flex flex-col items-center justify-center text-center transform transition duration-300 hover:scale-105 hover:bg-gray-600">
+                    <div class="text-5xl mb-4">PHP</div>
+                    <h3 class="text-xl font-semibold text-white">Backend Development</h3>
+                </div>
+                <!-- Skill Card 9 -->
+                <div
+                    class="bg-gray-700 p-6 rounded-lg shadow-md flex flex-col items-center justify-center text-center transform transition duration-300 hover:scale-105 hover:bg-gray-600">
+                    <div class="text-5xl mb-4">📊</div>
+                    <h3 class="text-xl font-semibold text-white">MySQL</h3>
+                </div>
+                <!-- Skill Card 10 -->
+                <div
+                    class="bg-gray-700 p-6 rounded-lg shadow-md flex flex-col items-center justify-center text-center transform transition duration-300 hover:scale-105 hover:bg-gray-600">
+                    <div class="text-5xl mb-4">⚙️</div>
+                    <h3 class="text-xl font-semibold text-white">Git / GitHub</h3>
+                </div>
+                <!-- Skill Card 11 -->
+                <div
+                    class="bg-gray-700 p-6 rounded-lg shadow-md flex flex-col items-center justify-center text-center transform transition duration-300 hover:scale-105 hover:bg-gray-600">
+                    <div class="text-5xl mb-4">🛠️</div>
+                    <h3 class="text-xl font-semibold text-white">Problem Solving</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 px-4 sm:px-8 bg-gray-900 scroll-reveal">
+        <div class="container mx-auto max-w-4xl">
+            <h2 class="text-4xl font-bold text-center text-white mb-12">My Projects</h2>
+
+            <!-- Project Filter Buttons -->
+            <div class="flex flex-wrap justify-center gap-4 mb-12">
+                <button class="filter-btn active-filter-btn" data-category="all">All</button>
+                <button class="filter-btn" data-category="web-design">Web Design</button>
+                <button class="filter-btn" data-category="development">Development</button>
+            </div>
+
+            <div id="project-grid" class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                <!-- Project Card 1: Online Food-Ordering Platform -->
+                <div class="project-card bg-gray-700 p-8 rounded-lg shadow-xl flex flex-col transform transition duration-300 hover:scale-105 hover:bg-gray-600"
+                    data-category="development web-design">
+                    <h3 class="text-3xl font-bold text-blue-400 mb-4">Online Food-Ordering Platform</h3>
+                    <p class="text-gray-300 mb-6 flex-grow">A full-stack Online Food-Ordering application built with
+                        HTML5,
+                        CSS, JS, PHP, and MYSQL featuring user authentication, and payment
+                        integration.</p>
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="bg-blue-500 text-white text-sm px-3 py-1 rounded-full">HTML5</span>
+                        <span class="bg-blue-500 text-white text-sm px-3 py-1 rounded-full">CSS</span>
+                        <span class="bg-blue-500 text-white text-sm px-3 py-1 rounded-full">JS</span>
+                        <span class="bg-blue-500 text-white text-sm px-3 py-1 rounded-full">PHP</span>
+                        <span class="bg-blue-500 text-white text-sm px-3 py-1 rounded-full">MYSQL</span>
+                    </div>
+                    <a href="#" target="_blank" rel="noopener noreferrer"
+                        class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-full text-center shadow-md transform transition duration-300 hover:scale-105">
+                        View Project
+                    </a>
+                </div>
+                <!-- Project Card 2: Portfolio Site -->
+                <div class="project-card bg-gray-700 p-8 rounded-lg shadow-xl flex flex-col transform transition duration-300 hover:scale-105 hover:bg-gray-600"
+                    data-category="development">
+                    <h3 class="text-3xl font-bold text-blue-400 mb-4">Portfolio Site</h3>
+                    <p class="text-gray-300 mb-6 flex-grow">A responsive Portfolio application.</p>
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="bg-blue-500 text-white text-sm px-3 py-1 rounded-full">HTML5</span>
+                        <span class="bg-blue-500 text-white text-sm px-3 py-1 rounded-full">CSS</span>
+                        <span class="bg-blue-500 text-white text-sm px-3 py-1 rounded-full">JS</span>
+                    </div>
+                    <a href="#" target="_blank" rel="noopener noreferrer"
+                        class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-full text-center shadow-md transform transition duration-300 hover:scale-105">
+                        View Project
+                    </a>
+                </div>
+                <!-- Project Card 3: Personal Blog Site -->
+                <div class="project-card bg-gray-700 p-8 rounded-lg shadow-xl flex flex-col transform transition duration-300 hover:scale-105 hover:bg-gray-600"
+                    data-category="development web-design">
+                    <h3 class="text-3xl font-bold text-blue-400 mb-4">Personal Blog Site</h3>
+                    <p class="text-gray-300 mb-6 flex-grow">A dynamic blog platform allowing users to create, edit, and
+                        publish posts, with a rich text editor and comment section.</p>
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="bg-blue-500 text-white text-sm px-3 py-1 rounded-full">HTML</span>
+                        <span class="bg-blue-500 text-white text-sm px-3 py-1 rounded-full">CSS</span>
+                        <span class="bg-blue-500 text-white text-sm px-3 py-1 rounded-full">JS</span>
+                    </div>
+                    <a href="#" target="_blank" rel="noopener noreferrer"
+                        class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-full text-center shadow-md transform transition duration-300 hover:scale-105">
+                        View Project
+                    </a>
+                </div>
+                <!-- Project Card 4: Weather Dashboard -->
+                <div class="project-card bg-gray-700 p-8 rounded-lg shadow-xl flex flex-col transform transition duration-300 hover:scale-105 hover:bg-gray-600"
+                    data-category="web-design">
+                    <h3 class="text-3xl font-bold text-blue-400 mb-4">Weather Dashboard</h3>
+                    <p class="text-gray-300 mb-6 flex-grow">A single-page application displaying real-time weather
+                        information using a third-party API, with search functionality and location-based weather.</p>
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="bg-blue-500 text-white text-sm px-3 py-1 rounded-full">HTML</span>
+                        <span class="bg-blue-500 text-white text-sm px-3 py-1 rounded-full">CSS</span>
+                        <span class="bg-blue-500 text-white text-sm px-3 py-1 rounded-full">JavaScript</span>
+                        <span class="bg-blue-500 text-white text-sm px-3 py-1 rounded-full">OpenWeather API</span>
+                    </div>
+                    <a href="#" target="_blank" rel="noopener noreferrer"
+                        class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-full text-center shadow-md transform transition duration-300 hover:scale-105">
+                        View Project
+                    </a>
+                </div>
+
+                <!-- Project Card 5: Mobile App Development (New Example) -->
+                <!-- <div class="project-card bg-gray-700 p-8 rounded-lg shadow-xl flex flex-col transform transition duration-300 hover:scale-105 hover:bg-gray-600"
+                    data-category="development">
+                    <h3 class="text-3xl font-bold text-blue-400 mb-4">Mobile Recipe App</h3>
+                    <p class="text-gray-300 mb-6 flex-grow">Designed and developed a cross-platform mobile application
+                        for managing recipes and meal plans, with offline capabilities.</p>
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="bg-blue-500 text-white text-sm px-3 py-1 rounded-full">React Native</span>
+                        <span class="bg-blue-500 text-white text-sm px-3 py-1 rounded-full">Firebase</span>
+                        <span class="bg-blue-500 text-white text-sm px-3 py-1 rounded-full">Redux</span>
+                    </div>
+                    <a href="#" target="_blank" rel="noopener noreferrer"
+                        class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-full text-center shadow-md transform transition duration-300 hover:scale-105">
+                        View Project
+                    </a>
+                </div> -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Resume Section -->
+    <section id="resume" class="py-20 px-4 sm:px-8 bg-gray-800 scroll-reveal">
+        <div class="container mx-auto max-w-4xl text-center">
+            <h2 class="text-4xl font-bold text-white mb-12">My Resume</h2>
+            <p class="text-lg text-gray-300 mb-8">
+                You can download my full resume to learn more about my professional experience, education, and detailed
+                skill set.
+            </p>
+            <a href="your_resume.pdf" download="Your_Name_Resume.pdf"
+                class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transform transition duration-300 hover:scale-105">
+                Click here
+            </a>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 px-4 sm:px-8 bg-gray-900 scroll-reveal">
+        <div class="container mx-auto max-w-2xl text-center">
+            <h2 class="text-4xl font-bold text-white mb-12">Get In Touch</h2>
+            <p class="text-lg text-gray-300 mb-8">
+                Have a question or want to work together? Send me an email!
+            </p>
+            <a href="mailto:heyiamyourBishalMandal@gmail.com?subject=Portfolio Website Inquiry&body=Hello Your Name,"
+                class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transform transition duration-300 hover:scale-105">
+                Send Email
+            </a>
+            <p class="text-sm text-gray-400 mt-4">
+                (You can reach out anytime to send me an email.)
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 py-8 text-center text-gray-400 text-sm">
+        <div class="container mx-auto">
+            <div class="flex justify-center space-x-6 mt-4">
+                <a href="https://www.linkedin.com/in/bishal-mandal-0bb756264/" target="_blank" rel="noopener noreferrer"
+                    class="text-gray-400 hover:text-blue-400 transition duration-300">
+                    <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path
+                            d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.761 0 5-2.239 5-5v-14c0-2.761-2.239-5-5-5zm-11 19h-3v-10h3v10zm-1.5-11.268c-.966 0-1.75-.784-1.75-1.75s.784-1.75 1.75-1.75 1.75.784 1.75 1.75-.784 1.75-1.75 1.75zm13.5 11.268h-3v-5.604c0-1.337-.026-3.063-1.867-3.063-1.868 0-2.154 1.459-2.154 2.967v5.7h-3v-10h2.881v1.367h.041c.401-.761 1.381-1.563 2.845-1.563 3.043 0 3.604 2.004 3.604 4.609v5.587z" />
+                    </svg>
+                    <span class="sr-only">LinkedIn</span>
+                </a>
+                <!-- Add more social media links as needed -->
+                <!-- Example for Instagram -->
+                <a href="https://instagram.com/yourusername" target="_blank" rel="noopener noreferrer"
+                    class="text-gray-400 hover:text-blue-400 transition duration-300">
+                    <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path
+                            d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.772 1.668 4.92 4.92.058 1.265.07 1.645.07 4.85s-.012 3.584-.07 4.85c-.148 3.252-1.668 4.772-4.92 4.92-.058.007-1.265.07-4.85.07s-3.584-.012-4.85-.07c-3.252-.148-4.772-1.668-4.92-4.92-.058-1.265-.07-1.645-.07-4.85s.012-3.584.07-4.85c.148-3.252 1.668-4.772 4.92-4.92zM12 0C8.74 0 8.334.014 7.05.072c-3.79.172-5.748 2.13-5.92 5.92-.058 1.265-.072 1.644-.072 4.85s.014 3.584.072 4.85c.172 3.79 2.13 5.748 5.92 5.92 1.265.058 1.644.072 4.85.072s3.584-.014 4.85-.072c3.79-.172 5.748-2.13 5.92-5.92.058-1.265.072-1.644.072-4.85s-.014-3.584-.072-4.85c-.172-3.79-2.13-5.748-5.92-5.92zM12 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 7.162a4.838 4.838 0 110 9.676 4.838 4.838 0 010-9.676zM18.462 3.784a1.44 1.44 0 100 2.88 1.44 1.44 0 000-2.88z" />
+                    </svg>
+                    <span class="sr-only">Instagram</span>
+
+                </a>
+
+            </div>
+
+        </div>
+        <p>&copy; <span id="current-year"></span> Bishal Mandal. All rights reserved.</p>
+    </footer>
+
+    <!-- External JavaScript file -->
+    <script src="assets/js/script.js" defer></script>
+</body>
+
+</html>

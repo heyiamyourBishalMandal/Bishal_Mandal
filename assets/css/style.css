@@ -1,0 +1,133 @@
+/* Custom styles for smooth scrolling and font */
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+}
+
+/* Logo Header Styles */
+.logo-header {
+    height: 40px;
+    width: auto;
+    transition: transform 0.3s ease;
+}
+
+.logo-header:hover {
+    transform: scale(1.05);
+}
+
+/* Responsive Logo Styles */
+@media (max-width: 640px) {
+    .logo-header {
+        height: 32px; /* Smaller on mobile */
+    }
+    
+    .logo-text {
+        font-size: 1.5rem !important; /* Smaller text on mobile */
+    }
+}
+
+@media (min-width: 641px) and (max-width: 768px) {
+    .logo-header {
+        height: 36px; /* Medium size on tablets */
+    }
+}
+
+@media (min-width: 769px) {
+    .logo-header {
+        height: 40px; /* Full size on laptops/desktop */
+    }
+}
+
+/* Active navigation link styling */
+.nav-link.active {
+    color: #60a5fa;
+    /* blue-400 */
+    border-bottom-width: 2px;
+    border-color: #60a5fa;
+    /* blue-400 */
+}
+
+/* Project Filter Button Styles */
+.filter-btn {
+    background-color: #374151;
+    /* bg-gray-700 */
+    color: #d1d5db;
+    /* text-gray-300 */
+    font-weight: 600;
+    /* font-semibold */
+    padding-top: 0.5rem;
+    /* py-2 */
+    padding-bottom: 0.5rem;
+    padding-left: 1.5rem;
+    /* px-6 */
+    padding-right: 1.5rem;
+    border-radius: 9999px;
+    /* rounded-full */
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+    /* shadow-md */
+    transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+    outline: none;
+}
+
+.filter-btn:hover,
+.filter-btn:focus {
+    background-color: #2563eb;
+    /* bg-blue-600 */
+    color: #fff;
+    /* text-white */
+}
+
+.filter-btn:focus {
+    box-shadow: 0 0 0 2px #3b82f6, 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+    /* focus:ring-2 focus:ring-blue-500 */
+}
+
+.filter-btn.active-filter-btn {
+    background-color: #2563eb;
+    /* bg-blue-600 */
+    color: #fff;
+    /* text-white */
+}
+
+/* Scroll Reveal Animations */
+.scroll-reveal {
+    opacity: 0;
+    transform: translateY(50px);
+    /* Start slightly below its final position */
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.scroll-reveal.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Optional: Add a slight delay for cards if desired, applied via JS */
+.scroll-reveal.card-delay-1 {
+    transition-delay: 0.1s;
+}
+
+.scroll-reveal.card-delay-2 {
+    transition-delay: 0.2s;
+}
+
+.scroll-reveal.card-delay-3 {
+    transition-delay: 0.3s;
+}
+
+.scroll-reveal.card-delay-4 {
+    transition-delay: 0.4s;
+}
+
+.scroll-reveal.card-delay-5 {
+    transition-delay: 0.5s;
+}
+
+.scroll-reveal.card-delay-6 {
+    transition-delay: 0.6s;
+}
+
+/* Add more card-delay classes if you have more than 6 cards per section */
