@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { motion, AnimatePresence, useScroll, useTransform, useSpring, useMotionValue } from 'framer-motion';
-import { Code, Terminal, Cpu, Sparkles } from 'lucide-react';
+import { Code, Terminal, Cpu, Sparkles, Award } from 'lucide-react';
 
 export default function HeroScrollytelling({ scrollToSection, darkMode }) {
   const containerRef = useRef(null);
@@ -214,23 +214,23 @@ export default function HeroScrollytelling({ scrollToSection, darkMode }) {
           Hey there, I'm <span className="text-cybergreen">Bishal Mandal</span>
         </>
       ),
-      description: 'A passionate Software Developer & Web Designer with a focus on creating impactful web applications and custom software solutions.',
-      pills: ['Python / C++ / JS', 'J.E.R.V.I.S Assistant', 'Kolkata, India'],
+      description: 'A passionate Software Developer & Web Designer with research experience at IIT Kharagpur, focusing on impactful web applications and custom software.',
+      pills: ['IIT KGP Intern', 'Python / C++ / JS', 'Kolkata, India'],
       buttons: true,
     },
     {
       stepNum: '#02',
-      stepName: 'Logic & Computation',
-      badge: 'PROFILE OVERVIEW',
-      icon: <Code className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-cybergreen shrink-0" />,
+      stepName: 'IIT KGP Research',
+      badge: 'IIT KHARAGPUR RESEARCH INTERN',
+      icon: <Award className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-cybergreen shrink-0" />,
       title: (
         <>
-          Logic & <span className="text-cybergreen">Computation.</span>
+          Research at <span className="text-cybergreen">IIT Kharagpur</span>
         </>
       ),
       description:
-        'Based in Kolkata, my technical journey is grounded in mathematical precision and structured systems engineering. I focus on high-yield, scalable architectures.',
-      pills: ['Python 3.11', 'C++ System Logic', 'JavaScript ES6+'],
+        'Completed research internship on Web Development to Showcase Indoor Air Pollution (IAP) Frameworks under Prof. Sandip Chakraborty, Dept. of CSE, IIT Kharagpur.',
+      pills: ['Dept. of CSE', 'Prof. Sandip Chakraborty', 'IAP Frameworks'],
     },
     {
       stepNum: '#03',
@@ -385,12 +385,9 @@ export default function HeroScrollytelling({ scrollToSection, darkMode }) {
           </div>
         </div>
 
-        {/* 4. Bottom Navigation Links (Removed GitHub link & Frame counter as requested) */}
+        {/* 4. Bottom Navigation Links */}
         <div className="absolute bottom-3 sm:bottom-4 left-6 right-6 flex justify-between items-center z-25 font-mono text-[10px] sm:text-xs text-gray-400 pointer-events-auto">
           <div className="flex items-center gap-3 sm:gap-6">
-            {/* GitHub link commented out as requested:
-            <a href="https://github.com/heyiamyourbishalmandal" target="_blank" rel="noreferrer" className="hover:text-cybergreen transition">GITHUB</a>
-            <span className="text-gray-700">|</span> */}
             <a
               href="https://www.linkedin.com/in/bishal-mandal-0bb756264/"
               target="_blank"
