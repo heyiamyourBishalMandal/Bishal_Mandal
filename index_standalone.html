@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bishal Mandal - Portfolio</title>
+  <meta name="title" content="Bishal Mandal | Software Developer & Web Designer">
+  <meta name="description" content="Portfolio of Bishal Mandal, a passionate software developer specializing in Python, full-stack web applications, and modern UI design." />
+
+  <!-- Google Fonts: Inter & Fira Code -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            cybergreen: '#00E676',
+            terminalblack: '#0d1117',
+            darkobsidian: '#080c10',
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #080c10;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #00E676;
+      border-radius: 4px;
+      box-shadow: 0 0 10px #00E676;
+    }
+    canvas {
+      image-rendering: -webkit-optimize-contrast;
+      image-rendering: crisp-edges;
+      transform: translateZ(0);
+      will-change: transform;
+    }
+  </style>
+</head>
+<body class="bg-slate-100 dark:bg-[#080c10] text-gray-900 dark:text-gray-100 transition-colors duration-500 font-sans selection:bg-cybergreen selection:text-black">
+
+  <!-- 1. SPLASH SCREEN INITIALIZATION (Matching Bishal Mandal Site) -->
+  <div id="splash-screen" class="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-gray-50 dark:bg-[#080c10] transition-colors duration-300 select-none">
+    <div class="relative flex flex-col items-center justify-center animate-pulse">
+      <img src="assets/Hlogo/Hlogo.png" alt="Hlogo.png" class="w-24 h-24 sm:w-32 sm:h-32 object-contain drop-shadow-[0_0_20px_rgba(0,230,118,0.4)]" onError="this.src='assets/logo/logo.png'">
+    </div>
+    <div class="absolute bottom-10 flex flex-col items-center space-y-2">
+      <span class="text-xs font-mono tracking-[0.2em] text-gray-400 dark:text-gray-500 uppercase">Initializing System</span>
+      <div class="w-32 sm:w-40 h-1 bg-gray-200 dark:bg-gray-800 rounded-full overflow-hidden border border-gray-300 dark:border-gray-700/50">
+        <div id="preloader-bar" class="h-full bg-cybergreen rounded-full shadow-[0_0_12px_#00E676] transition-all duration-150" style="width: 0%"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. NAVBAR HEADER -->
+  <header id="navbar" class="fixed top-4 left-0 right-0 z-50 transition-all duration-500 transform opacity-0 -translate-y-10 pointer-events-none">
+    <div class="max-w-5xl mx-auto px-4">
+      <div class="w-full bg-[#080c10]/90 backdrop-blur-xl border border-gray-800/80 rounded-full px-4 sm:px-6 py-2.5 flex items-center justify-between shadow-2xl shadow-black/80">
+        <a href="#hero" class="flex items-center cursor-pointer group">
+          <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-black/90 border border-cybergreen/50 p-1 flex items-center justify-center shadow-[0_0_15px_rgba(0,230,118,0.25)] group-hover:scale-105 transition-all duration-300">
+            <img src="assets/logo/logo.png" alt="BM Logo" class="w-full h-full object-contain" onError="this.src='assets/Hlogo/Hlogo.png'" />
+          </div>
+        </a>
+
+        <nav class="hidden md:flex items-center gap-6 lg:gap-8 font-sans text-xs sm:text-sm font-medium">
+          <a href="#about" class="text-gray-300 hover:text-white transition">About</a>
+          <a href="#skills" class="text-gray-300 hover:text-white transition">Skills</a>
+          <a href="#projects" class="text-gray-300 hover:text-white transition">Projects</a>
+          <a href="#resume" class="text-gray-300 hover:text-white transition">Resume</a>
+          <a href="#contact" class="text-gray-300 hover:text-white transition">Contact</a>
+        </nav>
+
+        <div class="flex items-center gap-2.5">
+          <button id="theme-toggle" class="p-1.5 sm:p-2 rounded-xl bg-gray-900/80 border border-gray-800 text-amber-400 hover:text-cybergreen transition">
+            <i data-lucide="sun" class="w-4 h-4"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- 3. HERO 3D SCROLLYTELLING STAGE -->
+  <section id="hero" class="relative w-full h-[500vh]">
+    <div class="sticky top-0 w-full h-screen overflow-hidden bg-[#080c10] flex items-center justify-center">
+      <canvas id="hero-canvas" class="absolute inset-0 w-full h-full object-cover filter contrast-[108%] brightness-[104%] saturate-[105%]"></canvas>
+
+      <div class="absolute top-16 left-5 sm:top-24 sm:left-10 lg:left-14 z-25 pointer-events-none select-none">
+        <span class="text-[10px] sm:text-xs font-mono font-bold tracking-widest text-cybergreen uppercase drop-shadow-[0_2px_10px_rgba(0,0,0,0.95)]">WELCOME TO</span>
+        <h1 class="text-2xl sm:text-6xl lg:text-7xl font-black tracking-tighter text-white uppercase leading-none mt-1 drop-shadow-[0_4px_30px_rgba(0,0,0,0.98)]">
+          BISHAL<br />MANDAL
+        </h1>
+      </div>
+
+      <div id="story-panel" class="relative z-30 w-full max-w-7xl mx-auto px-4 sm:px-8 md:px-12 lg:px-16 h-full flex flex-col justify-end md:justify-center items-end pointer-events-none pb-12 md:pb-0">
+        <div class="w-full max-w-sm sm:max-w-md lg:max-w-md text-left md:ml-auto md:mr-2 lg:mr-10">
+          <div class="space-y-3 sm:space-y-5 pointer-events-auto p-4 sm:p-6 rounded-2xl sm:rounded-3xl bg-[#080c10]/90 backdrop-blur-xl border border-gray-800/80 shadow-[0_10px_30px_rgba(0,0,0,0.9)]">
+            <div class="inline-flex items-center gap-1.5 sm:gap-2 px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full bg-cybergreen/10 border border-cybergreen/40 text-cybergreen text-[9px] sm:text-xs font-mono font-bold uppercase tracking-wider max-w-full">
+              <i data-lucide="sparkles" class="w-3.5 h-3.5 text-cybergreen animate-spin"></i>
+              <span class="truncate">"STRENGTH IN STRATEGY, POWER IN PROGRESS"</span>
+            </div>
+            <h2 class="text-lg sm:text-3xl lg:text-4xl font-black leading-tight tracking-tight text-white">
+              Hey there, I'm <span class="text-cybergreen">Bishal Mandal</span>
+            </h2>
+            <p class="text-xs sm:text-sm lg:text-base leading-relaxed font-normal text-gray-300">
+              A passionate Software Developer & Web Designer with research experience at <strong class="text-cybergreen font-semibold">IIT Kharagpur</strong>.
+            </p>
+            <div class="flex flex-row flex-wrap gap-2.5 pt-2">
+              <a href="#projects" class="bg-cybergreen hover:bg-emerald-400 text-black font-extrabold py-2.5 px-4 sm:px-5 rounded-xl shadow-lg shadow-cybergreen/30 transition text-xs sm:text-sm text-center">View My Work</a>
+              <a href="#contact" class="bg-gray-900 border border-gray-700 text-white font-semibold py-2.5 px-4 sm:px-5 rounded-xl hover:bg-gray-800 transition text-xs sm:text-sm text-center">Get In Touch</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Nav -->
+      <div class="absolute bottom-3 sm:bottom-4 left-6 right-6 flex justify-between items-center z-25 font-mono text-[10px] sm:text-xs text-gray-400">
+        <div class="flex items-center gap-4">
+          <a href="https://www.linkedin.com/in/bishal-mandal-0bb756264/" target="_blank" class="hover:text-cybergreen transition">LINKEDIN</a>
+          <span>|</span>
+          <a href="#resume" class="hover:text-cybergreen transition uppercase">RESUME</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. ABOUT SECTION -->
+  <section id="about" class="py-20 md:py-28 px-4 sm:px-8 relative z-10 border-t border-gray-200 dark:border-gray-800/60 bg-white dark:bg-[#080c10]/95 transition-colors duration-500">
+    <div class="container mx-auto max-w-6xl">
+      <div class="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cybergreen/10 border border-cybergreen/30 text-cybergreen text-xs font-mono font-bold uppercase tracking-widest mb-4">
+          <span class="w-2 h-2 rounded-full bg-cybergreen animate-ping"></span>
+          Developer Dossier
+        </div>
+        <h2 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-gray-900 dark:text-white tracking-tight mb-4">
+          About <span class="text-cybergreen">Bishal Mandal.</span>
+        </h2>
+        <p class="text-gray-600 dark:text-gray-300 font-light text-base sm:text-lg lg:text-xl leading-relaxed">
+          Software Developer & Systems Engineer based in Kolkata, with research experience at <strong class="text-cybergreen font-semibold">IIT Kharagpur</strong>.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-stretch">
+        <div class="lg:col-span-5 bg-gray-50 dark:bg-[#0d1117] border border-gray-200 dark:border-cybergreen/40 p-6 sm:p-8 rounded-2xl sm:rounded-3xl shadow-xl flex flex-col justify-between space-y-6">
+          <div>
+            <div class="flex items-center gap-4 mb-6">
+              <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-full overflow-hidden border-2 border-cybergreen shadow-[0_0_15px_#00E676] shrink-0">
+                <img src="assets/img/About_Me.jpg" alt="Bishal Mandal" class="w-full h-full object-cover" onError="this.src='assets/logo/logo.png'" />
+              </div>
+              <div>
+                <h3 class="text-xl sm:text-2xl font-extrabold text-gray-900 dark:text-white">Bishal Mandal</h3>
+                <p class="text-[10px] sm:text-xs font-mono text-cybergreen uppercase tracking-widest font-bold">IIT KGP Research Intern & BCA Graduate</p>
+              </div>
+            </div>
+            <p class="text-gray-600 dark:text-gray-300 text-sm sm:text-base leading-relaxed">
+              Based in Kolkata, my engineering foundation is built on mathematical precision, system algorithms, frontend web engineering, and Python desktop automation.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-2 gap-2.5 sm:gap-3 border-t border-gray-200 dark:border-gray-800 pt-6">
+            <div class="bg-white dark:bg-gray-900/80 border border-gray-200 dark:border-gray-800 p-3 rounded-2xl text-center">
+              <span class="block text-lg sm:text-xl font-extrabold text-cybergreen">IIT KGP</span>
+              <span class="text-[9px] sm:text-[10px] font-mono text-gray-500 dark:text-gray-400 uppercase">Research Intern</span>
+            </div>
+            <div class="bg-white dark:bg-gray-900/80 border border-gray-200 dark:border-gray-800 p-3 rounded-2xl text-center">
+              <span class="block text-xl sm:text-2xl font-extrabold text-cybergreen">2025</span>
+              <span class="text-[9px] sm:text-[10px] font-mono text-gray-500 dark:text-gray-400 uppercase">BCA Graduate</span>
+            </div>
+            <div class="bg-white dark:bg-gray-900/80 border border-gray-200 dark:border-gray-800 p-3 rounded-2xl text-center">
+              <span class="block text-lg sm:text-xl font-extrabold text-cybergreen">J.E.R.V.I.S</span>
+              <span class="text-[9px] sm:text-[10px] font-mono text-gray-500 dark:text-gray-400 uppercase">PyQt6 Assistant</span>
+            </div>
+            <div class="bg-white dark:bg-gray-900/80 border border-gray-200 dark:border-gray-800 p-3 rounded-2xl text-center">
+              <span class="block text-xl sm:text-2xl font-extrabold text-cybergreen">Google</span>
+              <span class="text-[9px] sm:text-[10px] font-mono text-gray-500 dark:text-gray-400 uppercase">Career Goal</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="lg:col-span-7 bg-gray-50 dark:bg-[#0d1117] border border-gray-200 dark:border-gray-800 p-6 sm:p-10 rounded-2xl sm:rounded-3xl shadow-xl flex flex-col justify-center space-y-6 text-sm sm:text-base lg:text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
+          <div class="bg-cybergreen/5 border border-cybergreen/30 p-5 rounded-2xl">
+            <h3 class="text-lg sm:text-xl font-bold text-gray-900 dark:text-white mb-2">Research Internship — <span class="text-cybergreen">IIT Kharagpur</span></h3>
+            <p class="text-xs sm:text-sm text-gray-300 leading-relaxed mb-3">
+              Successfully completed a research internship in <strong class="text-white font-semibold">Web Development & Frontend Engineering</strong> to showcase <strong class="text-cybergreen font-semibold">Indoor Air Pollution (IAP) Frameworks</strong> under the guidance of <strong class="text-white font-semibold">Prof. Sandip Chakraborty</strong>, Department of Computer Science & Engineering (CSE), IIT Kharagpur.
+            </p>
+          </div>
+          <div class="border-t border-gray-200 dark:border-gray-800 pt-6">
+            <h3 class="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white mb-3">Core Technical Competencies</h3>
+            <p>I specialize in architecting responsive full-stack applications and powerful desktop tooling utilizing <strong class="text-white font-semibold">Python, C++, and modern JavaScript ecosystems</strong>—most notably engineering <span class="text-cybergreen font-mono font-bold bg-cybergreen/20 px-2 py-0.5 rounded">J.E.R.V.I.S.</span>, a custom desktop voice assistant built for automation.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. SKILLS SECTION -->
+  <section id="skills" class="py-24 px-4 sm:px-8 bg-gray-50 dark:bg-[#080c10] relative z-10 border-t border-gray-800/60 text-center">
+    <div class="container mx-auto max-w-6xl">
+      <h2 class="text-4xl md:text-6xl font-extrabold text-white mb-4">My Technical<span class="text-cybergreen"> Gyan.</span></h2>
+      <p class="text-xs font-mono text-gray-400 uppercase tracking-widest mb-16">Programming languages integrated directly into my neural networks.</p>
+    </div>
+  </section>
+
+  <!-- 6. RESUME SECTION -->
+  <section id="resume" class="py-20 px-4 sm:px-8 bg-gray-50 dark:bg-[#080c10] relative z-10 border-t border-gray-800/60 text-center">
+    <div class="max-w-3xl mx-auto bg-[#11161d]/50 p-10 rounded-2xl border border-gray-800 space-y-6">
+      <h2 class="text-4xl font-bold text-white">My Resume</h2>
+      <p class="text-gray-400">Research Intern at IIT Kharagpur (Dept. of CSE) under Prof. Sandip Chakraborty.</p>
+      <a href="your_resume.pdf" download="Bishal_Mandal_Resume.pdf" class="inline-flex items-center gap-2 bg-cybergreen text-black font-bold py-3.5 px-8 rounded-full shadow-lg">Download PDF</a>
+    </div>
+  </section>
+
+  <!-- 7. CONTACT SECTION -->
+  <section id="contact" class="py-24 px-4 sm:px-8 bg-white dark:bg-[#080c10]/95 relative z-10 border-t border-gray-800/60 text-center">
+    <div class="max-w-2xl mx-auto space-y-6">
+      <h2 class="text-4xl font-bold text-white">Get In Touch</h2>
+      <p class="text-gray-400">Have a question or want to work together? Drop me a message below!</p>
+      <form action="https://formspree.io/f/xlgyapop" method="POST" class="bg-[#11161d]/60 p-8 rounded-2xl border border-gray-800 space-y-4 text-left">
+        <div>
+          <label class="block text-sm text-gray-300 mb-1">Name</label>
+          <input type="text" name="name" required placeholder="Enter your name" class="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white" />
+        </div>
+        <div>
+          <label class="block text-sm text-gray-300 mb-1">Email Address</label>
+          <input type="email" name="email" required placeholder="your.email@example.com" class="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white" />
+        </div>
+        <div>
+          <label class="block text-sm text-gray-300 mb-1">Message</label>
+          <textarea name="message" rows="5" required placeholder="Hello Bishal, I'd like to talk about..." class="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white resize-none"></textarea>
+        </div>
+        <button type="submit" class="w-full bg-cybergreen text-black font-bold py-3 rounded-lg">Send Message</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- 8. FOOTER -->
+  <footer class="py-12 border-t border-gray-800/60 bg-[#05080c] text-center flex flex-col items-center justify-center space-y-3">
+    <a href="https://www.linkedin.com/in/bishal-mandal-0bb756264/" target="_blank" class="w-10 h-10 rounded-full bg-[#0d131a] border border-gray-800 text-gray-300 hover:text-cybergreen flex items-center justify-center">
+      <i data-lucide="linkedin" class="w-4 h-4"></i>
+    </a>
+    <h3 class="text-sm font-black tracking-[0.2em] text-white uppercase">BISHAL MONDAL</h3>
+    <p class="text-[11px] font-sans text-gray-500">&copy; 2026 All rights reserved.</p>
+  </footer>
+
+  <script>
+    lucide.createIcons();
+
+    const splash = document.getElementById('splash-screen');
+    const preloaderBar = document.getElementById('preloader-bar');
+
+    let pct = 0;
+    const loadInterval = setInterval(() => {
+      pct += Math.floor(Math.random() * 12) + 6;
+      if (pct >= 100) {
+        pct = 100;
+        preloaderBar.style.width = '100%';
+        clearInterval(loadInterval);
+        setTimeout(() => {
+          splash.style.opacity = '0';
+          setTimeout(() => splash.style.display = 'none', 400);
+        }, 300);
+      } else {
+        preloaderBar.style.width = pct + '%';
+      }
+    }, 60);
+
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        navbar.className = 'fixed top-4 left-0 right-0 z-50 transition-all duration-500 transform opacity-100 translate-y-0 pointer-events-auto';
+      } else {
+        navbar.className = 'fixed top-4 left-0 right-0 z-50 transition-all duration-500 transform opacity-0 -translate-y-10 pointer-events-none';
+      }
+    });
+
+    const canvas = document.getElementById('hero-canvas');
+    const ctx = canvas.getContext('2d');
+    const totalFrames = 80;
+    const frames = [];
+
+    for (let i = 1; i <= totalFrames; i++) {
+      const img = new Image();
+      const numStr = String(i).padStart(3, '0');
+      img.src = `fram/ezgif-frame-${numStr}.jpg`;
+      frames.push(img);
+    }
+
+    let targetFrame = 0;
+    let currentFrame = 0;
+
+    function renderCanvas() {
+      if (frames.length === 0) return;
+      const width = window.innerWidth;
+      const height = window.innerHeight;
+      const dpr = Math.max(window.devicePixelRatio || 1, 3.5);
+
+      canvas.width = Math.round(width * dpr);
+      canvas.height = Math.round(height * dpr);
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
+      ctx.scale(dpr, dpr);
+
+      const frameIdx = Math.floor(Math.max(0, Math.min(totalFrames - 1, currentFrame)));
+      let img = frames[frameIdx];
+      if (!img || !img.complete || img.naturalWidth === 0) {
+        img = frames.find(f => f && f.complete && f.naturalWidth > 0) || frames[0];
+      }
+
+      if (img && img.complete && img.naturalWidth > 0) {
+        const sourceW = img.naturalWidth;
+        const sourceH = img.naturalHeight * 0.96;
+        const imgRatio = sourceW / sourceH;
+        let drawW, drawH, drawX, drawY;
+
+        if (width >= 1024) {
+          const targetH = height * 0.82;
+          drawH = targetH;
+          drawW = targetH * imgRatio;
+          drawX = Math.max(30, (width * 0.38 - drawW) / 2);
+          drawY = (height - drawH) / 2;
+        } else {
+          const targetH = height * 0.52;
+          drawH = targetH;
+          drawW = targetH * imgRatio;
+          drawX = (width - drawW) / 2;
+          drawY = (height * 0.28) - (drawH * 0.35);
+        }
+
+        ctx.clearRect(0, 0, width, height);
+        ctx.filter = 'contrast(108%) brightness(104%) saturate(105%)';
+        ctx.drawImage(img, 0, 0, Math.round(sourceW), Math.round(sourceH), Math.round(drawX), Math.round(drawY), Math.round(drawW), Math.round(drawH));
+        ctx.filter = 'none';
+
+        if (width >= 768) {
+          const fadeStart = width * 0.38;
+          const fadeWidth = width * 0.30;
+          const grad = ctx.createLinearGradient(fadeStart, 0, fadeStart + fadeWidth, 0);
+          grad.addColorStop(0, 'rgba(8, 12, 16, 0)');
+          grad.addColorStop(1, 'rgba(8, 12, 16, 1)');
+          ctx.fillStyle = grad;
+          ctx.fillRect(Math.round(fadeStart), 0, Math.round(fadeWidth), Math.round(height));
+          ctx.fillStyle = '#080c10';
+          ctx.fillRect(Math.round(fadeStart + fadeWidth), 0, Math.round(width - (fadeStart + fadeWidth)), Math.round(height));
+        }
+      }
+    }
+
+    function animLoop() {
+      const diff = targetFrame - currentFrame;
+      if (Math.abs(diff) > 0.0005) {
+        currentFrame += diff * 0.08;
+        renderCanvas();
+      }
+      requestAnimationFrame(animLoop);
+    }
+    animLoop();
+
+    window.addEventListener('resize', renderCanvas);
+
+    const heroSec = document.getElementById('hero');
+
+    window.addEventListener('scroll', () => {
+      const rect = heroSec.getBoundingClientRect();
+      const totalScrollable = rect.height - window.innerHeight;
+      let scrollPct = 0;
+      if (totalScrollable > 0) {
+        scrollPct = Math.max(0, Math.min(1, -rect.top / totalScrollable));
+      }
+      targetFrame = scrollPct * (totalFrames - 1);
+    });
+  </script>
+</body>
+</html>

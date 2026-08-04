@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    font-family: 'Inter', sans-serif;
+  }
+  
+  body {
+    overflow-x: hidden;
+  }
+
+  /* Ultra HD 4K Crisp Canvas Image Rendering & Hardware Acceleration */
+  canvas {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    will-change: transform;
+  }
+}
+
+/* Custom Cyber-Green Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #080c10;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #00E676;
+  border-radius: 4px;
+  box-shadow: 0 0 10px #00E676;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #00c853;
+}
