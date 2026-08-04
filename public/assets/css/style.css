@@ -1,0 +1,267 @@
+/* Custom styles for layout spacing and SPA functionality */
+body {
+    font-family: 'Inter', sans-serif;
+}
+
+/* --- SPA View Switching Engine --- */
+.spa-view {
+    display: none;
+    opacity: 0;
+    transform: translateY(15px);
+}
+
+.spa-view.active {
+    display: block;
+    animation: spaFadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes spaFadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Reset buttons acting as nav links */
+.nav-trigger {
+    background: transparent;
+    border: none;
+    text-align: left;
+    outline: none;
+}
+
+/* Logo Header Styles */
+.logo-header {
+    height: 40px;
+    width: auto;
+    transition: transform 0.3s ease;
+}
+
+.logo-header:hover {
+    transform: scale(1.05);
+}
+
+@media (max-width: 640px) {
+    .logo-header { height: 32px; }
+}
+@media (min-width: 641px) and (max-width: 768px) {
+    .logo-header { height: 36px; }
+}
+
+/* Active navigation link accent rules */
+.nav-link.active {
+    color: #00E676;
+    font-weight: 700;
+}
+.dark .nav-link.active {
+    color: #00E676;
+}
+
+/* Interactive Component: Terminal Blinking Cursor */
+.terminal-cursor {
+    display: inline-block;
+    width: 8px;
+    height: 16px;
+    background-color: #00E676;
+    margin-left: 4px;
+    animation: cursorBlink 1s infinite;
+}
+
+@keyframes cursorBlink {
+    0%, 49% { background-color: #00E676; }
+    50%, 100% { background-color: transparent; }
+}
+
+/* Project Filter Component UI Styles */
+.filter-btn {
+    background-color: rgba(255, 255, 255, 0.6); 
+    backdrop-filter: blur(8px);
+    color: #374151; 
+    font-weight: 600;
+    padding: 0.5rem 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    border: 1px solid rgba(229, 231, 235, 0.5); 
+}
+
+.dark .filter-btn {
+    background-color: rgba(17, 22, 29, 0.6); 
+    color: #d1d5db; 
+    border: 1px solid rgba(33, 38, 45, 0.5);
+}
+
+.filter-btn:hover, .filter-btn.active-filter-btn {
+    background-color: #00E676; 
+    color: #000;
+    transform: translateY(-2px);
+    border-color: #00E676;
+}
+
+.dark .filter-btn:hover, .dark .filter-btn.active-filter-btn {
+    background-color: #00E676;
+    color: #000;
+    border-color: #00E676;
+}
+
+/* Adaptive Theme Card Component Transitions */
+.dark .card-icon-accent {
+    color: #00E676 !important;
+}
+.dark .card-title-accent:hover {
+    color: #00E676 !important;
+}
+.dark .project-card:hover {
+    border-color: rgba(0, 230, 118, 0.4) !important;
+    box-shadow: 0 10px 30px -10px rgba(0, 230, 118, 0.15);
+}
+
+/* Splash Screen Animations */
+#splash-screen {
+    transition: opacity 0.6s cubic-bezier(0.25, 1, 0.5, 1), visibility 0.6s;
+}
+
+#splash-screen.fade-out {
+    opacity: 0;
+    visibility: hidden;
+}
+
+@keyframes loading {
+    0% { transform: translateX(-100%); }
+    50% { transform: translateX(0); }
+    100% { transform: translateX(100%); }
+}
+
+/* Scroll Reveal Animations Integration */
+.scroll-reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.scroll-reveal.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Accessibility: Reduce motion if OS setting enabled */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* Global Z-Index & Overlay Containment Fixes */
+nav#navbar {
+    z-index: 1000 !important;
+}
+
+#mobile-menu-overlay {
+    z-index: 1001 !important;
+}
+
+section {
+    position: relative;
+    overflow: hidden;
+}
+
+@media (max-width: 768px) {
+    #mobile-menu-overlay {
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.75);
+    }
+}
+
+/* --- Morphing Hamburger to 'X' Animations --- */
+#mobile-menu-button.menu-active .hamburger-bar:nth-child(1) {
+    transform: translateY(6px) rotate(45deg);
+    background-color: #00E676;
+}
+
+#mobile-menu-button.menu-active .hamburger-bar:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+}
+
+#mobile-menu-button.menu-active .hamburger-bar:nth-child(3) {
+    transform: translateY(-6px) rotate(-45deg);
+    background-color: #00E676;
+}
+
+/* Floating Dropdown Open State */
+#mobile-menu-overlay.menu-open {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    transform: scale(1) translateY(0) !important;
+}
+
+/* --- STICKY 3D PINNED SCROLLYTELLING ENGINE --- */
+#scrollytelling-section {
+    height: 500vh;
+    position: relative;
+    width: 100%;
+}
+
+#scrollytelling-sticky {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    background-color: #080c10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#scroll-motion-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover !important;
+    will-change: transform;
+    pointer-events: none;
+    z-index: 1;
+    transition: transform 0.15s ease-out;
+}
+
+.story-card-wrapper {
+    position: relative;
+    width: 100%;
+    min-height: 380px;
+    display: flex;
+    align-items: center;
+}
+
+.story-card {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-40%) scale(0.95);
+    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+}
+
+.story-card.active {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    transform: translateY(-50%) scale(1) !important;
+}
+
+.story-card.hidden {
+    opacity: 0 !important;
+    pointer-events: none !important;
+    transform: translateY(-60%) scale(0.95) !important;
+}
+

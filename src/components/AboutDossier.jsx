@@ -1,5 +1,5 @@
 import React from 'react';
-import { Target, Cpu, Sparkles, Award, GraduationCap } from 'lucide-react';
+import { Target, Cpu, Sparkles, Award } from 'lucide-react';
 
 export default function AboutDossier() {
   return (
@@ -32,7 +32,7 @@ export default function AboutDossier() {
                     className="w-full h-full object-cover"
                     onError={(e) => {
                       e.target.onerror = null;
-                      e.target.src = 'assets/logo/logo.png';
+                      e.target.src = 'img/About_Me.jpg';
                     }}
                   />
                 </div>

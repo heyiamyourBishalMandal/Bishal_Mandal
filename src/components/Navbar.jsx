@@ -14,7 +14,6 @@ export default function Navbar({ activeSection, scrollToSection, darkMode, setDa
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Removed Home button as requested — Links: About, Skills, Projects, Resume, Contact
   const navItems = [
     { id: 'about', label: 'About' },
     { id: 'skills', label: 'Skills' },
@@ -46,13 +45,13 @@ export default function Navbar({ activeSection, scrollToSection, darkMode, setDa
                 className="w-full h-full object-contain"
                 onError={(e) => {
                   e.target.onerror = null;
-                  e.target.src = 'assets/Hlogo/Hlogo.png';
+                  e.target.src = 'logo/logo.png';
                 }}
               />
             </div>
           </div>
 
-          {/* Center: Navigation Links (About, Skills, Projects, Resume, Contact) */}
+          {/* Center: Navigation Links */}
           <nav className="hidden md:flex items-center gap-6 lg:gap-8 font-sans text-xs sm:text-sm font-medium">
             {navItems.map((item) => {
               const isActive = activeSection === item.id;
@@ -72,7 +71,7 @@ export default function Navbar({ activeSection, scrollToSection, darkMode, setDa
             })}
           </nav>
 
-          {/* Right Action Controls: Theme Switch & Custom 2-Line Animated Hamburger */}
+          {/* Right Action Controls */}
           <div className="flex items-center gap-2.5">
             {/* Sun/Moon Theme Toggle Box */}
             <button
