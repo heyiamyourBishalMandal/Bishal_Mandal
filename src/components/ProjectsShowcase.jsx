@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 
 export default function ProjectsShowcase() {
   const [filter, setFilter] = useState('all');
@@ -44,14 +45,26 @@ export default function ProjectsShowcase() {
       : projects.filter((p) => p.category.includes(filter));
 
   return (
-    <section id="projects" className="py-20 md:py-28 px-4 sm:px-8 transition-colors duration-500 relative z-10 bg-white dark:bg-[#080c10]/95 border-t border-gray-200 dark:border-gray-800/60">
+    <section id="projects" className="py-20 md:py-28 px-4 sm:px-8 transition-colors duration-500 relative z-10 bg-white dark:bg-[#080c10]/95 border-t border-gray-200 dark:border-gray-800/60 overflow-hidden">
       <div className="container mx-auto max-w-5xl">
-        <h2 className="text-3xl sm:text-5xl font-extrabold text-center text-gray-900 dark:text-white mb-12 tracking-tight">
+        <motion.h2
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-50px' }}
+          transition={{ duration: 0.6 }}
+          className="text-3xl sm:text-5xl font-extrabold text-center text-gray-900 dark:text-white mb-12 tracking-tight"
+        >
           Featured <span className="text-cybergreen">Projects</span>
-        </h2>
+        </motion.h2>
 
         {/* Filter Buttons */}
-        <div className="flex flex-wrap justify-center gap-3 sm:gap-4 mb-12">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          className="flex flex-wrap justify-center gap-3 sm:gap-4 mb-12"
+        >
           {[
             { id: 'all', label: 'All Projects' },
             { id: 'web-design', label: 'Web Design' },
@@ -69,14 +82,19 @@ export default function ProjectsShowcase() {
               {tab.label}
             </button>
           ))}
-        </div>
+        </motion.div>
 
-        {/* Project Cards Grid */}
+        {/* Project Cards Grid with Scroll Entrance Stagger */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
-          {filteredProjects.map((project) => (
-            <div
+          {filteredProjects.map((project, pIdx) => (
+            <motion.div
               key={project.id}
-              className="bg-gray-50/90 dark:bg-[#0d1117]/90 backdrop-blur-2xl p-6 sm:p-8 rounded-3xl shadow-xl border border-gray-200 dark:border-gray-800/80 hover:border-cybergreen/50 flex flex-col transform transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,230,118,0.1)] group"
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-50px' }}
+              transition={{ duration: 0.6, delay: pIdx * 0.15, ease: 'easeOut' }}
+              whileHover={{ y: -8 }}
+              className="bg-gray-50/90 dark:bg-[#0d1117]/90 backdrop-blur-2xl p-6 sm:p-8 rounded-3xl shadow-xl border border-gray-200 dark:border-gray-800/80 hover:border-cybergreen/50 flex flex-col transform transition-all duration-500 hover:shadow-[0_20px_40px_rgba(0,230,118,0.1)] group"
             >
               <h3 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-cybergreen transition-colors">
                 {project.title}
@@ -95,7 +113,7 @@ export default function ProjectsShowcase() {
                   </span>
                 ))}
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

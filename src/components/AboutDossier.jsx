@@ -1,12 +1,19 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import { Target, Cpu, Sparkles, Award } from 'lucide-react';
 
 export default function AboutDossier() {
   return (
-    <section id="about" className="py-20 md:py-28 px-4 sm:px-8 relative z-10 border-t border-gray-200 dark:border-gray-800/60 bg-white dark:bg-[#080c10]/95 transition-colors duration-500">
+    <section id="about" className="py-20 md:py-28 px-4 sm:px-8 relative z-10 border-t border-gray-200 dark:border-gray-800/60 bg-white dark:bg-[#080c10]/95 transition-colors duration-500 overflow-hidden">
       <div className="container mx-auto max-w-6xl">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-50px' }}
+          transition={{ duration: 0.6, ease: 'easeOut' }}
+          className="text-center max-w-3xl mx-auto mb-12 sm:mb-16"
+        >
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cybergreen/10 border border-cybergreen/30 text-cybergreen text-xs font-mono font-bold uppercase tracking-widest mb-4">
             <span className="w-2 h-2 rounded-full bg-cybergreen animate-ping" />
             Developer Dossier
@@ -17,12 +24,18 @@ export default function AboutDossier() {
           <p className="text-gray-600 dark:text-gray-300 font-light text-base sm:text-lg lg:text-xl leading-relaxed">
             Software Developer & Systems Engineer based in Kolkata, with research experience at <strong className="text-cybergreen font-semibold">IIT Kharagpur</strong>.
           </p>
-        </div>
+        </motion.div>
 
         {/* 2-Column Grid Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-stretch">
           {/* Left Profile Card */}
-          <div className="lg:col-span-5 bg-gray-50/90 dark:bg-[#0d1117]/90 backdrop-blur-2xl border border-gray-200 dark:border-gray-800/80 hover:border-cybergreen/50 p-6 sm:p-8 rounded-3xl shadow-2xl dark:shadow-[0_20px_50px_rgba(0,0,0,0.8),0_0_30px_rgba(0,230,118,0.12)] flex flex-col justify-between space-y-6 transition-all duration-500 group">
+          <motion.div
+            initial={{ opacity: 0, x: -40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: '-50px' }}
+            transition={{ duration: 0.7, delay: 0.1, ease: 'easeOut' }}
+            className="lg:col-span-5 bg-gray-50/90 dark:bg-[#0d1117]/90 backdrop-blur-2xl border border-gray-200 dark:border-gray-800/80 hover:border-cybergreen/50 p-6 sm:p-8 rounded-3xl shadow-2xl dark:shadow-[0_20px_50px_rgba(0,0,0,0.8),0_0_30px_rgba(0,230,118,0.12)] flex flex-col justify-between space-y-6 transition-all duration-500 group"
+          >
             <div>
               <div className="flex items-center gap-4 sm:gap-5 mb-6">
                 {/* Beautifully Framed Circular Profile Image */}
@@ -51,28 +64,32 @@ export default function AboutDossier() {
 
             {/* Stat Pills Grid */}
             <div className="grid grid-cols-2 gap-3 border-t border-gray-200 dark:border-gray-800/80 pt-6">
-              <div className="bg-white/80 dark:bg-gray-900/80 border border-gray-200 dark:border-gray-800 p-3.5 rounded-2xl text-center shadow-sm hover:border-cybergreen/40 transition-colors">
-                <span className="block text-lg sm:text-xl font-black text-cybergreen">IIT KGP</span>
-                <span className="text-[9px] sm:text-[10px] font-mono text-gray-500 dark:text-gray-400 uppercase font-semibold">Research Intern</span>
-              </div>
-              <div className="bg-white/80 dark:bg-gray-900/80 border border-gray-200 dark:border-gray-800 p-3.5 rounded-2xl text-center shadow-sm hover:border-cybergreen/40 transition-colors">
-                <span className="block text-xl sm:text-2xl font-black text-cybergreen">2025</span>
-                <span className="text-[9px] sm:text-[10px] font-mono text-gray-500 dark:text-gray-400 uppercase font-semibold">BCA Graduate</span>
-              </div>
-              <div className="bg-white/80 dark:bg-gray-900/80 border border-gray-200 dark:border-gray-800 p-3.5 rounded-2xl text-center shadow-sm hover:border-cybergreen/40 transition-colors">
-                <span className="block text-lg sm:text-xl font-black text-cybergreen">J.E.R.V.I.S</span>
-                <span className="text-[9px] sm:text-[10px] font-mono text-gray-500 dark:text-gray-400 uppercase font-semibold">PyQt6 Assistant</span>
-              </div>
-              <div className="bg-white/80 dark:bg-gray-900/80 border border-gray-200 dark:border-gray-800 p-3.5 rounded-2xl text-center shadow-sm hover:border-cybergreen/40 transition-colors">
-                <span className="block text-xl sm:text-2xl font-black text-cybergreen">Google</span>
-                <span className="text-[9px] sm:text-[10px] font-mono text-gray-500 dark:text-gray-400 uppercase font-semibold">Career Goal</span>
-              </div>
+              {[
+                { label: 'IIT KGP', sub: 'Research Intern' },
+                { label: '2025', sub: 'BCA Graduate' },
+                { label: 'J.E.R.V.I.S', sub: 'PyQt6 Assistant' },
+                { label: 'Google', sub: 'Career Goal' },
+              ].map((stat, sIdx) => (
+                <motion.div
+                  key={sIdx}
+                  whileHover={{ scale: 1.05, y: -2 }}
+                  className="bg-white/80 dark:bg-gray-900/80 border border-gray-200 dark:border-gray-800 p-3.5 rounded-2xl text-center shadow-sm hover:border-cybergreen/40 transition-colors"
+                >
+                  <span className="block text-lg sm:text-xl font-black text-cybergreen">{stat.label}</span>
+                  <span className="text-[9px] sm:text-[10px] font-mono text-gray-500 dark:text-gray-400 uppercase font-semibold">{stat.sub}</span>
+                </motion.div>
+              ))}
             </div>
-          </div>
+          </motion.div>
 
           {/* Right Narrative Card */}
-          <div className="lg:col-span-7 bg-gray-50/90 dark:bg-[#0d1117]/90 backdrop-blur-2xl border border-gray-200 dark:border-gray-800/80 hover:border-cybergreen/40 p-6 sm:p-10 rounded-3xl shadow-2xl flex flex-col justify-center space-y-6 text-sm sm:text-base lg:text-lg text-gray-700 dark:text-gray-300 leading-relaxed transition-all duration-500">
-            
+          <motion.div
+            initial={{ opacity: 0, x: 40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: '-50px' }}
+            transition={{ duration: 0.7, delay: 0.2, ease: 'easeOut' }}
+            className="lg:col-span-7 bg-gray-50/90 dark:bg-[#0d1117]/90 backdrop-blur-2xl border border-gray-200 dark:border-gray-800/80 hover:border-cybergreen/40 p-6 sm:p-10 rounded-3xl shadow-2xl flex flex-col justify-center space-y-6 text-sm sm:text-base lg:text-lg text-gray-700 dark:text-gray-300 leading-relaxed transition-all duration-500"
+          >
             {/* Featured IIT Kharagpur Experience Card */}
             <div className="bg-cybergreen/10 border border-cybergreen/30 p-5 sm:p-6 rounded-2xl relative overflow-hidden backdrop-blur-md shadow-lg">
               <div className="flex items-center gap-2.5 mb-2.5">
@@ -106,7 +123,7 @@ export default function AboutDossier() {
               <Sparkles className="w-4 h-4 text-cybergreen shrink-0 animate-pulse" />
               <span>When away from the keyboard, I explore new audio landscapes and experiment with creative culinary recipes.</span>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>
