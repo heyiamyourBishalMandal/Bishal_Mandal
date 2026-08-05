@@ -1,130 +1,154 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { Target, Cpu, Sparkles, Award } from 'lucide-react';
+import React, { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { Target, Cpu, Sparkles, Award, Activity, ShieldCheck, ArrowUpRight } from 'lucide-react';
 
-export default function AboutDossier() {
+export default function AboutDossier({ scrollToSection }) {
+  const sectionRef = useRef(null);
+
+  // Parallax Scroll Tracking for Giant Watermark Text & Stage Card
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start end', 'end start'],
+  });
+
+  // Parallax shifts matching OmniBuds kinetic header
+  const titleY = useTransform(scrollYProgress, [0, 1], [-60, 80]);
+  const titleScale = useTransform(scrollYProgress, [0, 0.5, 1], [0.95, 1.05, 1.1]);
+  const titleOpacity = useTransform(scrollYProgress, [0, 0.3, 0.8, 1], [0.3, 0.85, 0.85, 0.2]);
+
   return (
-    <section id="about" className="py-20 md:py-28 px-4 sm:px-8 relative z-10 border-t border-gray-200 dark:border-gray-800/60 bg-white dark:bg-[#080c10]/95 transition-colors duration-500 overflow-hidden">
-      <div className="container mx-auto max-w-6xl">
+    <section
+      ref={sectionRef}
+      id="about"
+      className="py-24 md:py-36 px-4 sm:px-8 relative z-10 border-t border-gray-200 dark:border-gray-800/60 bg-white dark:bg-[#080c10]/95 transition-colors duration-500 overflow-hidden"
+    >
+      {/* 1. GIANT OMNIBUDS-STYLE PARALLAX WATERMARK HEADING */}
+      <div className="absolute top-8 left-0 right-0 z-0 pointer-events-none select-none flex justify-center overflow-hidden">
+        <motion.h1
+          style={{
+            y: titleY,
+            scale: titleScale,
+            opacity: titleOpacity,
+          }}
+          className="text-[14vw] sm:text-[13vw] font-black uppercase text-transparent bg-clip-text bg-gradient-to-b from-gray-900/15 via-gray-700/10 to-transparent dark:from-white/20 dark:via-white/5 dark:to-transparent tracking-tighter leading-none text-center whitespace-nowrap"
+        >
+          DEVELOPER
+        </motion.h1>
+      </div>
+
+      <div className="container mx-auto max-w-6xl relative z-10">
         {/* Section Header */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-50px' }}
-          transition={{ duration: 0.6, ease: 'easeOut' }}
-          className="text-center max-w-3xl mx-auto mb-12 sm:mb-16"
+          viewport={{ once: true, margin: '-60px' }}
+          transition={{ duration: 0.7, ease: 'easeOut' }}
+          className="text-center max-w-3xl mx-auto mb-14 sm:mb-20"
         >
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cybergreen/10 border border-cybergreen/30 text-cybergreen text-xs font-mono font-bold uppercase tracking-widest mb-4">
-            <span className="w-2 h-2 rounded-full bg-cybergreen animate-ping" />
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cybergreen/10 border border-cybergreen/30 text-cybergreen text-xs font-mono font-bold uppercase tracking-widest mb-4 shadow-[0_0_15px_rgba(0,230,118,0.2)]">
+            <span className="w-2.5 h-2.5 rounded-full bg-cybergreen animate-ping" />
             Developer Dossier
           </div>
-          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-gray-900 dark:text-white tracking-tight mb-4">
-            About <span className="text-cybergreen">Bishal Mandal.</span>
+          <h2 className="text-4xl sm:text-6xl lg:text-7xl font-black text-gray-900 dark:text-white tracking-tight mb-4">
+            Engineering <span className="text-cybergreen">Precision.</span>
           </h2>
-          <p className="text-gray-600 dark:text-gray-300 font-light text-base sm:text-lg lg:text-xl leading-relaxed">
-            Software Developer & Systems Engineer based in Kolkata, with research experience at <strong className="text-cybergreen font-semibold">IIT Kharagpur</strong>.
+          <p className="text-gray-600 dark:text-gray-300 font-light text-base sm:text-xl lg:text-2xl leading-relaxed">
+            Software Developer & Systems Engineer with research internship experience at <strong className="text-cybergreen font-semibold">IIT Kharagpur</strong>.
           </p>
         </motion.div>
 
-        {/* 2-Column Grid Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-stretch">
-          {/* Left Profile Card */}
-          <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: '-50px' }}
-            transition={{ duration: 0.7, delay: 0.1, ease: 'easeOut' }}
-            className="lg:col-span-5 bg-gray-50/90 dark:bg-[#0d1117]/90 backdrop-blur-2xl border border-gray-200 dark:border-gray-800/80 hover:border-cybergreen/50 p-6 sm:p-8 rounded-3xl shadow-2xl dark:shadow-[0_20px_50px_rgba(0,0,0,0.8),0_0_30px_rgba(0,230,118,0.12)] flex flex-col justify-between space-y-6 transition-all duration-500 group"
-          >
-            <div>
-              <div className="flex items-center gap-4 sm:gap-5 mb-6">
-                {/* Beautifully Framed Circular Profile Image */}
-                <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full overflow-hidden border-2 border-cybergreen shadow-[0_0_25px_rgba(0,230,118,0.4)] shrink-0 group-hover:scale-105 transition-transform duration-500 bg-black/90">
-                  <img
-                    src="assets/img/About_Me.jpg"
-                    alt="Bishal Mandal"
-                    className="w-full h-full object-cover object-top filter contrast-[105%] brightness-[102%]"
-                    onError={(e) => {
-                      e.target.onerror = null;
-                      e.target.src = 'img/About_Me.jpg';
-                    }}
-                  />
+        {/* 2. MAIN OMNIBUDS-STYLE OVERLAPPING SHOWCASE STAGE */}
+        <motion.div
+          initial={{ opacity: 0, y: 60 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-60px' }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          className="relative bg-gray-50/90 dark:bg-[#0d1117]/95 backdrop-blur-2xl border border-gray-200 dark:border-gray-800/90 rounded-[2.5rem] sm:rounded-[3rem] shadow-[0_30px_70px_rgba(0,0,0,0.8),0_0_40px_rgba(0,230,118,0.12)] overflow-hidden transition-all duration-500 hover:border-cybergreen/40 group"
+        >
+          <div className="grid grid-cols-1 lg:grid-cols-12 items-center">
+            {/* Left Media Stage with Overlaid Telemetry Badge */}
+            <div className="lg:col-span-6 relative h-[360px] sm:h-[460px] lg:h-[540px] overflow-hidden bg-black/90 flex items-center justify-center">
+              <img
+                src="assets/img/About_Me.jpg"
+                alt="Bishal Mandal"
+                className="w-full h-full object-cover object-top filter contrast-[108%] brightness-[102%] group-hover:scale-105 transition-transform duration-700 ease-out"
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.src = 'img/About_Me.jpg';
+                }}
+              />
+
+              {/* OmniBuds Floating Telemetry Glass Card */}
+              <motion.div
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.7, delay: 0.3 }}
+                className="absolute bottom-6 left-6 right-6 sm:right-auto sm:max-w-xs bg-[#080c10]/90 backdrop-blur-xl border border-gray-800 p-4 sm:p-5 rounded-2xl shadow-2xl space-y-2.5 z-20"
+              >
+                <div className="flex items-center justify-between">
+                  <span className="text-[10px] font-mono font-bold text-cybergreen uppercase tracking-widest flex items-center gap-1.5">
+                    <Activity className="w-3.5 h-3.5 animate-pulse text-cybergreen" />
+                    IIT KGP RESEARCH TELEMETRY
+                  </span>
+                  <span className="w-2 h-2 rounded-full bg-cybergreen animate-ping" />
                 </div>
-                <div>
-                  <h3 className="text-xl sm:text-2xl font-black text-gray-900 dark:text-white tracking-tight">Bishal Mandal</h3>
-                  <p className="text-[10px] sm:text-xs font-mono text-cybergreen uppercase tracking-widest font-bold mt-1">
-                    IIT KGP Research Intern & BCA Graduate
-                  </p>
+                <div className="text-xl sm:text-2xl font-black text-white tracking-tight flex items-baseline gap-2">
+                  IAP Frameworks
                 </div>
-              </div>
-              <p className="text-gray-600 dark:text-gray-300 text-sm sm:text-base leading-relaxed font-normal">
-                Based in Kolkata, my engineering foundation is built on mathematical precision, system algorithms, frontend web engineering, and Python desktop automation.
-              </p>
+                <p className="text-[11px] text-gray-300 font-sans leading-tight">
+                  Web development framework for Indoor Air Pollution visualization guided by <strong className="text-white">Prof. Sandip Chakraborty</strong> (Dept. of CSE, IIT KGP).
+                </p>
+              </motion.div>
             </div>
 
-            {/* Stat Pills Grid */}
-            <div className="grid grid-cols-2 gap-3 border-t border-gray-200 dark:border-gray-800/80 pt-6">
-              {[
-                { label: 'IIT KGP', sub: 'Research Intern' },
-                { label: '2025', sub: 'BCA Graduate' },
-                { label: 'J.E.R.V.I.S', sub: 'PyQt6 Assistant' },
-                { label: 'Google', sub: 'Career Goal' },
-              ].map((stat, sIdx) => (
-                <motion.div
-                  key={sIdx}
-                  whileHover={{ scale: 1.05, y: -2 }}
-                  className="bg-white/80 dark:bg-gray-900/80 border border-gray-200 dark:border-gray-800 p-3.5 rounded-2xl text-center shadow-sm hover:border-cybergreen/40 transition-colors"
-                >
-                  <span className="block text-lg sm:text-xl font-black text-cybergreen">{stat.label}</span>
-                  <span className="text-[9px] sm:text-[10px] font-mono text-gray-500 dark:text-gray-400 uppercase font-semibold">{stat.sub}</span>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-
-          {/* Right Narrative Card */}
-          <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: '-50px' }}
-            transition={{ duration: 0.7, delay: 0.2, ease: 'easeOut' }}
-            className="lg:col-span-7 bg-gray-50/90 dark:bg-[#0d1117]/90 backdrop-blur-2xl border border-gray-200 dark:border-gray-800/80 hover:border-cybergreen/40 p-6 sm:p-10 rounded-3xl shadow-2xl flex flex-col justify-center space-y-6 text-sm sm:text-base lg:text-lg text-gray-700 dark:text-gray-300 leading-relaxed transition-all duration-500"
-          >
-            {/* Featured IIT Kharagpur Experience Card */}
-            <div className="bg-cybergreen/10 border border-cybergreen/30 p-5 sm:p-6 rounded-2xl relative overflow-hidden backdrop-blur-md shadow-lg">
-              <div className="flex items-center gap-2.5 mb-2.5">
-                <Award className="w-5 h-5 text-cybergreen shrink-0" />
-                <h3 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white">
-                  Research Internship — <span className="text-cybergreen">IIT Kharagpur</span>
+            {/* Right Story Panel */}
+            <div className="lg:col-span-6 p-8 sm:p-12 lg:p-14 space-y-6 sm:space-y-8">
+              <div className="space-y-3">
+                <div className="inline-flex items-center gap-2 text-xs font-mono font-bold text-cybergreen uppercase tracking-wider bg-cybergreen/10 px-3 py-1 rounded-full border border-cybergreen/30">
+                  <ShieldCheck className="w-4 h-4" />
+                  SOFTWARE DEVELOPER & BCA GRADUATE
+                </div>
+                <h3 className="text-2xl sm:text-4xl font-black text-gray-900 dark:text-white tracking-tight leading-tight">
+                  Bishal Mandal.
                 </h3>
               </div>
-              <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-300 leading-relaxed mb-4 font-normal">
-                Successfully completed a research internship in <strong className="text-gray-900 dark:text-white font-semibold">Web Development & Frontend Engineering</strong> to showcase <strong className="text-cybergreen font-semibold">Indoor Air Pollution (IAP) Frameworks</strong> under the guidance of <strong className="text-gray-900 dark:text-white font-semibold">Prof. Sandip Chakraborty</strong>, Department of Computer Science & Engineering (CSE), IIT Kharagpur.
+
+              <p className="text-gray-600 dark:text-gray-300 text-sm sm:text-base lg:text-lg leading-relaxed font-normal">
+                Based in Kolkata, my engineering foundation bridges mathematical algorithms, responsive full-stack web applications, and Python desktop automation—highlighted by my research internship at <strong className="text-gray-900 dark:text-white font-semibold">IIT Kharagpur</strong>.
               </p>
-              <div className="inline-flex flex-wrap items-center gap-2 text-[10px] sm:text-xs font-mono font-bold text-cybergreen bg-cybergreen/10 px-3.5 py-1.5 rounded-full border border-cybergreen/30">
-                <span>Dept. of CSE, IIT Kharagpur</span>
-                <span>•</span>
-                <span>Prof. Sandip Chakraborty</span>
+
+              {/* Key Highlights Grid */}
+              <div className="grid grid-cols-2 gap-3 sm:gap-4 pt-2">
+                <div className="bg-white/80 dark:bg-gray-900/80 border border-gray-200 dark:border-gray-800 p-4 rounded-2xl hover:border-cybergreen/50 transition-colors">
+                  <span className="block text-xl sm:text-2xl font-black text-cybergreen">IIT KGP</span>
+                  <span className="text-[10px] sm:text-xs font-mono text-gray-500 dark:text-gray-400 uppercase font-semibold">Research Intern</span>
+                </div>
+                <div className="bg-white/80 dark:bg-gray-900/80 border border-gray-200 dark:border-gray-800 p-4 rounded-2xl hover:border-cybergreen/50 transition-colors">
+                  <span className="block text-xl sm:text-2xl font-black text-cybergreen">J.E.R.V.I.S</span>
+                  <span className="text-[10px] sm:text-xs font-mono text-gray-500 dark:text-gray-400 uppercase font-semibold">PyQt6 Assistant</span>
+                </div>
+              </div>
+
+              {/* Call to Action Buttons */}
+              <div className="flex flex-wrap gap-4 pt-4 border-t border-gray-200 dark:border-gray-800">
+                <button
+                  onClick={() => scrollToSection && scrollToSection('projects')}
+                  className="bg-cybergreen hover:bg-emerald-400 text-black font-extrabold py-3 px-6 rounded-xl shadow-lg shadow-cybergreen/30 transition duration-300 hover:scale-105 text-xs sm:text-sm flex items-center gap-2 cursor-pointer"
+                >
+                  <span>Explore My Work</span>
+                  <ArrowUpRight className="w-4 h-4" />
+                </button>
+                <button
+                  onClick={() => scrollToSection && scrollToSection('contact')}
+                  className="bg-gray-900 border border-gray-700 text-white font-semibold py-3 px-6 rounded-xl hover:bg-gray-800 transition duration-300 text-xs sm:text-sm cursor-pointer"
+                >
+                  Contact Bishal
+                </button>
               </div>
             </div>
-
-            {/* Core Competencies */}
-            <div className="border-t border-gray-200 dark:border-gray-800/80 pt-6">
-              <h3 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white mb-3 flex items-center gap-2">
-                <Cpu className="w-5 h-5 text-cybergreen shrink-0" />
-                <span>Core Technical Competencies</span>
-              </h3>
-              <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300">
-                I specialize in architecting responsive full-stack applications, environmental data visualization dashboards, and powerful desktop tooling utilizing <strong className="text-gray-900 dark:text-white font-semibold">Python, C++, and modern JavaScript ecosystems</strong>—most notably engineering <span className="text-cybergreen font-mono font-bold bg-cybergreen/20 px-2.5 py-0.5 rounded-md border border-cybergreen/40">J.E.R.V.I.S.</span>, a custom desktop voice assistant built for automation.
-              </p>
-            </div>
-
-            <div className="border-t border-gray-200 dark:border-gray-800/80 pt-4 text-xs sm:text-sm text-gray-500 dark:text-gray-400 flex items-center gap-2 font-mono">
-              <Sparkles className="w-4 h-4 text-cybergreen shrink-0 animate-pulse" />
-              <span>When away from the keyboard, I explore new audio landscapes and experiment with creative culinary recipes.</span>
-            </div>
-          </motion.div>
-        </div>
+          </div>
+        </motion.div>
       </div>
     </section>
   );
