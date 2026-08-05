@@ -16,8 +16,8 @@ export default function HeroScrollytelling({ scrollToSection, darkMode }) {
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
-  const smoothMouseX = useSpring(mouseX, { stiffness: 50, damping: 20 });
-  const smoothMouseY = useSpring(mouseY, { stiffness: 50, damping: 20 });
+  const smoothMouseX = useSpring(mouseX, { stiffness: 40, damping: 22 });
+  const smoothMouseY = useSpring(mouseY, { stiffness: 40, damping: 22 });
 
   const rotateY = useTransform(smoothMouseX, [-0.5, 0.5], [-4, 4]);
   const rotateX = useTransform(smoothMouseY, [-0.5, 0.5], [4, -4]);
@@ -27,10 +27,10 @@ export default function HeroScrollytelling({ scrollToSection, darkMode }) {
     offset: ['start start', 'end end'],
   });
 
-  // Spring physics for ultra-smooth frame scrubbing
+  // Perfectly balanced spring physics (no lag, no rushing!)
   const smoothScrollProgress = useSpring(scrollYProgress, {
-    stiffness: 120,
-    damping: 24,
+    stiffness: 60,
+    damping: 20,
     restDelta: 0.0001,
   });
 
@@ -188,7 +188,7 @@ export default function HeroScrollytelling({ scrollToSection, darkMode }) {
     const loop = () => {
       const diff = targetFrameRef.current - currentFrameRef.current;
       if (Math.abs(diff) > 0.0001) {
-        currentFrameRef.current += diff * 0.12; // Higher responsiveness lerp
+        currentFrameRef.current += diff * 0.07; // Perfectly weighted, buttery smooth lerp
         render();
       }
       animationFrameId = requestAnimationFrame(loop);
