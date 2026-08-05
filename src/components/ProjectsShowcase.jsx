@@ -44,25 +44,25 @@ export default function ProjectsShowcase() {
       : projects.filter((p) => p.category.includes(filter));
 
   return (
-    <section id="projects" className="py-20 px-4 sm:px-8 transition-colors duration-300 relative z-10 bg-white dark:bg-[#080c10]/95 border-t border-gray-200 dark:border-gray-800/60">
+    <section id="projects" className="py-20 md:py-28 px-4 sm:px-8 transition-colors duration-500 relative z-10 bg-white dark:bg-[#080c10]/95 border-t border-gray-200 dark:border-gray-800/60">
       <div className="container mx-auto max-w-5xl">
-        <h2 className="text-4xl font-bold text-center text-gray-900 dark:text-white mb-12">
-          Featured Projects
+        <h2 className="text-3xl sm:text-5xl font-extrabold text-center text-gray-900 dark:text-white mb-12 tracking-tight">
+          Featured <span className="text-cybergreen">Projects</span>
         </h2>
 
         {/* Filter Buttons */}
         <div className="flex flex-wrap justify-center gap-3 sm:gap-4 mb-12">
           {[
-            { id: 'all', label: 'All' },
+            { id: 'all', label: 'All Projects' },
             { id: 'web-design', label: 'Web Design' },
             { id: 'development', label: 'Development' },
           ].map((tab) => (
             <button
               key={tab.id}
               onClick={() => setFilter(tab.id)}
-              className={`px-6 py-2.5 rounded-full font-sans text-sm font-semibold transition-all duration-300 cursor-pointer ${
+              className={`px-6 py-2.5 rounded-full font-sans text-xs sm:text-sm font-semibold transition-all duration-300 cursor-pointer ${
                 filter === tab.id
-                  ? 'bg-cybergreen text-black shadow-[0_0_15px_#00E676] scale-105'
+                  ? 'bg-cybergreen text-black shadow-[0_0_20px_rgba(0,230,118,0.4)] scale-105'
                   : 'bg-gray-100 dark:bg-gray-800/80 text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-700 hover:border-cybergreen/50'
               }`}
             >
@@ -72,16 +72,16 @@ export default function ProjectsShowcase() {
         </div>
 
         {/* Project Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
           {filteredProjects.map((project) => (
             <div
               key={project.id}
-              className="bg-white/60 dark:bg-[#11161d]/60 backdrop-blur-md p-8 rounded-2xl shadow-lg border border-gray-200/50 dark:border-gray-800/80 flex flex-col transform transition duration-300 hover:-translate-y-2 group"
+              className="bg-gray-50/90 dark:bg-[#0d1117]/90 backdrop-blur-2xl p-6 sm:p-8 rounded-3xl shadow-xl border border-gray-200 dark:border-gray-800/80 hover:border-cybergreen/50 flex flex-col transform transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,230,118,0.1)] group"
             >
-              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-cybergreen transition-colors">
+              <h3 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-cybergreen transition-colors">
                 {project.title}
               </h3>
-              <p className="text-gray-700 dark:text-gray-400 mb-6 flex-grow leading-relaxed">
+              <p className="text-gray-600 dark:text-gray-300 text-sm sm:text-base mb-6 flex-grow leading-relaxed font-normal">
                 {project.description}
               </p>
 
@@ -89,7 +89,7 @@ export default function ProjectsShowcase() {
                 {project.tech.map((t, tIdx) => (
                   <span
                     key={tIdx}
-                    className="bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 text-xs font-semibold px-3 py-1 rounded-full border border-gray-200 dark:border-gray-700 font-mono"
+                    className="bg-cybergreen/10 text-cybergreen border border-cybergreen/30 text-[11px] font-semibold px-3 py-1 rounded-full font-mono"
                   >
                     {t}
                   </span>
