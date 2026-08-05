@@ -7,7 +7,6 @@ export default function HeroScrollytelling({ scrollToSection, darkMode }) {
   const canvasRef = useRef(null);
   const [activeStep, setActiveStep] = useState(0);
   const [frames, setFrames] = useState([]);
-  const [progress, setProgress] = useState(0);
   const targetFrameRef = useRef(0);
   const currentFrameRef = useRef(0);
 
@@ -17,8 +16,8 @@ export default function HeroScrollytelling({ scrollToSection, darkMode }) {
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
-  const smoothMouseX = useSpring(mouseX, { stiffness: 60, damping: 20 });
-  const smoothMouseY = useSpring(mouseY, { stiffness: 60, damping: 20 });
+  const smoothMouseX = useSpring(mouseX, { stiffness: 50, damping: 20 });
+  const smoothMouseY = useSpring(mouseY, { stiffness: 50, damping: 20 });
 
   const rotateY = useTransform(smoothMouseX, [-0.5, 0.5], [-4, 4]);
   const rotateX = useTransform(smoothMouseY, [-0.5, 0.5], [4, -4]);
@@ -28,8 +27,14 @@ export default function HeroScrollytelling({ scrollToSection, darkMode }) {
     offset: ['start start', 'end end'],
   });
 
-  const depthScale = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [1, 1.04, 1.02, 1]);
-  const smoothDepthScale = useSpring(depthScale, { stiffness: 80, damping: 25 });
+  // Spring physics for ultra-smooth frame scrubbing
+  const smoothScrollProgress = useSpring(scrollYProgress, {
+    stiffness: 120,
+    damping: 24,
+    restDelta: 0.0001,
+  });
+
+  const depthScale = useTransform(smoothScrollProgress, [0, 0.3, 0.7, 1], [1, 1.04, 1.02, 1]);
 
   // Preload & GPU-decode 80 3D frame images
   useEffect(() => {
@@ -60,148 +65,160 @@ export default function HeroScrollytelling({ scrollToSection, darkMode }) {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, [mouseX, mouseY]);
 
-  // Ultra-HD Canvas Engine: Zoomed-Out Mobile Facial Aesthetic Engine
+  // Ultra-Smooth 60FPS 3D Canvas Engine with Sub-Frame Fractional Alpha Blending
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
 
-    const render = () => {
-      if (frames.length === 0) return;
-      const width = window.innerWidth;
-      const height = window.innerHeight;
-      
-      const dpr = Math.max(window.devicePixelRatio || 1, 3.5);
+    let dpr = 1;
+    let width = window.innerWidth;
+    let height = window.innerHeight;
+
+    const resizeCanvas = () => {
+      width = window.innerWidth;
+      height = window.innerHeight;
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
 
       canvas.width = Math.round(width * dpr);
       canvas.height = Math.round(height * dpr);
-      ctx.setTransform(1, 0, 0, 1, 0, 0);
-      ctx.scale(dpr, dpr);
+      canvas.style.width = `${width}px`;
+      canvas.style.height = `${height}px`;
+    };
 
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    const drawFrameImage = (img, globalAlpha = 1) => {
+      if (!img || !img.complete || img.naturalWidth === 0) return;
+
+      const sourceW = img.naturalWidth;
+      const sourceH = img.naturalHeight * 0.96;
+      const imgRatio = sourceW / sourceH;
+      let drawW, drawH, drawX, drawY;
+
+      if (width >= 1024) {
+        const targetH = Math.max(height * 1.04, width / imgRatio);
+        drawH = targetH;
+        drawW = targetH * imgRatio;
+        drawX = - (drawW * 0.12);
+        drawY = (height - drawH) / 2;
+      } else if (width >= 768) {
+        const targetH = Math.max(height * 1.02, width / imgRatio);
+        drawH = targetH;
+        drawW = targetH * imgRatio;
+        drawX = - (drawW * 0.08);
+        drawY = (height - drawH) / 2;
+      } else {
+        const targetH = height * 0.52;
+        drawH = targetH;
+        drawW = targetH * imgRatio;
+        drawX = (width - drawW) / 2;
+        drawY = (height * 0.28) - (drawH * 0.35);
+      }
+
+      ctx.save();
+      ctx.globalAlpha = globalAlpha;
+      ctx.filter = 'contrast(108%) brightness(104%) saturate(105%)';
       ctx.imageSmoothingEnabled = true;
       ctx.imageSmoothingQuality = 'high';
 
-      const frameIndex = Math.floor(Math.max(0, Math.min(totalFrames - 1, currentFrameRef.current)));
-      let img = frames[frameIndex];
-      if (!img || !img.complete || img.naturalWidth === 0) {
-        img = frames.find((f) => f && f.complete && f.naturalWidth > 0) || frames[0];
+      ctx.drawImage(
+        img,
+        0,
+        0,
+        Math.round(sourceW),
+        Math.round(sourceH),
+        Math.round(drawX),
+        Math.round(drawY),
+        Math.round(drawW),
+        Math.round(drawH)
+      );
+
+      ctx.restore();
+    };
+
+    const render = () => {
+      if (frames.length === 0) return;
+
+      ctx.save();
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
+      ctx.scale(dpr, dpr);
+      ctx.clearRect(0, 0, width, height);
+
+      const clampedFrame = Math.max(0, Math.min(totalFrames - 1, currentFrameRef.current));
+      const baseIndex = Math.floor(clampedFrame);
+      const nextIndex = Math.min(totalFrames - 1, baseIndex + 1);
+      const alpha = clampedFrame - baseIndex;
+
+      let baseImg = frames[baseIndex];
+      let nextImg = frames[nextIndex];
+
+      if (!baseImg || !baseImg.complete) baseImg = frames[0];
+      if (!nextImg || !nextImg.complete) nextImg = baseImg;
+
+      // Draw base frame
+      drawFrameImage(baseImg, 1.0);
+
+      // Sub-frame cross-fade for silky continuous motion
+      if (alpha > 0.001 && nextIndex !== baseIndex) {
+        drawFrameImage(nextImg, alpha);
       }
 
-      if (img && img.complete && img.naturalWidth > 0) {
-        const sourceW = img.naturalWidth;
-        const sourceH = img.naturalHeight * 0.96;
+      // Deep Obsidian Black Gradient Edge Fade Mask (#080c10)
+      if (width >= 768) {
+        const fadeStart = width * 0.38;
+        const fadeWidth = width * 0.30;
+        const gradient = ctx.createLinearGradient(fadeStart, 0, fadeStart + fadeWidth, 0);
 
-        const imgRatio = sourceW / sourceH;
-        let drawW, drawH, drawX, drawY;
+        gradient.addColorStop(0, 'rgba(8, 12, 16, 0)');
+        gradient.addColorStop(1, 'rgba(8, 12, 16, 1)');
 
-        if (width >= 1024) {
-          // DESKTOP & LAPTOP
-          const targetH = Math.max(height * 1.04, width / imgRatio);
-          drawH = targetH;
-          drawW = targetH * imgRatio;
-          drawX = - (drawW * 0.12);
-          drawY = (height - drawH) / 2;
-        } else if (width >= 768) {
-          // TABLET
-          const targetH = Math.max(height * 1.02, width / imgRatio);
-          drawH = targetH;
-          drawW = targetH * imgRatio;
-          drawX = - (drawW * 0.08);
-          drawY = (height - drawH) / 2;
-        } else {
-          // MOBILE PHONE (Samsung Galaxy S20 Ultra & All Phones):
-          const targetH = height * 0.52;
-          drawH = targetH;
-          drawW = targetH * imgRatio;
-          drawX = (width - drawW) / 2; // Dead-centered horizontally!
-          drawY = (height * 0.28) - (drawH * 0.35); // Positioned in upper stage above text card!
-        }
+        ctx.fillStyle = gradient;
+        ctx.fillRect(Math.round(fadeStart), 0, Math.round(fadeWidth), Math.round(height));
 
-        ctx.clearRect(0, 0, width, height);
-
-        ctx.filter = 'contrast(108%) brightness(104%) saturate(105%)';
-        ctx.imageSmoothingEnabled = true;
-        ctx.imageSmoothingQuality = 'high';
-
-        ctx.drawImage(
-          img,
-          0,
-          0,
-          Math.round(sourceW),
-          Math.round(sourceH),
-          Math.round(drawX),
-          Math.round(drawY),
-          Math.round(drawW),
-          Math.round(drawH)
-        );
-
-        ctx.filter = 'none';
-
-        // Deep Obsidian Black Gradient Edge Fade Mask (#080c10)
-        if (width >= 768) {
-          const fadeStart = width * 0.38;
-          const fadeWidth = width * 0.30;
-          const gradient = ctx.createLinearGradient(fadeStart, 0, fadeStart + fadeWidth, 0);
-          
-          gradient.addColorStop(0, 'rgba(8, 12, 16, 0)');
-          gradient.addColorStop(1, 'rgba(8, 12, 16, 1)');
-
-          ctx.fillStyle = gradient;
-          ctx.fillRect(Math.round(fadeStart), 0, Math.round(fadeWidth), Math.round(height));
-
-          ctx.fillStyle = '#080c10';
-          ctx.fillRect(Math.round(fadeStart + fadeWidth), 0, Math.round(width - (fadeStart + fadeWidth)), Math.round(height));
-        }
+        ctx.fillStyle = '#080c10';
+        ctx.fillRect(Math.round(fadeStart + fadeWidth), 0, Math.round(width - (fadeStart + fadeWidth)), Math.round(height));
       }
+
+      ctx.restore();
     };
 
     let animationFrameId;
     const loop = () => {
       const diff = targetFrameRef.current - currentFrameRef.current;
-      if (Math.abs(diff) > 0.0005) {
-        currentFrameRef.current += diff * 0.08;
+      if (Math.abs(diff) > 0.0001) {
+        currentFrameRef.current += diff * 0.12; // Higher responsiveness lerp
         render();
       }
       animationFrameId = requestAnimationFrame(loop);
     };
     loop();
 
-    const handleResize = () => render();
-    window.addEventListener('resize', handleResize);
-
     return () => {
       cancelAnimationFrame(animationFrameId);
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('resize', resizeCanvas);
     };
   }, [frames]);
 
-  // Scroll Progress Engine
+  // Scroll Progress Engine linked with Framer Motion spring physics
   useEffect(() => {
-    const handleScroll = () => {
-      if (!containerRef.current) return;
-      const rect = containerRef.current.getBoundingClientRect();
-      const totalScrollable = rect.height - window.innerHeight;
-      let scrollPct = 0;
-      if (totalScrollable > 0) {
-        scrollPct = Math.max(0, Math.min(1, -rect.top / totalScrollable));
-      }
-      setProgress(scrollPct);
-      targetFrameRef.current = scrollPct * (totalFrames - 1);
+    const unsubscribe = smoothScrollProgress.on('change', (val) => {
+      targetFrameRef.current = val * (totalFrames - 1);
 
-      if (scrollPct < 0.25) {
+      if (val < 0.25) {
         setActiveStep(0);
-      } else if (scrollPct >= 0.25 && scrollPct < 0.50) {
+      } else if (val >= 0.25 && val < 0.50) {
         setActiveStep(1);
-      } else if (scrollPct >= 0.50 && scrollPct < 0.75) {
+      } else if (val >= 0.50 && val < 0.75) {
         setActiveStep(2);
       } else {
         setActiveStep(3);
       }
-    };
+    });
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+    return () => unsubscribe();
+  }, [smoothScrollProgress]);
 
   const storySteps = [
     {
@@ -271,7 +288,7 @@ export default function HeroScrollytelling({ scrollToSection, darkMode }) {
           style={{
             rotateX,
             rotateY,
-            scale: smoothDepthScale,
+            scale: depthScale,
             transformStyle: 'preserve-3d',
           }}
           className="absolute inset-0 w-full h-full pointer-events-none"
