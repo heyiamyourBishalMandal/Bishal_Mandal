@@ -27,7 +27,7 @@ export default function HeroScrollytelling({ scrollToSection, darkMode }) {
     offset: ['start start', 'end end'],
   });
 
-  // Perfectly balanced spring physics (no lag, no rushing!)
+  // Balanced spring physics for responsive, natural scrolling
   const smoothScrollProgress = useSpring(scrollYProgress, {
     stiffness: 60,
     damping: 20,
@@ -65,7 +65,7 @@ export default function HeroScrollytelling({ scrollToSection, darkMode }) {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, [mouseX, mouseY]);
 
-  // Ultra-Smooth 60FPS 3D Canvas Engine with Sub-Frame Fractional Alpha Blending
+  // Ultra-Sharp 60FPS Canvas Engine (Zero Ghosting & Zero Haziness)
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -89,55 +89,6 @@ export default function HeroScrollytelling({ scrollToSection, darkMode }) {
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
 
-    const drawFrameImage = (img, globalAlpha = 1) => {
-      if (!img || !img.complete || img.naturalWidth === 0) return;
-
-      const sourceW = img.naturalWidth;
-      const sourceH = img.naturalHeight * 0.96;
-      const imgRatio = sourceW / sourceH;
-      let drawW, drawH, drawX, drawY;
-
-      if (width >= 1024) {
-        const targetH = Math.max(height * 1.04, width / imgRatio);
-        drawH = targetH;
-        drawW = targetH * imgRatio;
-        drawX = - (drawW * 0.12);
-        drawY = (height - drawH) / 2;
-      } else if (width >= 768) {
-        const targetH = Math.max(height * 1.02, width / imgRatio);
-        drawH = targetH;
-        drawW = targetH * imgRatio;
-        drawX = - (drawW * 0.08);
-        drawY = (height - drawH) / 2;
-      } else {
-        const targetH = height * 0.52;
-        drawH = targetH;
-        drawW = targetH * imgRatio;
-        drawX = (width - drawW) / 2;
-        drawY = (height * 0.28) - (drawH * 0.35);
-      }
-
-      ctx.save();
-      ctx.globalAlpha = globalAlpha;
-      ctx.filter = 'contrast(108%) brightness(104%) saturate(105%)';
-      ctx.imageSmoothingEnabled = true;
-      ctx.imageSmoothingQuality = 'high';
-
-      ctx.drawImage(
-        img,
-        0,
-        0,
-        Math.round(sourceW),
-        Math.round(sourceH),
-        Math.round(drawX),
-        Math.round(drawY),
-        Math.round(drawW),
-        Math.round(drawH)
-      );
-
-      ctx.restore();
-    };
-
     const render = () => {
       if (frames.length === 0) return;
 
@@ -146,39 +97,72 @@ export default function HeroScrollytelling({ scrollToSection, darkMode }) {
       ctx.scale(dpr, dpr);
       ctx.clearRect(0, 0, width, height);
 
-      const clampedFrame = Math.max(0, Math.min(totalFrames - 1, currentFrameRef.current));
-      const baseIndex = Math.floor(clampedFrame);
-      const nextIndex = Math.min(totalFrames - 1, baseIndex + 1);
-      const alpha = clampedFrame - baseIndex;
-
-      let baseImg = frames[baseIndex];
-      let nextImg = frames[nextIndex];
-
-      if (!baseImg || !baseImg.complete) baseImg = frames[0];
-      if (!nextImg || !nextImg.complete) nextImg = baseImg;
-
-      // Draw base frame
-      drawFrameImage(baseImg, 1.0);
-
-      // Sub-frame cross-fade for silky continuous motion
-      if (alpha > 0.001 && nextIndex !== baseIndex) {
-        drawFrameImage(nextImg, alpha);
+      // Render ONE exact, crisp frame (eliminates all ghosting & haziness!)
+      const frameIndex = Math.round(Math.max(0, Math.min(totalFrames - 1, currentFrameRef.current)));
+      let img = frames[frameIndex];
+      if (!img || !img.complete || img.naturalWidth === 0) {
+        img = frames.find((f) => f && f.complete && f.naturalWidth > 0) || frames[0];
       }
 
-      // Deep Obsidian Black Gradient Edge Fade Mask (#080c10)
-      if (width >= 768) {
-        const fadeStart = width * 0.38;
-        const fadeWidth = width * 0.30;
-        const gradient = ctx.createLinearGradient(fadeStart, 0, fadeStart + fadeWidth, 0);
+      if (img && img.complete && img.naturalWidth > 0) {
+        const sourceW = img.naturalWidth;
+        const sourceH = img.naturalHeight * 0.96;
+        const imgRatio = sourceW / sourceH;
+        let drawW, drawH, drawX, drawY;
 
-        gradient.addColorStop(0, 'rgba(8, 12, 16, 0)');
-        gradient.addColorStop(1, 'rgba(8, 12, 16, 1)');
+        if (width >= 1024) {
+          const targetH = Math.max(height * 1.04, width / imgRatio);
+          drawH = targetH;
+          drawW = targetH * imgRatio;
+          drawX = - (drawW * 0.12);
+          drawY = (height - drawH) / 2;
+        } else if (width >= 768) {
+          const targetH = Math.max(height * 1.02, width / imgRatio);
+          drawH = targetH;
+          drawW = targetH * imgRatio;
+          drawX = - (drawW * 0.08);
+          drawY = (height - drawH) / 2;
+        } else {
+          const targetH = height * 0.52;
+          drawH = targetH;
+          drawW = targetH * imgRatio;
+          drawX = (width - drawW) / 2;
+          drawY = (height * 0.28) - (drawH * 0.35);
+        }
 
-        ctx.fillStyle = gradient;
-        ctx.fillRect(Math.round(fadeStart), 0, Math.round(fadeWidth), Math.round(height));
+        ctx.filter = 'contrast(108%) brightness(104%) saturate(105%)';
+        ctx.imageSmoothingEnabled = true;
+        ctx.imageSmoothingQuality = 'high';
 
-        ctx.fillStyle = '#080c10';
-        ctx.fillRect(Math.round(fadeStart + fadeWidth), 0, Math.round(width - (fadeStart + fadeWidth)), Math.round(height));
+        ctx.drawImage(
+          img,
+          0,
+          0,
+          Math.round(sourceW),
+          Math.round(sourceH),
+          Math.round(drawX),
+          Math.round(drawY),
+          Math.round(drawW),
+          Math.round(drawH)
+        );
+
+        ctx.filter = 'none';
+
+        // Deep Obsidian Black Gradient Edge Fade Mask (#080c10)
+        if (width >= 768) {
+          const fadeStart = width * 0.38;
+          const fadeWidth = width * 0.30;
+          const gradient = ctx.createLinearGradient(fadeStart, 0, fadeStart + fadeWidth, 0);
+
+          gradient.addColorStop(0, 'rgba(8, 12, 16, 0)');
+          gradient.addColorStop(1, 'rgba(8, 12, 16, 1)');
+
+          ctx.fillStyle = gradient;
+          ctx.fillRect(Math.round(fadeStart), 0, Math.round(fadeWidth), Math.round(height));
+
+          ctx.fillStyle = '#080c10';
+          ctx.fillRect(Math.round(fadeStart + fadeWidth), 0, Math.round(width - (fadeStart + fadeWidth)), Math.round(height));
+        }
       }
 
       ctx.restore();
@@ -187,8 +171,8 @@ export default function HeroScrollytelling({ scrollToSection, darkMode }) {
     let animationFrameId;
     const loop = () => {
       const diff = targetFrameRef.current - currentFrameRef.current;
-      if (Math.abs(diff) > 0.0001) {
-        currentFrameRef.current += diff * 0.07; // Perfectly weighted, buttery smooth lerp
+      if (Math.abs(diff) > 0.001) {
+        currentFrameRef.current += diff * 0.08; // Smooth, crystal-clear lerping
         render();
       }
       animationFrameId = requestAnimationFrame(loop);
@@ -201,7 +185,7 @@ export default function HeroScrollytelling({ scrollToSection, darkMode }) {
     };
   }, [frames]);
 
-  // Scroll Progress Engine linked with Framer Motion spring physics
+  // Scroll Progress Engine
   useEffect(() => {
     const unsubscribe = smoothScrollProgress.on('change', (val) => {
       targetFrameRef.current = val * (totalFrames - 1);

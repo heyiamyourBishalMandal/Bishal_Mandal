@@ -320,35 +320,6 @@
     let targetFrame = 0;
     let currentFrame = 0;
 
-    function drawFrameImage(img, globalAlpha = 1) {
-      if (!img || !img.complete || img.naturalWidth === 0) return;
-
-      const sourceW = img.naturalWidth;
-      const sourceH = img.naturalHeight * 0.96;
-      const imgRatio = sourceW / sourceH;
-      let drawW, drawH, drawX, drawY;
-
-      if (width >= 1024) {
-        const targetH = height * 0.82;
-        drawH = targetH;
-        drawW = targetH * imgRatio;
-        drawX = Math.max(30, (width * 0.38 - drawW) / 2);
-        drawY = (height - drawH) / 2;
-      } else {
-        const targetH = height * 0.52;
-        drawH = targetH;
-        drawW = targetH * imgRatio;
-        drawX = (width - drawW) / 2;
-        drawY = (height * 0.28) - (drawH * 0.35);
-      }
-
-      ctx.save();
-      ctx.globalAlpha = globalAlpha;
-      ctx.filter = 'contrast(108%) brightness(104%) saturate(105%)';
-      ctx.drawImage(img, 0, 0, Math.round(sourceW), Math.round(sourceH), Math.round(drawX), Math.round(drawY), Math.round(drawW), Math.round(drawH));
-      ctx.restore();
-    }
-
     function renderCanvas() {
       if (frames.length === 0) return;
 
@@ -357,33 +328,47 @@
       ctx.scale(dpr, dpr);
       ctx.clearRect(0, 0, width, height);
 
-      const clampedFrame = Math.max(0, Math.min(totalFrames - 1, currentFrame));
-      const baseIndex = Math.floor(clampedFrame);
-      const nextIndex = Math.min(totalFrames - 1, baseIndex + 1);
-      const alpha = clampedFrame - baseIndex;
-
-      let baseImg = frames[baseIndex];
-      let nextImg = frames[nextIndex];
-
-      if (!baseImg || !baseImg.complete) baseImg = frames[0];
-      if (!nextImg || !nextImg.complete) nextImg = baseImg;
-
-      drawFrameImage(baseImg, 1.0);
-
-      if (alpha > 0.001 && nextIndex !== baseIndex) {
-        drawFrameImage(nextImg, alpha);
+      const frameIndex = Math.round(Math.max(0, Math.min(totalFrames - 1, currentFrame)));
+      let img = frames[frameIndex];
+      if (!img || !img.complete || img.naturalWidth === 0) {
+        img = frames.find(f => f && f.complete && f.naturalWidth > 0) || frames[0];
       }
 
-      if (width >= 768) {
-        const fadeStart = width * 0.38;
-        const fadeWidth = width * 0.30;
-        const grad = ctx.createLinearGradient(fadeStart, 0, fadeStart + fadeWidth, 0);
-        grad.addColorStop(0, 'rgba(8, 12, 16, 0)');
-        grad.addColorStop(1, 'rgba(8, 12, 16, 1)');
-        ctx.fillStyle = grad;
-        ctx.fillRect(Math.round(fadeStart), 0, Math.round(fadeWidth), Math.round(height));
-        ctx.fillStyle = '#080c10';
-        ctx.fillRect(Math.round(fadeStart + fadeWidth), 0, Math.round(width - (fadeStart + fadeWidth)), Math.round(height));
+      if (img && img.complete && img.naturalWidth > 0) {
+        const sourceW = img.naturalWidth;
+        const sourceH = img.naturalHeight * 0.96;
+        const imgRatio = sourceW / sourceH;
+        let drawW, drawH, drawX, drawY;
+
+        if (width >= 1024) {
+          const targetH = height * 0.82;
+          drawH = targetH;
+          drawW = targetH * imgRatio;
+          drawX = Math.max(30, (width * 0.38 - drawW) / 2);
+          drawY = (height - drawH) / 2;
+        } else {
+          const targetH = height * 0.52;
+          drawH = targetH;
+          drawW = targetH * imgRatio;
+          drawX = (width - drawW) / 2;
+          drawY = (height * 0.28) - (drawH * 0.35);
+        }
+
+        ctx.filter = 'contrast(108%) brightness(104%) saturate(105%)';
+        ctx.drawImage(img, 0, 0, Math.round(sourceW), Math.round(sourceH), Math.round(drawX), Math.round(drawY), Math.round(drawW), Math.round(drawH));
+        ctx.filter = 'none';
+
+        if (width >= 768) {
+          const fadeStart = width * 0.38;
+          const fadeWidth = width * 0.30;
+          const grad = ctx.createLinearGradient(fadeStart, 0, fadeStart + fadeWidth, 0);
+          grad.addColorStop(0, 'rgba(8, 12, 16, 0)');
+          grad.addColorStop(1, 'rgba(8, 12, 16, 1)');
+          ctx.fillStyle = grad;
+          ctx.fillRect(Math.round(fadeStart), 0, Math.round(fadeWidth), Math.round(height));
+          ctx.fillStyle = '#080c10';
+          ctx.fillRect(Math.round(fadeStart + fadeWidth), 0, Math.round(width - (fadeStart + fadeWidth)), Math.round(height));
+        }
       }
 
       ctx.restore();
@@ -391,8 +376,8 @@
 
     function animLoop() {
       const diff = targetFrame - currentFrame;
-      if (Math.abs(diff) > 0.0001) {
-        currentFrame += diff * 0.07;
+      if (Math.abs(diff) > 0.001) {
+        currentFrame += diff * 0.08;
         renderCanvas();
       }
       requestAnimationFrame(animLoop);
