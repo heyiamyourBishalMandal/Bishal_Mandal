@@ -9,6 +9,7 @@ export default function HeroScrollytelling({ scrollToSection, darkMode }) {
   const [frames, setFrames] = useState([]);
   const targetFrameRef = useRef(0);
   const currentFrameRef = useRef(0);
+  const lastDrawnFrameRef = useRef(-1);
 
   const totalFrames = 80;
 
@@ -27,21 +28,23 @@ export default function HeroScrollytelling({ scrollToSection, darkMode }) {
     offset: ['start start', 'end end'],
   });
 
-  // Balanced spring physics for responsive, natural scrolling
+  // Balanced spring physics for stutter-free, responsive scrolling across low and high-spec devices
   const smoothScrollProgress = useSpring(scrollYProgress, {
-    stiffness: 60,
-    damping: 20,
-    restDelta: 0.0001,
+    stiffness: 80,
+    damping: 22,
+    restDelta: 0.0005,
   });
 
   const depthScale = useTransform(smoothScrollProgress, [0, 0.3, 0.7, 1], [1, 1.04, 1.02, 1]);
 
-  // Preload & GPU-decode 80 3D frame images
+  // Preload & GPU Async-decode 80 3D frame images with zero CPU blocking
   useEffect(() => {
     const loadedImages = [];
     for (let i = 1; i <= totalFrames; i++) {
       const img = new Image();
       const numStr = String(i).padStart(3, '0');
+      img.decoding = 'async';
+      img.loading = 'eager';
       img.src = `fram/ezgif-frame-${numStr}.jpg`;
       if (img.decode) {
         img.decode().catch(() => {});
@@ -51,9 +54,10 @@ export default function HeroScrollytelling({ scrollToSection, darkMode }) {
     setFrames(loadedImages);
   }, []);
 
-  // Mouse Move Parallax Tracker
+  // Mouse Move Parallax Tracker (Desktop Only)
   useEffect(() => {
     const handleMouseMove = (e) => {
+      if (window.innerWidth < 768) return; // Skip on mobile to save CPU cycles
       const { innerWidth, innerHeight } = window;
       const x = (e.clientX / innerWidth) - 0.5;
       const y = (e.clientY / innerHeight) - 0.5;
@@ -61,15 +65,15 @@ export default function HeroScrollytelling({ scrollToSection, darkMode }) {
       mouseY.set(y);
     };
 
-    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, [mouseX, mouseY]);
 
-  // Ultra-Sharp 60FPS Canvas Engine (Zero Ghosting & Zero Haziness)
+  // Hardware-Accelerated 60-120FPS Canvas Engine (Optimized for Low & High Spec Devices)
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext('2d', { alpha: false, desynchronized: true });
 
     let dpr = 1;
     let width = window.innerWidth;
@@ -78,33 +82,41 @@ export default function HeroScrollytelling({ scrollToSection, darkMode }) {
     const resizeCanvas = () => {
       width = window.innerWidth;
       height = window.innerHeight;
-      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const isMobile = width < 768;
+
+      // Device-adaptive DPR capping (prevents VRAM exhaustion on lower-end devices)
+      dpr = isMobile
+        ? Math.min(window.devicePixelRatio || 1, 1.25)
+        : Math.min(window.devicePixelRatio || 1, 1.75);
 
       canvas.width = Math.round(width * dpr);
       canvas.height = Math.round(height * dpr);
       canvas.style.width = `${width}px`;
       canvas.style.height = `${height}px`;
+
+      lastDrawnFrameRef.current = -1; // Force re-render on resize
     };
 
     resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
+    window.addEventListener('resize', resizeCanvas, { passive: true });
 
-    const render = () => {
+    const render = (frameIndex) => {
       if (frames.length === 0) return;
 
-      ctx.save();
-      ctx.setTransform(1, 0, 0, 1, 0, 0);
-      ctx.scale(dpr, dpr);
-      ctx.clearRect(0, 0, width, height);
-
-      // Render ONE exact, crisp frame (eliminates all ghosting & haziness!)
-      const frameIndex = Math.round(Math.max(0, Math.min(totalFrames - 1, currentFrameRef.current)));
       let img = frames[frameIndex];
       if (!img || !img.complete || img.naturalWidth === 0) {
         img = frames.find((f) => f && f.complete && f.naturalWidth > 0) || frames[0];
       }
 
       if (img && img.complete && img.naturalWidth > 0) {
+        ctx.save();
+        ctx.setTransform(1, 0, 0, 1, 0, 0);
+        ctx.scale(dpr, dpr);
+
+        // Hardware-accelerated background fill
+        ctx.fillStyle = '#080c10';
+        ctx.fillRect(0, 0, width, height);
+
         const sourceW = img.naturalWidth;
         const sourceH = img.naturalHeight * 0.96;
         const imgRatio = sourceW / sourceH;
@@ -130,9 +142,8 @@ export default function HeroScrollytelling({ scrollToSection, darkMode }) {
           drawY = (height * 0.28) - (drawH * 0.35);
         }
 
-        ctx.filter = 'contrast(108%) brightness(104%) saturate(105%)';
         ctx.imageSmoothingEnabled = true;
-        ctx.imageSmoothingQuality = 'high';
+        ctx.imageSmoothingQuality = width >= 768 ? 'high' : 'medium';
 
         ctx.drawImage(
           img,
@@ -145,8 +156,6 @@ export default function HeroScrollytelling({ scrollToSection, darkMode }) {
           Math.round(drawW),
           Math.round(drawH)
         );
-
-        ctx.filter = 'none';
 
         // Deep Obsidian Black Gradient Edge Fade Mask (#080c10)
         if (width >= 768) {
@@ -163,17 +172,26 @@ export default function HeroScrollytelling({ scrollToSection, darkMode }) {
           ctx.fillStyle = '#080c10';
           ctx.fillRect(Math.round(fadeStart + fadeWidth), 0, Math.round(width - (fadeStart + fadeWidth)), Math.round(height));
         }
-      }
 
-      ctx.restore();
+        ctx.restore();
+      }
     };
 
     let animationFrameId;
     const loop = () => {
       const diff = targetFrameRef.current - currentFrameRef.current;
-      if (Math.abs(diff) > 0.001) {
-        currentFrameRef.current += diff * 0.08; // Smooth, crystal-clear lerping
-        render();
+
+      if (Math.abs(diff) > 0.0005) {
+        // Fast, adaptive lerp (0.10 for crisp desktop, 0.12 for mobile)
+        const lerpFactor = width < 768 ? 0.12 : 0.10;
+        currentFrameRef.current += diff * lerpFactor;
+
+        const currentIntFrame = Math.round(Math.max(0, Math.min(totalFrames - 1, currentFrameRef.current)));
+
+        if (currentIntFrame !== lastDrawnFrameRef.current) {
+          render(currentIntFrame);
+          lastDrawnFrameRef.current = currentIntFrame;
+        }
       }
       animationFrameId = requestAnimationFrame(loop);
     };
@@ -277,7 +295,10 @@ export default function HeroScrollytelling({ scrollToSection, darkMode }) {
           }}
           className="absolute inset-0 w-full h-full pointer-events-none"
         >
-          <canvas ref={canvasRef} className="w-full h-full object-cover filter contrast-[108%] brightness-[104%] saturate-[105%]" />
+          <canvas
+            ref={canvasRef}
+            className="w-full h-full object-cover filter contrast-[108%] brightness-[104%] saturate-[105%]"
+          />
         </motion.div>
 
         {/* 1. Huge Brand Display Title */}
