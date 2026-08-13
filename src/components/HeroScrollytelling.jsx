@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { motion, AnimatePresence, useScroll, useTransform, useSpring, useMotionValue } from 'framer-motion';
-import { Code, Terminal, Cpu, Sparkles, Award } from 'lucide-react';
+import { motion, AnimatePresence, useScroll } from 'framer-motion';
+import { Terminal, Cpu, Sparkles, Award } from 'lucide-react';
 
 export default function HeroScrollytelling({ scrollToSection, darkMode }) {
   const containerRef = useRef(null);
@@ -13,31 +13,12 @@ export default function HeroScrollytelling({ scrollToSection, darkMode }) {
 
   const totalFrames = 80;
 
-  // 3D Parallax & Gyroscope Motion Values
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-
-  const smoothMouseX = useSpring(mouseX, { stiffness: 40, damping: 22 });
-  const smoothMouseY = useSpring(mouseY, { stiffness: 40, damping: 22 });
-
-  const rotateY = useTransform(smoothMouseX, [-0.5, 0.5], [-4, 4]);
-  const rotateX = useTransform(smoothMouseY, [-0.5, 0.5], [4, -4]);
-
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ['start start', 'end end'],
   });
 
-  // Balanced spring physics for stutter-free, responsive scrolling across low and high-spec devices
-  const smoothScrollProgress = useSpring(scrollYProgress, {
-    stiffness: 80,
-    damping: 22,
-    restDelta: 0.0005,
-  });
-
-  const depthScale = useTransform(smoothScrollProgress, [0, 0.3, 0.7, 1], [1, 1.04, 1.02, 1]);
-
-  // Preload & GPU Async-decode 80 3D frame images with zero CPU blocking
+  // Preload & GPU Async-decode 80 3D frame images
   useEffect(() => {
     const loadedImages = [];
     for (let i = 1; i <= totalFrames; i++) {
@@ -54,22 +35,7 @@ export default function HeroScrollytelling({ scrollToSection, darkMode }) {
     setFrames(loadedImages);
   }, []);
 
-  // Mouse Move Parallax Tracker (Desktop Only)
-  useEffect(() => {
-    const handleMouseMove = (e) => {
-      if (window.innerWidth < 768) return; // Skip on mobile to save CPU cycles
-      const { innerWidth, innerHeight } = window;
-      const x = (e.clientX / innerWidth) - 0.5;
-      const y = (e.clientY / innerHeight) - 0.5;
-      mouseX.set(x);
-      mouseY.set(y);
-    };
-
-    window.addEventListener('mousemove', handleMouseMove, { passive: true });
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, [mouseX, mouseY]);
-
-  // Hardware-Accelerated 60-120FPS Canvas Engine (Optimized for Low & High Spec Devices)
+  // Hardware-Accelerated High-FPS Canvas Engine (Zero Input Lag & Stutter-Free)
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -84,7 +50,7 @@ export default function HeroScrollytelling({ scrollToSection, darkMode }) {
       height = window.innerHeight;
       const isMobile = width < 768;
 
-      // Device-adaptive DPR capping (prevents VRAM exhaustion on lower-end devices)
+      // Device-adaptive DPR capping (prevents VRAM exhaustion and lag)
       dpr = isMobile
         ? Math.min(window.devicePixelRatio || 1, 1.25)
         : Math.min(window.devicePixelRatio || 1, 1.75);
@@ -113,7 +79,7 @@ export default function HeroScrollytelling({ scrollToSection, darkMode }) {
         ctx.setTransform(1, 0, 0, 1, 0, 0);
         ctx.scale(dpr, dpr);
 
-        // Hardware-accelerated background fill
+        // Hardware background fill
         ctx.fillStyle = '#080c10';
         ctx.fillRect(0, 0, width, height);
 
@@ -181,10 +147,9 @@ export default function HeroScrollytelling({ scrollToSection, darkMode }) {
     const loop = () => {
       const diff = targetFrameRef.current - currentFrameRef.current;
 
-      if (Math.abs(diff) > 0.0005) {
-        // Fast, adaptive lerp (0.10 for crisp desktop, 0.12 for mobile)
-        const lerpFactor = width < 768 ? 0.12 : 0.10;
-        currentFrameRef.current += diff * lerpFactor;
+      if (Math.abs(diff) > 0.0001) {
+        // High-responsiveness, zero-lag lerp factor (0.18 for instant, silky motion)
+        currentFrameRef.current += diff * 0.18;
 
         const currentIntFrame = Math.round(Math.max(0, Math.min(totalFrames - 1, currentFrameRef.current)));
 
@@ -203,9 +168,9 @@ export default function HeroScrollytelling({ scrollToSection, darkMode }) {
     };
   }, [frames]);
 
-  // Scroll Progress Engine
+  // Instant Direct Scroll Tracking (Eliminates spring delay lag)
   useEffect(() => {
-    const unsubscribe = smoothScrollProgress.on('change', (val) => {
+    const unsubscribe = scrollYProgress.on('change', (val) => {
       targetFrameRef.current = val * (totalFrames - 1);
 
       if (val < 0.25) {
@@ -220,7 +185,7 @@ export default function HeroScrollytelling({ scrollToSection, darkMode }) {
     });
 
     return () => unsubscribe();
-  }, [smoothScrollProgress]);
+  }, [scrollYProgress]);
 
   const storySteps = [
     {
@@ -284,22 +249,14 @@ export default function HeroScrollytelling({ scrollToSection, darkMode }) {
   return (
     <section ref={containerRef} id="hero" className="relative w-full h-[500vh]">
       {/* Pinned Sticky 3D Stage */}
-      <div className="sticky top-0 w-full h-screen overflow-hidden bg-[#080c10] flex items-center justify-center [perspective:1000px]">
-        {/* Full-bleed 3D Interactive Motion Canvas */}
-        <motion.div
-          style={{
-            rotateX,
-            rotateY,
-            scale: depthScale,
-            transformStyle: 'preserve-3d',
-          }}
-          className="absolute inset-0 w-full h-full pointer-events-none"
-        >
+      <div className="sticky top-0 w-full h-screen overflow-hidden bg-[#080c10] flex items-center justify-center">
+        {/* Full-bleed Hardware Accelerated Motion Canvas */}
+        <div className="absolute inset-0 w-full h-full pointer-events-none">
           <canvas
             ref={canvasRef}
             className="w-full h-full object-cover filter contrast-[108%] brightness-[104%] saturate-[105%]"
           />
-        </motion.div>
+        </div>
 
         {/* 1. Huge Brand Display Title */}
         <div className="absolute top-16 left-5 sm:top-24 sm:left-10 lg:left-14 z-25 pointer-events-none select-none">
@@ -350,7 +307,7 @@ export default function HeroScrollytelling({ scrollToSection, darkMode }) {
                     initial={{ opacity: 0, y: 25 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -25 }}
-                    transition={{ duration: 0.5, ease: 'easeOut' }}
+                    transition={{ duration: 0.4, ease: 'easeOut' }}
                     className="space-y-3 sm:space-y-5 pointer-events-auto p-4 sm:p-6 rounded-2xl sm:rounded-3xl bg-[#080c10]/90 backdrop-blur-xl border border-gray-800/80 shadow-[0_10px_30px_rgba(0,0,0,0.9)]"
                   >
                     {/* Pill Badge */}
