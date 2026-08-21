@@ -35,7 +35,7 @@ export default function HeroScrollytelling({ scrollToSection, darkMode }) {
     setFrames(loadedImages);
   }, []);
 
-  // Hardware-Accelerated 60-120FPS Canvas Engine (Universal Tablet, Mobile, & Widescreen Desktop Math)
+  // Hardware-Accelerated 60-120FPS Canvas Engine (Universal Mobile, Tablet, & Laptop Smoothness)
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -148,9 +148,8 @@ export default function HeroScrollytelling({ scrollToSection, darkMode }) {
       const diff = targetFrameRef.current - currentFrameRef.current;
 
       if (Math.abs(diff) > 0.0001) {
-        // High-responsiveness, zero-lag lerp factor
-        const lerpFactor = width < 768 ? 0.12 : 0.16;
-        currentFrameRef.current += diff * lerpFactor;
+        // High-responsiveness, zero-lag lerp factor (0.18 across ALL devices for laptop-grade smoothness)
+        currentFrameRef.current += diff * 0.18;
 
         const currentIntFrame = Math.round(Math.max(0, Math.min(totalFrames - 1, currentFrameRef.current)));
 

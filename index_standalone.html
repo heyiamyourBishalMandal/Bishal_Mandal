@@ -142,13 +142,13 @@
 
   <!-- 4. ABOUT SECTION (Mobile Perfected Parallax Watermark) -->
   <section id="about" class="py-16 sm:py-24 md:py-36 px-4 sm:px-8 relative z-10 border-t border-gray-200 dark:border-gray-800/60 bg-white dark:bg-[#080c10]/95 transition-colors duration-500 overflow-hidden">
-    <div class="absolute top-2 sm:top-8 left-0 right-0 z-0 pointer-events-none select-none flex justify-center overflow-hidden px-2">
-      <h1 class="text-[11.5vw] sm:text-[13vw] lg:text-[14vw] font-black uppercase text-transparent bg-clip-text bg-gradient-to-b from-gray-900/15 via-gray-700/10 to-transparent dark:from-white/20 dark:via-white/5 dark:to-transparent tracking-tighter leading-none text-center whitespace-nowrap">
+    <div class="absolute top-1 sm:top-6 left-0 right-0 z-0 pointer-events-none select-none flex justify-center overflow-hidden px-1">
+      <h1 class="text-[14.5vw] sm:text-[13.5vw] lg:text-[14vw] font-black uppercase text-transparent bg-clip-text bg-gradient-to-b from-gray-900/20 via-gray-700/10 to-transparent dark:from-white/30 dark:via-cybergreen/15 dark:to-transparent tracking-[-0.06em] leading-none text-center whitespace-nowrap drop-shadow-[0_4px_25px_rgba(0,0,0,0.5)]">
         DEVELOPER
       </h1>
     </div>
 
-    <div class="container mx-auto max-w-5xl relative z-10 pt-6 sm:pt-10">
+    <div class="container mx-auto max-w-5xl relative z-10 pt-8 sm:pt-12">
       <div class="text-center max-w-3xl mx-auto mb-10 sm:mb-16 lg:mb-20">
         <h2 class="text-3xl sm:text-6xl lg:text-7xl font-black text-gray-900 dark:text-white tracking-tight mb-3 sm:mb-4">
           Engineering <span class="text-cybergreen">Precision.</span>
@@ -397,8 +397,7 @@
     function animLoop() {
       const diff = targetFrame - currentFrame;
       if (Math.abs(diff) > 0.0001) {
-        const lerpFactor = width < 768 ? 0.12 : 0.16;
-        currentFrame += diff * lerpFactor;
+        currentFrame += diff * 0.18;
         const currentIntFrame = Math.round(Math.max(0, Math.min(totalFrames - 1, currentFrame)));
         if (currentIntFrame !== lastDrawnFrame) {
           renderCanvas(currentIntFrame);

@@ -11,9 +11,9 @@ export default function AboutDossier({ scrollToSection }) {
     offset: ['start end', 'end start'],
   });
 
-  const titleY = useTransform(scrollYProgress, [0, 1], [-30, 50]);
-  const titleScale = useTransform(scrollYProgress, [0, 0.5, 1], [0.95, 1.02, 1.08]);
-  const titleOpacity = useTransform(scrollYProgress, [0, 0.3, 0.8, 1], [0.25, 0.75, 0.75, 0.2]);
+  const titleY = useTransform(scrollYProgress, [0, 1], [-20, 60]);
+  const titleScale = useTransform(scrollYProgress, [0, 0.5, 1], [0.96, 1.03, 1.08]);
+  const titleOpacity = useTransform(scrollYProgress, [0, 0.25, 0.8, 1], [0.35, 0.85, 0.85, 0.2]);
 
   return (
     <section
@@ -21,21 +21,21 @@ export default function AboutDossier({ scrollToSection }) {
       id="about"
       className="py-16 sm:py-24 md:py-36 px-4 sm:px-8 relative z-10 border-t border-gray-200 dark:border-gray-800/60 bg-white dark:bg-[#080c10]/95 transition-colors duration-500 overflow-hidden"
     >
-      {/* 1. GIANT OMNIBUDS-STYLE PARALLAX WATERMARK HEADING (DEVELOPER - Mobile Perfected) */}
-      <div className="absolute top-2 sm:top-8 left-0 right-0 z-0 pointer-events-none select-none flex justify-center overflow-hidden px-2">
+      {/* 1. GIANT OMNIBUDS-STYLE PARALLAX WATERMARK HEADING (DEVELOPER - Mobile & Laptop Perfected) */}
+      <div className="absolute top-1 sm:top-6 left-0 right-0 z-0 pointer-events-none select-none flex justify-center overflow-hidden px-1">
         <motion.h1
           style={{
             y: titleY,
             scale: titleScale,
             opacity: titleOpacity,
           }}
-          className="text-[11.5vw] sm:text-[13vw] lg:text-[14vw] font-black uppercase text-transparent bg-clip-text bg-gradient-to-b from-gray-900/15 via-gray-700/10 to-transparent dark:from-white/20 dark:via-white/5 dark:to-transparent tracking-tighter leading-none text-center whitespace-nowrap"
+          className="text-[14.5vw] sm:text-[13.5vw] lg:text-[14vw] font-black uppercase text-transparent bg-clip-text bg-gradient-to-b from-gray-900/20 via-gray-700/10 to-transparent dark:from-white/30 dark:via-cybergreen/15 dark:to-transparent tracking-[-0.06em] leading-none text-center whitespace-nowrap drop-shadow-[0_4px_25px_rgba(0,0,0,0.5)]"
         >
           DEVELOPER
         </motion.h1>
       </div>
 
-      <div className="container mx-auto max-w-5xl relative z-10 pt-6 sm:pt-10">
+      <div className="container mx-auto max-w-5xl relative z-10 pt-8 sm:pt-12">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
@@ -92,7 +92,7 @@ export default function AboutDossier({ scrollToSection }) {
               </h4>
             </div>
             <p className="text-xs sm:text-base text-gray-600 dark:text-gray-300 leading-relaxed font-normal">
-              Successfully completed a research internship in <strong className="text-gray-900 dark:text-white font-semibold">Web Development & Frontend Engineering</strong> to showcase <strong className="text-cybergreen font-semibold">Indoor Air Pollution (IAP) Frameworks</strong> under the guidance of <strong className="text-gray-900 dark:text-white font-semibold">Prof. Sandip Chakraborty</strong>, Department of Computer Science & Engineering (CSE), IIT Kharagpur.
+              Successfully completed a research internship in <strong className="text-gray-900 dark:text-white font-semibold">Web Development & Frontend Engineering</strong> to showcase <strong class="text-cybergreen font-semibold">Indoor Air Pollution (IAP) Frameworks</strong> under the guidance of <strong class="text-gray-900 dark:text-white font-semibold">Prof. Sandip Chakraborty</strong>, Department of Computer Science & Engineering (CSE), IIT Kharagpur.
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3 pt-1 sm:pt-2">
               <div className="flex items-center gap-2 text-xs sm:text-sm text-gray-600 dark:text-gray-300 font-mono">
