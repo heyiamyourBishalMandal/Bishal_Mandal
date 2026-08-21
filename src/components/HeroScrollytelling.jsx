@@ -35,7 +35,7 @@ export default function HeroScrollytelling({ scrollToSection, darkMode }) {
     setFrames(loadedImages);
   }, []);
 
-  // Hardware-Accelerated High-FPS Canvas Engine (Zero Input Lag & Stutter-Free)
+  // Hardware-Accelerated 60-120FPS Canvas Engine (Universal Tablet, Mobile, & Widescreen Desktop Math)
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -50,7 +50,7 @@ export default function HeroScrollytelling({ scrollToSection, darkMode }) {
       height = window.innerHeight;
       const isMobile = width < 768;
 
-      // Device-adaptive DPR capping (prevents VRAM exhaustion and lag)
+      // Device-adaptive DPR capping
       dpr = isMobile
         ? Math.min(window.devicePixelRatio || 1, 1.25)
         : Math.min(window.devicePixelRatio || 1, 1.75);
@@ -88,28 +88,28 @@ export default function HeroScrollytelling({ scrollToSection, darkMode }) {
         const imgRatio = sourceW / sourceH;
         let drawW, drawH, drawX, drawY;
 
-        if (width >= 1024) {
+        // Widescreen Monitor vs Tablet / Mobile / Desktop-Site Mode
+        const isDesktopWidescreen = width >= 1024 && width > height;
+
+        if (isDesktopWidescreen) {
+          // Widescreen Desktop / Laptop: 3D portrait on left stage
           const targetH = Math.max(height * 1.04, width / imgRatio);
           drawH = targetH;
           drawW = targetH * imgRatio;
           drawX = - (drawW * 0.12);
           drawY = (height - drawH) / 2;
-        } else if (width >= 768) {
-          const targetH = Math.max(height * 1.02, width / imgRatio);
-          drawH = targetH;
-          drawW = targetH * imgRatio;
-          drawX = - (drawW * 0.08);
-          drawY = (height - drawH) / 2;
         } else {
-          const targetH = height * 0.52;
+          // iPad, Tablet, Mobile Phone, & Mobile "Desktop site" mode:
+          // Centered 3D portrait framing in upper stage!
+          const targetH = Math.min(height * 0.52, width * 0.85);
           drawH = targetH;
           drawW = targetH * imgRatio;
-          drawX = (width - drawW) / 2;
-          drawY = (height * 0.28) - (drawH * 0.35);
+          drawX = (width - drawW) / 2; // Dead centered!
+          drawY = (height * 0.28) - (drawH * 0.35); // Upper stage above story card!
         }
 
         ctx.imageSmoothingEnabled = true;
-        ctx.imageSmoothingQuality = width >= 768 ? 'high' : 'medium';
+        ctx.imageSmoothingQuality = isDesktopWidescreen ? 'high' : 'medium';
 
         ctx.drawImage(
           img,
@@ -123,8 +123,8 @@ export default function HeroScrollytelling({ scrollToSection, darkMode }) {
           Math.round(drawH)
         );
 
-        // Deep Obsidian Black Gradient Edge Fade Mask (#080c10)
-        if (width >= 768) {
+        // Deep Obsidian Black Gradient Edge Fade Mask ONLY on Widescreen Monitors
+        if (isDesktopWidescreen) {
           const fadeStart = width * 0.38;
           const fadeWidth = width * 0.30;
           const gradient = ctx.createLinearGradient(fadeStart, 0, fadeStart + fadeWidth, 0);
@@ -148,8 +148,9 @@ export default function HeroScrollytelling({ scrollToSection, darkMode }) {
       const diff = targetFrameRef.current - currentFrameRef.current;
 
       if (Math.abs(diff) > 0.0001) {
-        // High-responsiveness, zero-lag lerp factor (0.18 for instant, silky motion)
-        currentFrameRef.current += diff * 0.18;
+        // High-responsiveness, zero-lag lerp factor
+        const lerpFactor = width < 768 ? 0.12 : 0.16;
+        currentFrameRef.current += diff * lerpFactor;
 
         const currentIntFrame = Math.round(Math.max(0, Math.min(totalFrames - 1, currentFrameRef.current)));
 
@@ -168,7 +169,7 @@ export default function HeroScrollytelling({ scrollToSection, darkMode }) {
     };
   }, [frames]);
 
-  // Instant Direct Scroll Tracking (Eliminates spring delay lag)
+  // Instant Direct Scroll Tracking
   useEffect(() => {
     const unsubscribe = scrollYProgress.on('change', (val) => {
       targetFrameRef.current = val * (totalFrames - 1);
@@ -269,7 +270,7 @@ export default function HeroScrollytelling({ scrollToSection, darkMode }) {
         </div>
 
         {/* 2. Interactive Step List (#01 - #04) */}
-        <div className="hidden md:block absolute bottom-16 left-6 sm:bottom-20 sm:left-10 lg:left-14 z-25 pointer-events-auto space-y-2 font-mono text-[11px] sm:text-xs">
+        <div className="hidden lg:block absolute bottom-16 left-6 sm:bottom-20 sm:left-10 lg:left-14 z-25 pointer-events-auto space-y-2 font-mono text-[11px] sm:text-xs">
           {storySteps.map((step, sIdx) => {
             const isActive = sIdx === activeStep;
             return (
@@ -295,9 +296,9 @@ export default function HeroScrollytelling({ scrollToSection, darkMode }) {
           })}
         </div>
 
-        {/* 3. Floating Story Panel Container */}
-        <div className="relative z-30 w-full max-w-7xl mx-auto px-4 sm:px-8 md:px-12 lg:px-16 h-full flex flex-col justify-end md:justify-center items-end pointer-events-none pb-12 md:pb-0">
-          <div className="w-full max-w-sm sm:max-w-md lg:max-w-md text-left md:ml-auto md:mr-2 lg:mr-10">
+        {/* 3. Floating Story Panel Container (Universal Tablet & Widescreen Layout) */}
+        <div className="relative z-30 w-full max-w-7xl mx-auto px-4 sm:px-8 md:px-12 lg:px-16 h-full flex flex-col justify-end lg:justify-center items-center lg:items-end pointer-events-none pb-12 lg:pb-0">
+          <div className="w-full max-w-sm sm:max-w-md lg:max-w-md text-left lg:ml-auto lg:mr-10">
             <AnimatePresence mode="wait">
               {storySteps.map((step, idx) => {
                 if (idx !== activeStep) return null;
