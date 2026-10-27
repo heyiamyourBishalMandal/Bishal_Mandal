@@ -68,7 +68,7 @@ export default function AboutDossier({ scrollToSection }) {
                 SOFTWARE DEVELOPER & BCA GRADUATE
               </div>
               <h3 className="text-2xl sm:text-4xl lg:text-5xl font-black text-gray-900 dark:text-white tracking-tight">
-                Bishal Mandal.
+                Bishal Mondal.
               </h3>
             </div>
             <div className="text-left sm:text-right">

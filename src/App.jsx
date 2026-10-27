@@ -95,7 +95,7 @@ export default function App() {
 
             {/* Brand Title */}
             <h3 className="text-sm font-black tracking-[0.2em] text-white uppercase pt-1">
-              BISHAL MANDAL
+              BISHAL MONDAL
             </h3>
 
             {/* Copyright Line */}

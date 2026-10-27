@@ -195,7 +195,7 @@ export default function HeroScrollytelling({ scrollToSection, darkMode }) {
       icon: <Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-cybergreen animate-spin shrink-0" />,
       title: (
         <>
-          Hey there, I'm <span className="text-cybergreen">Bishal Mandal</span>
+          Hey there, I'm <span className="text-cybergreen">Bishal Mondal</span>
         </>
       ),
       description: 'A passionate Software Developer & Web Designer with research experience at IIT Kharagpur, focusing on impactful web applications and custom software.',
@@ -264,7 +264,7 @@ export default function HeroScrollytelling({ scrollToSection, darkMode }) {
             WELCOME TO
           </span>
           <h1 className="text-2xl sm:text-6xl lg:text-7xl font-black tracking-tighter text-white uppercase leading-none mt-1 drop-shadow-[0_4px_30px_rgba(0,0,0,0.98)]">
-            BISHAL<br />MANDAL
+            BISHAL<br />MONDAL
           </h1>
         </div>
 

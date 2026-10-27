@@ -611,7 +611,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!terminalForm || !terminalInput || !terminalBody) return;
 
         const commands = {
-            'whoami': 'Bishal Mandal — Software Developer | Systems Architect | BCA 2025 Graduate | Preparing for NIMCET June 6, 2026. Target: Top NIT MCA & Google Systems Engineering.',
+            'whoami': 'Bishal Mondal — Software Developer | Systems Architect | BCA 2025 Graduate | Preparing for NIMCET June 6, 2026. Target: Top NIT MCA & Google Systems Engineering.',
             'skills': 'Primary Stack: Python 3.11, C++, JavaScript ES6+, PyQt6, MySQL, HTML5/CSS3, Tailwind CSS, System Automation, RESTful APIs.',
             'projects': 'Featured Systems:\n1. J.E.R.V.I.S Desktop Assistant (PyQt6/Python)\n2. Sweet Shop E-Commerce Platform\n3. 3D Kinetic Canvas Engine\n4. NIMCET Rank Predictor & Analytics',
             'nimcet': 'Target Date: JUNE 6, 2026. Objective: Top-tier NIT Master of Computer Applications (MCA) seat. Focus: Advanced Mathematics & Computer Science.',
