@@ -96,34 +96,103 @@
     </div>
   </header>
 
-  <!-- 3. HERO 3D SCROLLYTELLING STAGE -->
-  <section id="hero" class="relative w-full h-[500vh]">
+  <!-- 3. HERO HOME SECTION (Fixed Frame with Brief Intro) -->
+  <section id="hero" class="relative w-full h-screen overflow-hidden bg-[#080c10] flex items-center justify-center">
+    <canvas id="hero-canvas" class="absolute inset-0 w-full h-full object-cover filter contrast-[108%] brightness-[104%] saturate-[105%] pointer-events-none"></canvas>
+
+    <div class="absolute top-16 left-5 sm:top-24 sm:left-10 lg:left-14 z-25 pointer-events-none select-none">
+      <span class="text-[10px] sm:text-xs font-mono font-bold tracking-widest text-cybergreen uppercase drop-shadow-[0_2px_10px_rgba(0,0,0,0.95)]">WELCOME TO</span>
+      <h1 class="text-2xl sm:text-6xl lg:text-7xl font-black tracking-tighter text-white uppercase leading-none mt-1 drop-shadow-[0_4px_30px_rgba(0,0,0,0.98)]">
+        BISHAL<br />MONDAL
+      </h1>
+    </div>
+
+    <div id="story-panel" class="relative z-30 w-full max-w-7xl mx-auto px-4 sm:px-8 md:px-12 lg:px-16 h-full flex flex-col justify-end lg:justify-center items-center lg:items-end pointer-events-none pb-12 lg:pb-0">
+      <div class="w-full max-w-sm sm:max-w-md lg:max-w-md text-left lg:ml-auto lg:mr-10">
+        <div class="space-y-3 sm:space-y-5 pointer-events-auto p-4 sm:p-6 rounded-3xl bg-[#080c10]/90 backdrop-blur-xl border border-gray-800/80 shadow-[0_10px_30px_rgba(0,0,0,0.9)]">
+          <div class="inline-flex items-center gap-1.5 sm:gap-2 px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full bg-cybergreen/10 border border-cybergreen/40 text-cybergreen text-[9px] sm:text-xs font-mono font-bold uppercase tracking-wider max-w-full">
+            <i data-lucide="sparkles" class="w-3.5 h-3.5 text-cybergreen animate-spin"></i>
+            <span class="truncate">"STRENGTH IN STRATEGY, POWER IN PROGRESS"</span>
+          </div>
+          <h2 class="text-lg sm:text-3xl lg:text-4xl font-black leading-tight tracking-tight text-white">
+            Hey there, I'm <span class="text-cybergreen">Bishal Mondal</span>
+          </h2>
+          <p class="text-xs sm:text-sm lg:text-base leading-relaxed font-normal text-gray-300">
+            A passionate Software Developer & Web Designer with research experience at <strong class="text-cybergreen font-semibold">IIT Kharagpur</strong>.
+          </p>
+          <div class="flex flex-wrap gap-1.5 sm:gap-2 pt-1">
+            <span class="bg-cybergreen/10 text-cybergreen border border-cybergreen/30 text-[10px] sm:text-xs font-mono font-bold px-2.5 py-1 rounded-full">IIT KGP Intern</span>
+            <span class="bg-cybergreen/10 text-cybergreen border border-cybergreen/30 text-[10px] sm:text-xs font-mono font-bold px-2.5 py-1 rounded-full">Python / C++ / JS</span>
+            <span class="bg-cybergreen/10 text-cybergreen border border-cybergreen/30 text-[10px] sm:text-xs font-mono font-bold px-2.5 py-1 rounded-full">Kolkata, India</span>
+          </div>
+          <div class="flex flex-row flex-wrap gap-2.5 pt-2">
+            <a href="#projects" class="bg-cybergreen hover:bg-emerald-400 text-black font-extrabold py-2.5 px-4 sm:px-5 rounded-xl shadow-lg shadow-cybergreen/30 transition text-xs sm:text-sm text-center">View My Work</a>
+            <a href="#contact" class="bg-gray-900 border border-gray-700 text-white font-semibold py-2.5 px-4 sm:px-5 rounded-xl hover:bg-gray-800 transition text-xs sm:text-sm text-center">Get In Touch</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Nav -->
+    <div class="absolute bottom-3 sm:bottom-4 left-6 right-6 flex justify-between items-center z-25 font-mono text-[10px] sm:text-xs text-gray-400">
+      <div class="flex items-center gap-4">
+        <a href="https://www.linkedin.com/in/bishal-mandal-0bb756264/" target="_blank" class="hover:text-cybergreen transition">LINKEDIN</a>
+        <span>|</span>
+        <a href="#resume" class="hover:text-cybergreen transition uppercase">RESUME</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. ABOUT 3D SCROLLYTELLING ANIMATION SECTION -->
+  <section id="about" class="relative w-full h-[500vh]">
     <div class="sticky top-0 w-full h-screen overflow-hidden bg-[#080c10] flex items-center justify-center">
-      <canvas id="hero-canvas" class="absolute inset-0 w-full h-full object-cover filter contrast-[108%] brightness-[104%] saturate-[105%]"></canvas>
+      <canvas id="about-canvas" class="absolute inset-0 w-full h-full object-cover filter contrast-[108%] brightness-[104%] saturate-[105%]"></canvas>
 
       <div class="absolute top-16 left-5 sm:top-24 sm:left-10 lg:left-14 z-25 pointer-events-none select-none">
-        <span class="text-[10px] sm:text-xs font-mono font-bold tracking-widest text-cybergreen uppercase drop-shadow-[0_2px_10px_rgba(0,0,0,0.95)]">WELCOME TO</span>
-        <h1 class="text-2xl sm:text-6xl lg:text-7xl font-black tracking-tighter text-white uppercase leading-none mt-1 drop-shadow-[0_4px_30px_rgba(0,0,0,0.98)]">
-          BISHAL<br />MONDAL
-        </h1>
+        <span class="text-[10px] sm:text-xs font-mono font-bold tracking-widest text-cybergreen uppercase drop-shadow-[0_2px_10px_rgba(0,0,0,0.95)]">ABOUT THE</span>
+        <h2 class="text-2xl sm:text-6xl lg:text-7xl font-black tracking-tighter text-white uppercase leading-none mt-1 drop-shadow-[0_4px_30px_rgba(0,0,0,0.98)]">
+          DEVELOPER<br />JOURNEY
+        </h2>
       </div>
 
-      <div id="story-panel" class="relative z-30 w-full max-w-7xl mx-auto px-4 sm:px-8 md:px-12 lg:px-16 h-full flex flex-col justify-end lg:justify-center items-center lg:items-end pointer-events-none pb-12 lg:pb-0">
+      <!-- Step Indicator List -->
+      <div class="hidden lg:block absolute bottom-16 left-6 sm:bottom-20 sm:left-10 lg:left-14 z-25 pointer-events-auto space-y-2 font-mono text-[11px] sm:text-xs">
+        <div id="step-btn-0" class="flex items-center gap-2 text-cybergreen font-bold translate-x-2 scale-105 drop-shadow-[0_0_12px_#00E676] transition-all duration-300 cursor-pointer">
+          <span class="text-[10px] opacity-70 font-semibold">#01</span>
+          <span>Software Engineering</span>
+        </div>
+        <div id="step-btn-1" class="flex items-center gap-2 text-gray-400 hover:text-gray-200 transition-all duration-300 cursor-pointer">
+          <span class="text-[10px] opacity-70 font-semibold">#02</span>
+          <span>IIT KGP Research</span>
+        </div>
+        <div id="step-btn-2" class="flex items-center gap-2 text-gray-400 hover:text-gray-200 transition-all duration-300 cursor-pointer">
+          <span class="text-[10px] opacity-70 font-semibold">#03</span>
+          <span>J.E.R.V.I.S Assistant</span>
+        </div>
+        <div id="step-btn-3" class="flex items-center gap-2 text-gray-400 hover:text-gray-200 transition-all duration-300 cursor-pointer">
+          <span class="text-[10px] opacity-70 font-semibold">#04</span>
+          <span>Full-Stack Web</span>
+        </div>
+      </div>
+
+      <!-- Floating Step Story Container -->
+      <div class="relative z-30 w-full max-w-7xl mx-auto px-4 sm:px-8 md:px-12 lg:px-16 h-full flex flex-col justify-end lg:justify-center items-center lg:items-end pointer-events-none pb-12 lg:pb-0">
         <div class="w-full max-w-sm sm:max-w-md lg:max-w-md text-left lg:ml-auto lg:mr-10">
-          <div class="space-y-3 sm:space-y-5 pointer-events-auto p-4 sm:p-6 rounded-3xl bg-[#080c10]/90 backdrop-blur-xl border border-gray-800/80 shadow-[0_10px_30px_rgba(0,0,0,0.9)]">
-            <div class="inline-flex items-center gap-1.5 sm:gap-2 px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full bg-cybergreen/10 border border-cybergreen/40 text-cybergreen text-[9px] sm:text-xs font-mono font-bold uppercase tracking-wider max-w-full">
+          <div id="about-story-card" class="space-y-3 sm:space-y-5 pointer-events-auto p-4 sm:p-6 rounded-3xl bg-[#080c10]/90 backdrop-blur-xl border border-gray-800/80 shadow-[0_10px_30px_rgba(0,0,0,0.9)] transition-all duration-300">
+            <div id="about-card-badge" class="inline-flex items-center gap-1.5 sm:gap-2 px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full bg-cybergreen/10 border border-cybergreen/40 text-cybergreen text-[9px] sm:text-xs font-mono font-bold uppercase tracking-wider max-w-full">
               <i data-lucide="sparkles" class="w-3.5 h-3.5 text-cybergreen animate-spin"></i>
-              <span class="truncate">"STRENGTH IN STRATEGY, POWER IN PROGRESS"</span>
+              <span>SYSTEMS & SOFTWARE ARCHITECTURE</span>
             </div>
-            <h2 class="text-lg sm:text-3xl lg:text-4xl font-black leading-tight tracking-tight text-white">
-              Hey there, I'm <span class="text-cybergreen">Bishal Mondal</span>
-            </h2>
-            <p class="text-xs sm:text-sm lg:text-base leading-relaxed font-normal text-gray-300">
-              A passionate Software Developer & Web Designer with research experience at <strong class="text-cybergreen font-semibold">IIT Kharagpur</strong>.
+            <h3 id="about-card-title" class="text-lg sm:text-3xl lg:text-4xl font-black leading-tight tracking-tight text-white">
+              Software <span class="text-cybergreen">Developer</span>
+            </h3>
+            <p id="about-card-desc" class="text-xs sm:text-sm lg:text-base leading-relaxed font-normal text-gray-300">
+              Specializing in Python desktop automation, algorithm design, and full-stack systems engineering built for scalability and performance.
             </p>
-            <div class="flex flex-row flex-wrap gap-2.5 pt-2">
-              <a href="#projects" class="bg-cybergreen hover:bg-emerald-400 text-black font-extrabold py-2.5 px-4 sm:px-5 rounded-xl shadow-lg shadow-cybergreen/30 transition text-xs sm:text-sm text-center">View My Work</a>
-              <a href="#contact" class="bg-gray-900 border border-gray-700 text-white font-semibold py-2.5 px-4 sm:px-5 rounded-xl hover:bg-gray-800 transition text-xs sm:text-sm text-center">Get In Touch</a>
+            <div id="about-card-pills" class="flex flex-wrap gap-1.5 sm:gap-2 pt-1">
+              <span class="bg-cybergreen/10 text-cybergreen border border-cybergreen/30 text-[10px] sm:text-xs font-mono font-bold px-2.5 py-1 rounded-full">Python 3.11</span>
+              <span class="bg-cybergreen/10 text-cybergreen border border-cybergreen/30 text-[10px] sm:text-xs font-mono font-bold px-2.5 py-1 rounded-full">Algorithms & DS</span>
+              <span class="bg-cybergreen/10 text-cybergreen border border-cybergreen/30 text-[10px] sm:text-xs font-mono font-bold px-2.5 py-1 rounded-full">PyQt6 & Full-Stack</span>
             </div>
           </div>
         </div>
@@ -132,16 +201,16 @@
       <!-- Bottom Nav -->
       <div class="absolute bottom-3 sm:bottom-4 left-6 right-6 flex justify-between items-center z-25 font-mono text-[10px] sm:text-xs text-gray-400">
         <div class="flex items-center gap-4">
-          <a href="https://www.linkedin.com/in/bishal-mandal-0bb756264/" target="_blank" class="hover:text-cybergreen transition">LINKEDIN</a>
+          <span class="text-cybergreen uppercase font-bold tracking-wider">SCROLL TO ROTATE 3D MODEL</span>
           <span>|</span>
-          <a href="#resume" class="hover:text-cybergreen transition uppercase">RESUME</a>
+          <a href="#skills" class="hover:text-cybergreen transition uppercase">NEXT: SKILLS &rarr;</a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 4. ABOUT SECTION (Mobile Perfected Parallax Watermark) -->
-  <section id="about" class="py-16 sm:py-24 md:py-36 px-4 sm:px-8 relative z-10 border-t border-gray-200 dark:border-gray-800/60 bg-white dark:bg-[#080c10]/95 transition-colors duration-500 overflow-hidden">
+  <!-- 5. ABOUT DOSSIER SHOWCASE (Mobile Perfected Parallax Watermark) -->
+  <section id="about-dossier" class="py-16 sm:py-24 md:py-36 px-4 sm:px-8 relative z-10 border-t border-gray-200 dark:border-gray-800/60 bg-white dark:bg-[#080c10]/95 transition-colors duration-500 overflow-hidden">
     <div class="absolute top-1 sm:top-6 left-0 right-0 z-0 pointer-events-none select-none flex justify-center overflow-hidden px-1">
       <h1 class="text-[14.5vw] sm:text-[13.5vw] lg:text-[14vw] font-black uppercase text-transparent bg-clip-text bg-gradient-to-b from-gray-900/20 via-gray-700/10 to-transparent dark:from-white/30 dark:via-cybergreen/15 dark:to-transparent tracking-[-0.06em] leading-none text-center whitespace-nowrap drop-shadow-[0_4px_25px_rgba(0,0,0,0.5)]">
         DEVELOPER
@@ -304,8 +373,77 @@
       }
     });
 
-    const canvas = document.getElementById('hero-canvas');
-    const ctx = canvas.getContext('2d', { alpha: false, desynchronized: true });
+    // 1. Fixed Hero Canvas (ezgif-frame-080.jpg)
+    const heroCanvas = document.getElementById('hero-canvas');
+    if (heroCanvas) {
+      const heroCtx = heroCanvas.getContext('2d', { alpha: false });
+      const heroImg = new Image();
+      heroImg.decoding = 'async';
+      heroImg.src = 'fram/ezgif-frame-080.jpg';
+
+      function renderHero() {
+        const w = window.innerWidth;
+        const h = window.innerHeight;
+        const isMobile = w < 768;
+        const isWidescreen = w >= 1024 && w > h;
+        const dpr = isMobile ? Math.min(window.devicePixelRatio || 1, 1.25) : Math.min(window.devicePixelRatio || 1, 1.75);
+
+        heroCanvas.width = Math.round(w * dpr);
+        heroCanvas.height = Math.round(h * dpr);
+        heroCanvas.style.width = w + 'px';
+        heroCanvas.style.height = h + 'px';
+
+        heroCtx.save();
+        heroCtx.setTransform(1, 0, 0, 1, 0, 0);
+        heroCtx.scale(dpr, dpr);
+        heroCtx.fillStyle = '#080c10';
+        heroCtx.fillRect(0, 0, w, h);
+
+        if (heroImg.complete && heroImg.naturalWidth > 0) {
+          const sW = heroImg.naturalWidth;
+          const sH = heroImg.naturalHeight * 0.96;
+          const ratio = sW / sH;
+          let drawW, drawH, drawX, drawY;
+
+          if (isWidescreen) {
+            const targetH = Math.max(h * 1.04, w / ratio);
+            drawH = targetH;
+            drawW = targetH * ratio;
+            drawX = - (drawW * 0.12);
+            drawY = (h - drawH) / 2;
+          } else {
+            const targetH = Math.min(h * 0.52, w * 0.85);
+            drawH = targetH;
+            drawW = targetH * ratio;
+            drawX = (w - drawW) / 2;
+            drawY = (h * 0.28) - (drawH * 0.35);
+          }
+
+          heroCtx.drawImage(heroImg, 0, 0, Math.round(sW), Math.round(sH), Math.round(drawX), Math.round(drawY), Math.round(drawW), Math.round(drawH));
+
+          if (isWidescreen) {
+            const fadeStart = w * 0.38;
+            const fadeWidth = w * 0.30;
+            const grad = heroCtx.createLinearGradient(fadeStart, 0, fadeStart + fadeWidth, 0);
+            grad.addColorStop(0, 'rgba(8, 12, 16, 0)');
+            grad.addColorStop(1, 'rgba(8, 12, 16, 1)');
+            heroCtx.fillStyle = grad;
+            heroCtx.fillRect(Math.round(fadeStart), 0, Math.round(fadeWidth), Math.round(h));
+            heroCtx.fillStyle = '#080c10';
+            heroCtx.fillRect(Math.round(fadeStart + fadeWidth), 0, Math.round(w - (fadeStart + fadeWidth)), Math.round(h));
+          }
+        }
+        heroCtx.restore();
+      }
+
+      heroImg.onload = renderHero;
+      if (heroImg.complete) renderHero();
+      window.addEventListener('resize', renderHero, { passive: true });
+    }
+
+    // 2. About 3D Scrollytelling Canvas Engine (80 Frames)
+    const aboutCanvas = document.getElementById('about-canvas');
+    const aboutCtx = aboutCanvas ? aboutCanvas.getContext('2d', { alpha: false, desynchronized: true }) : null;
     const totalFrames = 80;
     const frames = [];
 
@@ -323,25 +461,26 @@
     let height = window.innerHeight;
     let lastDrawnFrame = -1;
 
-    function resizeCanvas() {
+    function resizeAboutCanvas() {
+      if (!aboutCanvas) return;
       width = window.innerWidth;
       height = window.innerHeight;
       const isMobile = width < 768;
       dpr = isMobile ? Math.min(window.devicePixelRatio || 1, 1.25) : Math.min(window.devicePixelRatio || 1, 1.75);
-      canvas.width = Math.round(width * dpr);
-      canvas.height = Math.round(height * dpr);
-      canvas.style.width = `${width}px`;
-      canvas.style.height = `${height}px`;
+      aboutCanvas.width = Math.round(width * dpr);
+      aboutCanvas.height = Math.round(height * dpr);
+      aboutCanvas.style.width = `${width}px`;
+      aboutCanvas.style.height = `${height}px`;
       lastDrawnFrame = -1;
     }
-    resizeCanvas();
-    window.addEventListener('resize', resizeCanvas, { passive: true });
+    resizeAboutCanvas();
+    window.addEventListener('resize', resizeAboutCanvas, { passive: true });
 
     let targetFrame = 0;
     let currentFrame = 0;
 
-    function renderCanvas(frameIndex) {
-      if (frames.length === 0) return;
+    function renderAboutCanvas(frameIndex) {
+      if (!aboutCtx || frames.length === 0) return;
 
       let img = frames[frameIndex];
       if (!img || !img.complete || img.naturalWidth === 0) {
@@ -349,11 +488,11 @@
       }
 
       if (img && img.complete && img.naturalWidth > 0) {
-        ctx.save();
-        ctx.setTransform(1, 0, 0, 1, 0, 0);
-        ctx.scale(dpr, dpr);
-        ctx.fillStyle = '#080c10';
-        ctx.fillRect(0, 0, width, height);
+        aboutCtx.save();
+        aboutCtx.setTransform(1, 0, 0, 1, 0, 0);
+        aboutCtx.scale(dpr, dpr);
+        aboutCtx.fillStyle = '#080c10';
+        aboutCtx.fillRect(0, 0, width, height);
 
         const sourceW = img.naturalWidth;
         const sourceH = img.naturalHeight * 0.96;
@@ -376,21 +515,93 @@
           drawY = (height * 0.28) - (drawH * 0.35);
         }
 
-        ctx.drawImage(img, 0, 0, Math.round(sourceW), Math.round(sourceH), Math.round(drawX), Math.round(drawY), Math.round(drawW), Math.round(drawH));
+        aboutCtx.drawImage(img, 0, 0, Math.round(sourceW), Math.round(sourceH), Math.round(drawX), Math.round(drawY), Math.round(drawW), Math.round(drawH));
 
         if (isDesktopWidescreen) {
           const fadeStart = width * 0.38;
           const fadeWidth = width * 0.30;
-          const grad = ctx.createLinearGradient(fadeStart, 0, fadeStart + fadeWidth, 0);
+          const grad = aboutCtx.createLinearGradient(fadeStart, 0, fadeStart + fadeWidth, 0);
           grad.addColorStop(0, 'rgba(8, 12, 16, 0)');
           grad.addColorStop(1, 'rgba(8, 12, 16, 1)');
-          ctx.fillStyle = grad;
-          ctx.fillRect(Math.round(fadeStart), 0, Math.round(fadeWidth), Math.round(height));
-          ctx.fillStyle = '#080c10';
-          ctx.fillRect(Math.round(fadeStart + fadeWidth), 0, Math.round(width - (fadeStart + fadeWidth)), Math.round(height));
+          aboutCtx.fillStyle = grad;
+          aboutCtx.fillRect(Math.round(fadeStart), 0, Math.round(fadeWidth), Math.round(height));
+          aboutCtx.fillStyle = '#080c10';
+          aboutCtx.fillRect(Math.round(fadeStart + fadeWidth), 0, Math.round(width - (fadeStart + fadeWidth)), Math.round(height));
         }
 
-        ctx.restore();
+        aboutCtx.restore();
+      }
+    }
+
+    const storyData = [
+      {
+        badge: 'SYSTEMS & SOFTWARE ARCHITECTURE',
+        title: 'Software <span class="text-cybergreen">Developer</span>',
+        desc: 'Specializing in Python desktop automation, algorithm design, and full-stack systems engineering built for scalability and performance.',
+        pills: ['Python 3.11', 'Algorithms & DS', 'PyQt6 & Full-Stack']
+      },
+      {
+        badge: 'IIT KHARAGPUR RESEARCH INTERN',
+        title: 'Research at <span class="text-cybergreen">IIT Kharagpur</span>',
+        desc: 'Completed research internship on Web Development to Showcase Indoor Air Pollution (IAP) Frameworks under Prof. Sandip Chakraborty, Dept. of CSE, IIT Kharagpur.',
+        pills: ['Dept. of CSE', 'Prof. Sandip Chakraborty', 'IAP Frameworks']
+      },
+      {
+        badge: 'INTELLIGENCE MODULE',
+        title: 'Custom <span class="text-cybergreen">J.E.R.V.I.S. Assistant</span>',
+        desc: 'Integrating practical AI modules directly into software workflows—most notably engineering J.E.R.V.I.S., a custom desktop voice assistant built for automation.',
+        pills: ['Voice Automation', 'Desktop Tooling', 'PyQt6 GUI']
+      },
+      {
+        badge: 'DEVELOPMENT STACK',
+        title: 'Full-Stack <span class="text-cybergreen">Web Platforms</span>',
+        desc: 'Architecting responsive full-stack applications with HTML5, CSS3, Tailwind, JavaScript, PHP, and MySQL for robust digital experiences.',
+        pills: ['HTML5 & CSS3', 'Tailwind CSS', 'PHP & MySQL']
+      }
+    ];
+
+    let currentStepIdx = 0;
+    function updateStepUI(idx) {
+      if (idx === currentStepIdx) return;
+      currentStepIdx = idx;
+
+      for (let i = 0; i < 4; i++) {
+        const btn = document.getElementById(`step-btn-${i}`);
+        if (btn) {
+          if (i === idx) {
+            btn.className = 'flex items-center gap-2 text-cybergreen font-bold translate-x-2 scale-105 drop-shadow-[0_0_12px_#00E676] transition-all duration-300 cursor-pointer';
+          } else {
+            btn.className = 'flex items-center gap-2 text-gray-400 hover:text-gray-200 transition-all duration-300 cursor-pointer';
+          }
+        }
+      }
+
+      const cardBadge = document.getElementById('about-card-badge');
+      const cardTitle = document.getElementById('about-card-title');
+      const cardDesc = document.getElementById('about-card-desc');
+      const cardPills = document.getElementById('about-card-pills');
+      const data = storyData[idx];
+
+      if (cardBadge) cardBadge.innerHTML = `<i data-lucide="sparkles" class="w-3.5 h-3.5 text-cybergreen animate-spin"></i><span>${data.badge}</span>`;
+      if (cardTitle) cardTitle.innerHTML = data.title;
+      if (cardDesc) cardDesc.textContent = data.desc;
+      if (cardPills) {
+        cardPills.innerHTML = data.pills.map(p => `<span class="bg-cybergreen/10 text-cybergreen border border-cybergreen/30 text-[10px] sm:text-xs font-mono font-bold px-2.5 py-1 rounded-full">${p}</span>`).join('');
+      }
+      lucide.createIcons();
+    }
+
+    // Step button click scrolling
+    for (let i = 0; i < 4; i++) {
+      const btn = document.getElementById(`step-btn-${i}`);
+      if (btn) {
+        btn.addEventListener('click', () => {
+          const aboutSec = document.getElementById('about');
+          if (aboutSec) {
+            const targetY = aboutSec.offsetTop + (i / 3) * (aboutSec.offsetHeight - window.innerHeight);
+            window.scrollTo({ top: targetY, behavior: 'smooth' });
+          }
+        });
       }
     }
 
@@ -400,7 +611,7 @@
         currentFrame += diff * 0.18;
         const currentIntFrame = Math.round(Math.max(0, Math.min(totalFrames - 1, currentFrame)));
         if (currentIntFrame !== lastDrawnFrame) {
-          renderCanvas(currentIntFrame);
+          renderAboutCanvas(currentIntFrame);
           lastDrawnFrame = currentIntFrame;
         }
       }
@@ -408,16 +619,22 @@
     }
     animLoop();
 
-    const heroSec = document.getElementById('hero');
+    const aboutSec = document.getElementById('about');
 
     window.addEventListener('scroll', () => {
-      const rect = heroSec.getBoundingClientRect();
+      if (!aboutSec) return;
+      const rect = aboutSec.getBoundingClientRect();
       const totalScrollable = rect.height - window.innerHeight;
       let scrollPct = 0;
       if (totalScrollable > 0) {
         scrollPct = Math.max(0, Math.min(1, -rect.top / totalScrollable));
       }
       targetFrame = scrollPct * (totalFrames - 1);
+
+      if (scrollPct < 0.25) updateStepUI(0);
+      else if (scrollPct < 0.50) updateStepUI(1);
+      else if (scrollPct < 0.75) updateStepUI(2);
+      else updateStepUI(3);
     }, { passive: true });
   </script>
 </body>

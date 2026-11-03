@@ -18,7 +18,7 @@ export default function AboutDossier({ scrollToSection }) {
   return (
     <section
       ref={sectionRef}
-      id="about"
+      id="about-dossier"
       className="py-16 sm:py-24 md:py-36 px-4 sm:px-8 relative z-10 border-t border-gray-200 dark:border-gray-800/60 bg-white dark:bg-[#080c10]/95 transition-colors duration-500 overflow-hidden"
     >
       {/* 1. GIANT OMNIBUDS-STYLE PARALLAX WATERMARK HEADING (DEVELOPER - Mobile & Laptop Perfected) */}

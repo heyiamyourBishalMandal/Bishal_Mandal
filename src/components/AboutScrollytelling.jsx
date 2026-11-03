@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useState } from 'react';
 import { motion, AnimatePresence, useScroll } from 'framer-motion';
 import { Terminal, Cpu, Sparkles, Award } from 'lucide-react';
 
-export default function HeroScrollytelling({ scrollToSection, darkMode }) {
+export default function AboutScrollytelling({ scrollToSection }) {
   const containerRef = useRef(null);
   const canvasRef = useRef(null);
   const [activeStep, setActiveStep] = useState(0);
@@ -104,8 +104,8 @@ export default function HeroScrollytelling({ scrollToSection, darkMode }) {
           const targetH = Math.min(height * 0.52, width * 0.85);
           drawH = targetH;
           drawW = targetH * imgRatio;
-          drawX = (width - drawW) / 2; // Dead centered!
-          drawY = (height * 0.28) - (drawH * 0.35); // Upper stage above story card!
+          drawX = (width - drawW) / 2;
+          drawY = (height * 0.28) - (drawH * 0.35);
         }
 
         ctx.imageSmoothingEnabled = true;
@@ -148,7 +148,7 @@ export default function HeroScrollytelling({ scrollToSection, darkMode }) {
       const diff = targetFrameRef.current - currentFrameRef.current;
 
       if (Math.abs(diff) > 0.0001) {
-        // High-responsiveness, zero-lag lerp factor (0.18 across ALL devices for laptop-grade smoothness)
+        // High-responsiveness, zero-lag lerp factor (0.18 across all devices)
         currentFrameRef.current += diff * 0.18;
 
         const currentIntFrame = Math.round(Math.max(0, Math.min(totalFrames - 1, currentFrameRef.current)));
@@ -190,16 +190,16 @@ export default function HeroScrollytelling({ scrollToSection, darkMode }) {
   const storySteps = [
     {
       stepNum: '#01',
-      stepName: 'Software Developer',
-      badge: '"STRENGTH IN STRATEGY, POWER IN PROGRESS"',
+      stepName: 'Software Engineering',
+      badge: 'SYSTEMS & SOFTWARE ARCHITECTURE',
       icon: <Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-cybergreen animate-spin shrink-0" />,
       title: (
         <>
-          Hey there, I'm <span className="text-cybergreen">Bishal Mondal</span>
+          Software <span className="text-cybergreen">Developer</span>
         </>
       ),
-      description: 'A passionate Software Developer & Web Designer with research experience at IIT Kharagpur, focusing on impactful web applications and custom software.',
-      pills: ['IIT KGP Intern', 'Python / C++ / JS', 'Kolkata, India'],
+      description: 'Specializing in Python desktop automation, algorithm design, and full-stack systems engineering built for scalability and performance.',
+      pills: ['Python 3.11', 'Algorithms & DS', 'PyQt6 & Full-Stack'],
       buttons: true,
     },
     {
@@ -247,7 +247,7 @@ export default function HeroScrollytelling({ scrollToSection, darkMode }) {
   ];
 
   return (
-    <section ref={containerRef} id="hero" className="relative w-full h-[500vh]">
+    <section ref={containerRef} id="about" className="relative w-full h-[500vh]">
       {/* Pinned Sticky 3D Stage */}
       <div className="sticky top-0 w-full h-screen overflow-hidden bg-[#080c10] flex items-center justify-center">
         {/* Full-bleed Hardware Accelerated Motion Canvas */}
@@ -258,14 +258,14 @@ export default function HeroScrollytelling({ scrollToSection, darkMode }) {
           />
         </div>
 
-        {/* 1. Huge Brand Display Title */}
+        {/* 1. Huge Brand Display Title in About Section */}
         <div className="absolute top-16 left-5 sm:top-24 sm:left-10 lg:left-14 z-25 pointer-events-none select-none">
           <span className="text-[10px] sm:text-xs font-mono font-bold tracking-widest text-cybergreen uppercase drop-shadow-[0_2px_10px_rgba(0,0,0,0.95)]">
-            WELCOME TO
+            ABOUT THE
           </span>
-          <h1 className="text-2xl sm:text-6xl lg:text-7xl font-black tracking-tighter text-white uppercase leading-none mt-1 drop-shadow-[0_4px_30px_rgba(0,0,0,0.98)]">
-            BISHAL<br />MONDAL
-          </h1>
+          <h2 className="text-2xl sm:text-6xl lg:text-7xl font-black tracking-tighter text-white uppercase leading-none mt-1 drop-shadow-[0_4px_30px_rgba(0,0,0,0.98)]">
+            DEVELOPER<br />JOURNEY
+          </h2>
         </div>
 
         {/* 2. Interactive Step List (#01 - #04) */}
@@ -295,7 +295,7 @@ export default function HeroScrollytelling({ scrollToSection, darkMode }) {
           })}
         </div>
 
-        {/* 3. Floating Story Panel Container (Universal Tablet & Widescreen Layout) */}
+        {/* 3. Floating Story Panel Container */}
         <div className="relative z-30 w-full max-w-7xl mx-auto px-4 sm:px-8 md:px-12 lg:px-16 h-full flex flex-col justify-end lg:justify-center items-center lg:items-end pointer-events-none pb-12 lg:pb-0">
           <div className="w-full max-w-sm sm:max-w-md lg:max-w-md text-left lg:ml-auto lg:mr-10">
             <AnimatePresence mode="wait">
@@ -364,23 +364,16 @@ export default function HeroScrollytelling({ scrollToSection, darkMode }) {
           </div>
         </div>
 
-        {/* 4. Bottom Navigation Links */}
+        {/* 4. Bottom Navigation Indicator */}
         <div className="absolute bottom-3 sm:bottom-4 left-6 right-6 flex justify-between items-center z-25 font-mono text-[10px] sm:text-xs text-gray-400 pointer-events-auto">
           <div className="flex items-center gap-3 sm:gap-6">
-            <a
-              href="https://www.linkedin.com/in/bishal-mandal-0bb756264/"
-              target="_blank"
-              rel="noreferrer"
-              className="hover:text-cybergreen transition"
-            >
-              LINKEDIN
-            </a>
+            <span className="text-cybergreen uppercase font-bold tracking-wider">SCROLL TO ROTATE 3D MODEL</span>
             <span className="text-gray-700">|</span>
             <button
-              onClick={() => scrollToSection('resume')}
+              onClick={() => scrollToSection('skills')}
               className="hover:text-cybergreen transition uppercase cursor-pointer"
             >
-              RESUME
+              NEXT: SKILLS &rarr;
             </button>
           </div>
         </div>

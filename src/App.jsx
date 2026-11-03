@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Preloader from './components/Preloader';
-import HeroScrollytelling from './components/HeroScrollytelling';
+import HeroHome from './components/HeroHome';
+import AboutScrollytelling from './components/AboutScrollytelling';
 import AboutDossier from './components/AboutDossier';
 import SkillsSection from './components/SkillsSection';
 import ProjectsShowcase from './components/ProjectsShowcase';
@@ -27,7 +28,7 @@ export default function App() {
   // Section Observer for Navbar Highlighting
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ['hero', 'about', 'skills', 'projects', 'resume', 'contact'];
+      const sections = ['hero', 'about', 'about-dossier', 'skills', 'projects', 'resume', 'contact'];
       const scrollPos = window.scrollY + 200;
 
       for (const secId of sections) {
@@ -36,7 +37,7 @@ export default function App() {
           const top = el.offsetTop;
           const height = el.offsetHeight;
           if (scrollPos >= top && scrollPos < top + height) {
-            setActiveSection(secId);
+            setActiveSection(secId === 'about-dossier' ? 'about' : secId);
             break;
           }
         }
@@ -72,7 +73,8 @@ export default function App() {
 
           {/* Main Content Sections */}
           <main>
-            <HeroScrollytelling scrollToSection={scrollToSection} darkMode={darkMode} />
+            <HeroHome scrollToSection={scrollToSection} />
+            <AboutScrollytelling scrollToSection={scrollToSection} />
             <AboutDossier scrollToSection={scrollToSection} />
             <SkillsSection />
             <ProjectsShowcase />
