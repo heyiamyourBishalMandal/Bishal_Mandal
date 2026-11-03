@@ -95,10 +95,12 @@ export default function App() {
               <Linkedin className="w-4.5 h-4.5 group-hover:scale-110 transition duration-300" />
             </a>
 
-            {/* Brand Title */}
-            <h3 className="text-sm font-black tracking-[0.2em] text-white uppercase pt-1">
-              BISHAL MONDAL
-            </h3>
+            {/* Brand Title with Text Skeleton Wave */}
+            <div className="relative inline-block pt-1">
+              <h3 className="text-sm sm:text-base font-black tracking-[0.25em] uppercase text-skeleton-wave select-none">
+                BISHAL MONDAL
+              </h3>
+            </div>
 
             {/* Copyright Line */}
             <p className="text-[11px] font-sans text-gray-500 tracking-wide">

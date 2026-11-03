@@ -52,6 +52,45 @@
       transform: translateZ(0);
       will-change: transform;
     }
+
+    /* Text Skeleton Wave: The movement of a translucent, slanted gradient across static structural paths to create a glossy, reflective surface illusion */
+    @keyframes textSkeletonWave {
+      0% {
+        background-position: 120% 0;
+      }
+      65%, 100% {
+        background-position: -25% 0;
+      }
+    }
+
+    .text-skeleton-wave {
+      display: inline-block;
+      background: linear-gradient(
+        115deg,
+        rgba(255, 255, 255, 0.35) 0%,
+        rgba(255, 255, 255, 0.35) 32%,
+        rgba(255, 255, 255, 0.75) 44%,
+        rgba(255, 255, 255, 1) 49%,
+        rgba(0, 230, 118, 0.95) 52%,
+        rgba(255, 255, 255, 1) 55%,
+        rgba(255, 255, 255, 0.75) 60%,
+        rgba(255, 255, 255, 0.35) 72%,
+        rgba(255, 255, 255, 0.35) 100%
+      );
+      background-size: 280% 100%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      color: transparent;
+      animation: textSkeletonWave 3.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+      will-change: background-position;
+      filter: drop-shadow(0 0 12px rgba(0, 230, 118, 0.25));
+      transition: filter 0.3s ease;
+    }
+
+    .text-skeleton-wave:hover {
+      filter: drop-shadow(0 0 18px rgba(0, 230, 118, 0.5));
+    }
   </style>
 </head>
 <body class="bg-slate-100 dark:bg-[#080c10] text-gray-900 dark:text-gray-100 transition-colors duration-500 font-sans selection:bg-cybergreen selection:text-black">
@@ -335,11 +374,13 @@
 
   <!-- 8. FOOTER -->
   <footer class="py-12 border-t border-gray-800/60 bg-[#05080c] text-center flex flex-col items-center justify-center space-y-3">
-    <a href="https://www.linkedin.com/in/bishal-mandal-0bb756264/" target="_blank" class="w-10 h-10 rounded-full bg-[#0d131a] border border-gray-800 text-gray-300 hover:text-cybergreen flex items-center justify-center">
-      <i data-lucide="linkedin" class="w-4 h-4"></i>
+    <a href="https://www.linkedin.com/in/bishal-mandal-0bb756264/" target="_blank" rel="noreferrer" class="w-10 h-10 rounded-full bg-[#0d131a] border border-gray-800 text-gray-300 hover:text-cybergreen hover:border-cybergreen/50 flex items-center justify-center transition-all duration-300 shadow-md group cursor-pointer" title="LinkedIn">
+      <i data-lucide="linkedin" class="w-4.5 h-4.5 group-hover:scale-110 transition duration-300"></i>
     </a>
-    <h3 class="text-sm font-black tracking-[0.2em] text-white uppercase">BISHAL MONDAL</h3>
-    <p class="text-[11px] font-sans text-gray-500">&copy; 2026 All rights reserved.</p>
+    <div class="relative inline-block pt-1">
+      <h3 class="text-sm sm:text-base font-black tracking-[0.25em] uppercase text-skeleton-wave select-none">BISHAL MONDAL</h3>
+    </div>
+    <p class="text-[11px] font-sans text-gray-500 tracking-wide">&copy; 2026 All rights reserved.</p>
   </footer>
 
   <script>
