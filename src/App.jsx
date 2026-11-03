@@ -82,30 +82,31 @@ export default function App() {
             <CyberTerminalContact />
           </main>
 
-          {/* Sleek Minimalist Footer (Updated LinkedIn Link) */}
-          <footer className="py-12 border-t border-gray-800/60 bg-[#05080c] text-center flex flex-col items-center justify-center space-y-3">
-            {/* Circular LinkedIn Badge */}
-            <a
-              href="https://www.linkedin.com/in/bishal-mandal-0bb756264/"
-              target="_blank"
-              rel="noreferrer"
-              className="w-10 h-10 rounded-full bg-[#0d131a] border border-gray-800 text-gray-300 hover:text-cybergreen hover:border-cybergreen/50 flex items-center justify-center transition-all duration-300 shadow-md group cursor-pointer"
-              title="LinkedIn"
-            >
-              <Linkedin className="w-4.5 h-4.5 group-hover:scale-110 transition duration-300" />
-            </a>
+          {/* Coding Ninjas Style Footer */}
+          <footer className="relative pt-16 pb-8 sm:pb-12 border-t border-gray-800/60 bg-[#05080c] text-center flex flex-col items-center justify-center overflow-hidden">
+            {/* Upper Footer: Social & Copyright */}
+            <div className="flex flex-col items-center justify-center space-y-3 z-10 mb-8 sm:mb-12">
+              <a
+                href="https://www.linkedin.com/in/bishal-mandal-0bb756264/"
+                target="_blank"
+                rel="noreferrer"
+                className="w-10 h-10 rounded-full bg-[#0d131a] border border-gray-800 text-gray-300 hover:text-cybergreen hover:border-cybergreen/50 flex items-center justify-center transition-all duration-300 shadow-md group cursor-pointer"
+                title="LinkedIn"
+              >
+                <Linkedin className="w-4.5 h-4.5 group-hover:scale-110 transition duration-300" />
+              </a>
 
-            {/* Brand Title with Text Skeleton Wave */}
-            <div className="relative inline-block pt-1">
-              <h3 className="text-sm sm:text-base font-black tracking-[0.25em] uppercase text-skeleton-wave select-none">
-                BISHAL MONDAL
-              </h3>
+              <p className="text-[11px] font-sans text-gray-500 tracking-wide">
+                &copy; 2026 Bishal Mondal &bull; All rights reserved.
+              </p>
             </div>
 
-            {/* Copyright Line */}
-            <p className="text-[11px] font-sans text-gray-500 tracking-wide">
-              &copy; 2026 All rights reserved.
-            </p>
+            {/* Coding Ninjas Style Giant Watermark Brand Text with Translucent Slanted Wave */}
+            <div className="w-full flex items-center justify-center px-4 select-none pointer-events-none overflow-hidden">
+              <h2 className="text-[2.8rem] sm:text-7xl md:text-8xl lg:text-9xl xl:text-[11rem] font-extrabold tracking-tighter leading-none coding-ninjas-text-shimmer">
+                Bishal Mondal
+              </h2>
+            </div>
           </footer>
         </>
       )}

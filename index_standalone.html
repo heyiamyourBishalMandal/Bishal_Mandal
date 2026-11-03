@@ -53,43 +53,53 @@
       will-change: transform;
     }
 
-    /* Text Skeleton Wave: The movement of a translucent, slanted gradient across static structural paths to create a glossy, reflective surface illusion */
-    @keyframes textSkeletonWave {
+    /* Coding Ninjas Style Giant Text Skeleton Wave */
+    @keyframes codingNinjasWave {
       0% {
-        background-position: 120% 0;
+        background-position: 115% 0;
       }
       65%, 100% {
-        background-position: -25% 0;
+        background-position: -15% 0;
       }
     }
 
-    .text-skeleton-wave {
+    .coding-ninjas-text-shimmer {
       display: inline-block;
+      font-weight: 800;
+      letter-spacing: -0.035em;
+      line-height: 0.92;
+      user-select: none;
+      text-align: center;
+      white-space: nowrap;
+      
+      /* Translucent charcoal base with a specular glossy light wave sweeping across */
       background: linear-gradient(
         115deg,
-        rgba(255, 255, 255, 0.35) 0%,
-        rgba(255, 255, 255, 0.35) 32%,
-        rgba(255, 255, 255, 0.75) 44%,
-        rgba(255, 255, 255, 1) 49%,
-        rgba(0, 230, 118, 0.95) 52%,
-        rgba(255, 255, 255, 1) 55%,
-        rgba(255, 255, 255, 0.75) 60%,
-        rgba(255, 255, 255, 0.35) 72%,
-        rgba(255, 255, 255, 0.35) 100%
+        rgba(255, 255, 255, 0.07) 0%,
+        rgba(255, 255, 255, 0.07) 35%,
+        rgba(255, 255, 255, 0.25) 43%,
+        rgba(255, 255, 255, 0.70) 48%,
+        rgba(255, 255, 255, 0.95) 50%,
+        rgba(0, 230, 118, 0.85) 52%,
+        rgba(255, 255, 255, 0.95) 54%,
+        rgba(255, 255, 255, 0.70) 56%,
+        rgba(255, 255, 255, 0.25) 61%,
+        rgba(255, 255, 255, 0.07) 69%,
+        rgba(255, 255, 255, 0.07) 100%
       );
-      background-size: 280% 100%;
+      background-size: 300% 100%;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
       color: transparent;
-      animation: textSkeletonWave 3.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+      animation: codingNinjasWave 4.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
       will-change: background-position;
-      filter: drop-shadow(0 0 12px rgba(0, 230, 118, 0.25));
-      transition: filter 0.3s ease;
+      filter: drop-shadow(0 2px 20px rgba(0, 230, 118, 0.12));
+      transition: filter 0.4s ease;
     }
 
-    .text-skeleton-wave:hover {
-      filter: drop-shadow(0 0 18px rgba(0, 230, 118, 0.5));
+    .coding-ninjas-text-shimmer:hover {
+      filter: drop-shadow(0 4px 30px rgba(0, 230, 118, 0.35));
     }
   </style>
 </head>
@@ -372,15 +382,21 @@
     </div>
   </section>
 
-  <!-- 8. FOOTER -->
-  <footer class="py-12 border-t border-gray-800/60 bg-[#05080c] text-center flex flex-col items-center justify-center space-y-3">
-    <a href="https://www.linkedin.com/in/bishal-mandal-0bb756264/" target="_blank" rel="noreferrer" class="w-10 h-10 rounded-full bg-[#0d131a] border border-gray-800 text-gray-300 hover:text-cybergreen hover:border-cybergreen/50 flex items-center justify-center transition-all duration-300 shadow-md group cursor-pointer" title="LinkedIn">
-      <i data-lucide="linkedin" class="w-4.5 h-4.5 group-hover:scale-110 transition duration-300"></i>
-    </a>
-    <div class="relative inline-block pt-1">
-      <h3 class="text-sm sm:text-base font-black tracking-[0.25em] uppercase text-skeleton-wave select-none">BISHAL MONDAL</h3>
+  <!-- 8. FOOTER (Coding Ninjas Style) -->
+  <footer class="relative pt-16 pb-8 sm:pb-12 border-t border-gray-800/60 bg-[#05080c] text-center flex flex-col items-center justify-center overflow-hidden">
+    <div class="flex flex-col items-center justify-center space-y-3 z-10 mb-8 sm:mb-12">
+      <a href="https://www.linkedin.com/in/bishal-mandal-0bb756264/" target="_blank" rel="noreferrer" class="w-10 h-10 rounded-full bg-[#0d131a] border border-gray-800 text-gray-300 hover:text-cybergreen hover:border-cybergreen/50 flex items-center justify-center transition-all duration-300 shadow-md group cursor-pointer" title="LinkedIn">
+        <i data-lucide="linkedin" class="w-4.5 h-4.5 group-hover:scale-110 transition duration-300"></i>
+      </a>
+      <p class="text-[11px] font-sans text-gray-500 tracking-wide">&copy; 2026 Bishal Mondal &bull; All rights reserved.</p>
     </div>
-    <p class="text-[11px] font-sans text-gray-500 tracking-wide">&copy; 2026 All rights reserved.</p>
+
+    <!-- Coding Ninjas Style Giant Watermark Brand Text with Translucent Slanted Wave -->
+    <div class="w-full flex items-center justify-center px-4 select-none pointer-events-none overflow-hidden">
+      <h2 class="text-[2.8rem] sm:text-7xl md:text-8xl lg:text-9xl xl:text-[11rem] font-extrabold tracking-tighter leading-none coding-ninjas-text-shimmer">
+        Bishal Mondal
+      </h2>
+    </div>
   </footer>
 
   <script>
