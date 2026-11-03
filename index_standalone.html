@@ -150,8 +150,18 @@
     <canvas id="hero-canvas" class="absolute inset-0 w-full h-full object-cover filter contrast-[108%] brightness-[104%] saturate-[105%] pointer-events-none"></canvas>
 
     <div class="absolute top-8 sm:top-12 lg:top-20 left-5 sm:left-10 lg:left-14 z-25 pointer-events-none select-none">
-      <span class="text-[10px] sm:text-xs font-mono font-bold tracking-widest text-cybergreen uppercase drop-shadow-[0_2px_10px_rgba(0,0,0,0.95)]">WELCOME TO</span>
-      <h1 class="text-2xl sm:text-5xl lg:text-7xl font-black tracking-tighter text-white uppercase leading-none mt-1 drop-shadow-[0_4px_30px_rgba(0,0,0,0.98)]">
+      <div class="inline-flex items-center gap-2 mb-2.5 px-3 py-1 rounded-full bg-black/60 border border-white/10 backdrop-blur-md">
+        <span class="relative flex h-2 w-2">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-cybergreen opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-2 w-2 bg-cybergreen"></span>
+        </span>
+        <span class="text-[9px] sm:text-[10px] font-mono tracking-widest text-gray-300 uppercase font-bold">
+          AVAILABLE FOR OPPORTUNITIES
+        </span>
+      </div>
+      <br />
+      <span class="text-[10px] sm:text-xs font-mono font-bold tracking-widest text-cybergreen uppercase drop-shadow-[0_2px_10px_rgba(0,0,0,0.95)]">PORTFOLIO ARCHIVE // 2026</span>
+      <h1 class="text-3xl sm:text-6xl lg:text-7xl font-black tracking-tighter text-white uppercase leading-none mt-1 drop-shadow-[0_4px_30px_rgba(0,0,0,0.98)]">
         BISHAL<br />MONDAL
       </h1>
     </div>
@@ -396,6 +406,14 @@
       <h2 class="text-[2.8rem] sm:text-7xl md:text-8xl lg:text-9xl xl:text-[11rem] font-extrabold tracking-tighter leading-none coding-ninjas-text-shimmer">
         Bishal Mondal
       </h2>
+    </div>
+
+    <!-- Back to Top Quick Action -->
+    <div class="pt-8 z-10">
+      <a href="#hero" class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 hover:border-cybergreen/40 text-xs font-mono text-gray-400 hover:text-cybergreen transition-all duration-300 cursor-pointer group">
+        <span>BACK TO TOP</span>
+        <span class="text-cybergreen group-hover:-translate-y-0.5 transition-transform font-bold">&uarr;</span>
+      </a>
     </div>
   </footer>
 

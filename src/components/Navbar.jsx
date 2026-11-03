@@ -32,7 +32,7 @@ export default function Navbar({ activeSection, scrollToSection, darkMode, setDa
     >
       <div className="max-w-5xl mx-auto px-4">
         {/* Floating Capsule Navbar */}
-        <div className="w-full bg-[#080c10]/90 backdrop-blur-xl border border-gray-800/80 rounded-full px-4 sm:px-6 py-2.5 flex items-center justify-between shadow-2xl shadow-black/80">
+        <div className="w-full bg-[#080c10]/80 backdrop-blur-2xl border border-white/[0.08] rounded-full px-4 sm:px-6 py-2.5 flex items-center justify-between shadow-[0_15px_40px_rgba(0,0,0,0.8),0_0_20px_rgba(0,230,118,0.06)] transition-all">
           {/* Left: Circular BM Cyber-Green Logo */}
           <div
             onClick={() => scrollToSection('hero')}
@@ -52,17 +52,17 @@ export default function Navbar({ activeSection, scrollToSection, darkMode, setDa
           </div>
 
           {/* Center: Navigation Links */}
-          <nav className="hidden md:flex items-center gap-6 lg:gap-8 font-sans text-xs sm:text-sm font-medium">
+          <nav className="hidden md:flex items-center gap-3 lg:gap-5 font-sans text-xs sm:text-sm font-medium">
             {navItems.map((item) => {
               const isActive = activeSection === item.id;
               return (
                 <button
                   key={item.id}
                   onClick={() => scrollToSection(item.id)}
-                  className={`transition-colors duration-300 cursor-pointer ${
+                  className={`px-3 py-1 rounded-full transition-all duration-300 cursor-pointer ${
                     isActive
-                      ? 'text-cybergreen font-bold drop-shadow-[0_0_10px_#00E676]'
-                      : 'text-gray-300 hover:text-white'
+                      ? 'bg-cybergreen/10 text-cybergreen font-bold border border-cybergreen/30 shadow-[0_0_15px_rgba(0,230,118,0.25)]'
+                      : 'text-gray-300 hover:text-white hover:bg-white/[0.05]'
                   }`}
                 >
                   {item.label}
@@ -76,7 +76,7 @@ export default function Navbar({ activeSection, scrollToSection, darkMode, setDa
             {/* Sun/Moon Theme Toggle Box */}
             <button
               onClick={() => setDarkMode(!darkMode)}
-              className="p-1.5 sm:p-2 rounded-xl bg-gray-900/80 border border-gray-800 text-amber-400 hover:text-cybergreen transition-all duration-300 cursor-pointer"
+              className="p-1.5 sm:p-2 rounded-xl bg-white/[0.05] hover:bg-white/[0.1] border border-white/10 hover:border-cybergreen/40 text-amber-400 hover:text-cybergreen transition-all duration-300 cursor-pointer"
               title="Toggle Theme"
             >
               {darkMode ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4 text-cybergreen" />}

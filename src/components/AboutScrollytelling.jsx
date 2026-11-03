@@ -341,7 +341,7 @@ export default function AboutScrollytelling({ scrollToSection }) {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -25 }}
                     transition={{ duration: 0.4, ease: 'easeOut' }}
-                    className="space-y-3 sm:space-y-5 pointer-events-auto p-4 sm:p-6 rounded-2xl sm:rounded-3xl bg-[#080c10]/90 backdrop-blur-xl border border-gray-800/80 shadow-[0_10px_30px_rgba(0,0,0,0.9)]"
+                    className="space-y-3 sm:space-y-5 pointer-events-auto p-5 sm:p-7 rounded-3xl bg-[#080c10]/85 backdrop-blur-2xl border border-white/[0.08] shadow-[0_20px_50px_rgba(0,0,0,0.9),0_0_40px_rgba(0,230,118,0.06)] hover:border-cybergreen/40 transition-all duration-500"
                   >
                     {/* Pill Badge */}
                     <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full bg-cybergreen/10 border border-cybergreen/40 text-cybergreen text-[9px] sm:text-xs font-mono font-bold uppercase tracking-wider max-w-full">
@@ -350,7 +350,7 @@ export default function AboutScrollytelling({ scrollToSection }) {
                     </div>
 
                     {/* Title */}
-                    <h2 className="text-lg sm:text-3xl lg:text-4xl font-black leading-tight tracking-tight text-white">
+                    <h2 className="text-xl sm:text-3xl lg:text-4xl font-black leading-tight tracking-tight text-white">
                       {step.title}
                     </h2>
 
@@ -365,7 +365,7 @@ export default function AboutScrollytelling({ scrollToSection }) {
                         {step.pills.map((pill, pIdx) => (
                           <span
                             key={pIdx}
-                            className="bg-cybergreen/10 text-cybergreen border border-cybergreen/30 text-[10px] sm:text-xs font-mono font-bold px-2.5 py-1 rounded-full"
+                            className="bg-cybergreen/10 text-cybergreen border border-cybergreen/30 text-[10px] sm:text-xs font-mono font-bold px-2.5 py-1 rounded-full shadow-sm"
                           >
                             {pill}
                           </span>
@@ -378,13 +378,13 @@ export default function AboutScrollytelling({ scrollToSection }) {
                       <div className="flex flex-row flex-wrap gap-2.5 pt-2">
                         <button
                           onClick={() => scrollToSection('projects')}
-                          className="bg-cybergreen hover:bg-emerald-400 text-black font-extrabold py-2.5 px-4 sm:px-5 rounded-xl shadow-lg shadow-cybergreen/30 transition duration-300 hover:scale-105 text-xs sm:text-sm text-center cursor-pointer"
+                          className="bg-gradient-to-r from-cybergreen via-emerald-400 to-cybergreen text-black font-extrabold py-2.5 px-5 sm:px-6 rounded-xl shadow-lg shadow-cybergreen/30 hover:shadow-cybergreen/50 transition-all duration-300 hover:scale-105 text-xs sm:text-sm text-center cursor-pointer"
                         >
-                          View My Work
+                          Explore Work
                         </button>
                         <button
                           onClick={() => scrollToSection('contact')}
-                          className="bg-gray-900 border border-gray-700 text-white font-semibold py-2.5 px-4 sm:px-5 rounded-xl hover:bg-gray-800 transition duration-300 text-xs sm:text-sm text-center cursor-pointer"
+                          className="bg-white/[0.05] hover:bg-white/[0.1] border border-white/15 hover:border-cybergreen/50 text-white font-semibold py-2.5 px-5 sm:px-6 rounded-xl transition duration-300 text-xs sm:text-sm text-center cursor-pointer backdrop-blur-md"
                         >
                           Get In Touch
                         </button>

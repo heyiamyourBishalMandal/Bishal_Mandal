@@ -89,7 +89,7 @@ export default function CareerRoadmap() {
             viewport={{ once: true, margin: '-50px' }}
             transition={{ duration: 0.6, delay: 0.2 }}
             whileHover={{ y: -5 }}
-            className="bg-white/90 dark:bg-[#0d1117]/90 backdrop-blur-2xl border border-gray-200 dark:border-gray-800 p-6 sm:p-8 rounded-3xl shadow-xl transition-all duration-300 hover:border-cybergreen/40"
+            className="bg-white/90 dark:bg-[#0b0f15]/90 backdrop-blur-2xl border border-gray-200 dark:border-white/[0.08] p-6 sm:p-8 rounded-3xl shadow-xl transition-all duration-300 hover:border-cybergreen/40"
           >
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4 border-b border-gray-200 dark:border-gray-800 pb-4">
               <div>
@@ -122,7 +122,7 @@ export default function CareerRoadmap() {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="text-center bg-white/90 dark:bg-[#0d1117]/90 backdrop-blur-2xl p-8 sm:p-12 rounded-3xl border border-gray-200 dark:border-gray-800/80 shadow-2xl space-y-6 hover:border-cybergreen/50 transition-all"
+          className="text-center bg-white/90 dark:bg-[#0b0f15]/90 backdrop-blur-2xl p-8 sm:p-12 rounded-3xl border border-gray-200 dark:border-white/[0.08] shadow-2xl space-y-6 hover:border-cybergreen/50 transition-all"
         >
           <h3 className="text-2xl sm:text-3xl font-extrabold text-gray-900 dark:text-white">
             Download Official Resume
@@ -134,7 +134,7 @@ export default function CareerRoadmap() {
             <a
               href="your_resume.pdf"
               download="Bishal_Mandal_Resume.pdf"
-              className="inline-flex items-center gap-3 bg-cybergreen hover:bg-emerald-400 text-black font-extrabold py-4 px-9 rounded-full shadow-lg shadow-cybergreen/30 transition duration-300 hover:scale-105 text-sm sm:text-base cursor-pointer"
+              className="inline-flex items-center gap-3 bg-gradient-to-r from-cybergreen to-emerald-400 hover:from-emerald-400 hover:to-cybergreen text-black font-extrabold py-4 px-9 rounded-full shadow-lg shadow-cybergreen/30 hover:shadow-cybergreen/50 transition duration-300 hover:scale-105 text-sm sm:text-base cursor-pointer"
             >
               <Download className="w-5 h-5" />
               <span>Download Resume PDF</span>

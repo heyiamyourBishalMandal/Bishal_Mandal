@@ -50,13 +50,13 @@ export default function SkillsSection() {
                 whileHover={{ scale: 1.05 }}
                 className="relative w-full max-w-[280px] group text-center lg:text-right"
               >
-                <div className="bg-white/80 dark:bg-[#0d1117]/90 backdrop-blur-xl border border-gray-200 dark:border-gray-800/80 p-4 sm:p-5 rounded-2xl sm:rounded-3xl shadow-lg hover:border-cybergreen/50 transition-all duration-300 hover:shadow-[0_10px_25px_rgba(0,230,118,0.15)] flex items-center justify-center lg:justify-end gap-3 relative z-10">
+                <div className="bg-white/80 dark:bg-[#0b0f15]/85 backdrop-blur-2xl border border-gray-200 dark:border-white/[0.08] p-4 sm:p-5 rounded-2xl sm:rounded-3xl shadow-lg hover:border-cybergreen/50 transition-all duration-300 hover:shadow-[0_10px_30px_rgba(0,230,118,0.2)] flex items-center justify-center lg:justify-end gap-3 relative z-10 group-hover:scale-[1.02]">
                   {skill.isCustomIcon ? (
                     <Link className="w-6 h-6 text-gray-400 group-hover:text-cybergreen transition-colors" />
                   ) : (
                     <i className={`${skill.iconClass} text-2xl text-gray-400 group-hover:text-cybergreen transition-colors`} />
                   )}
-                  <span className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white">{skill.name}</span>
+                  <span className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white group-hover:text-cybergreen transition-colors">{skill.name}</span>
                 </div>
                 <div className="hidden lg:flex absolute top-1/2 -translate-y-1/2 left-full items-center w-[80px] xl:w-[130px] opacity-40 group-hover:opacity-100 transition-opacity duration-300">
                   <div className="h-[1px] w-full bg-gray-400 dark:bg-gray-600 group-hover:bg-cybergreen transition-colors" />
@@ -107,9 +107,9 @@ export default function SkillsSection() {
                   <div className="w-2 h-2 rounded-full bg-gray-800 dark:bg-gray-200 group-hover:bg-cybergreen group-hover:shadow-[0_0_10px_#00E676] transition-all shrink-0" />
                   <div className="h-[1px] w-full bg-gray-400 dark:bg-gray-600 group-hover:bg-cybergreen transition-colors" />
                 </div>
-                <div className="bg-white/80 dark:bg-[#0d1117]/90 backdrop-blur-xl border border-gray-200 dark:border-gray-800/80 p-4 sm:p-5 rounded-2xl sm:rounded-3xl shadow-lg hover:border-cybergreen/50 transition-all duration-300 hover:shadow-[0_10px_25px_rgba(0,230,118,0.15)] flex items-center justify-center lg:justify-start gap-3 relative z-10">
+                <div className="bg-white/80 dark:bg-[#0b0f15]/85 backdrop-blur-2xl border border-gray-200 dark:border-white/[0.08] p-4 sm:p-5 rounded-2xl sm:rounded-3xl shadow-lg hover:border-cybergreen/50 transition-all duration-300 hover:shadow-[0_10px_30px_rgba(0,230,118,0.2)] flex items-center justify-center lg:justify-start gap-3 relative z-10 group-hover:scale-[1.02]">
                   <i className={`${skill.iconClass} text-2xl text-gray-400 group-hover:text-cybergreen transition-colors`} />
-                  <span className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white">{skill.name}</span>
+                  <span className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white group-hover:text-cybergreen transition-colors">{skill.name}</span>
                 </div>
               </motion.div>
             ))}

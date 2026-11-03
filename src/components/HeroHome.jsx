@@ -142,10 +142,20 @@ export default function HeroHome({ scrollToSection }) {
 
       {/* 1. Huge Brand Display Title */}
       <div className="absolute top-8 sm:top-12 lg:top-20 left-5 sm:left-10 lg:left-14 z-25 pointer-events-none select-none">
+        <div className="inline-flex items-center gap-2 mb-2.5 px-3 py-1 rounded-full bg-black/60 border border-white/10 backdrop-blur-md">
+          <span className="relative flex h-2 w-2">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cybergreen opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-cybergreen"></span>
+          </span>
+          <span className="text-[9px] sm:text-[10px] font-mono tracking-widest text-gray-300 uppercase font-bold">
+            AVAILABLE FOR OPPORTUNITIES
+          </span>
+        </div>
+        <br />
         <span className="text-[10px] sm:text-xs font-mono font-bold tracking-widest text-cybergreen uppercase drop-shadow-[0_2px_10px_rgba(0,0,0,0.95)]">
-          WELCOME TO
+          PORTFOLIO ARCHIVE // 2026
         </span>
-        <h1 className="text-2xl sm:text-5xl lg:text-7xl font-black tracking-tighter text-white uppercase leading-none mt-1 drop-shadow-[0_4px_30px_rgba(0,0,0,0.98)]">
+        <h1 className="text-3xl sm:text-6xl lg:text-7xl font-black tracking-tighter text-white uppercase leading-none mt-1 drop-shadow-[0_4px_30px_rgba(0,0,0,0.98)]">
           BISHAL<br />MONDAL
         </h1>
       </div>
@@ -157,7 +167,7 @@ export default function HeroHome({ scrollToSection }) {
             initial={{ opacity: 0, y: 25 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: 'easeOut' }}
-            className="space-y-3 sm:space-y-5 pointer-events-auto p-4 sm:p-6 rounded-2xl sm:rounded-3xl bg-[#080c10]/90 backdrop-blur-xl border border-gray-800/80 shadow-[0_10px_30px_rgba(0,0,0,0.9)]"
+            className="space-y-3 sm:space-y-5 pointer-events-auto p-5 sm:p-7 rounded-3xl bg-[#080c10]/85 backdrop-blur-2xl border border-white/[0.08] shadow-[0_20px_50px_rgba(0,0,0,0.9),0_0_40px_rgba(0,230,118,0.06)] hover:border-cybergreen/40 transition-all duration-500"
           >
             {/* Pill Badge */}
             <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full bg-cybergreen/10 border border-cybergreen/40 text-cybergreen text-[9px] sm:text-xs font-mono font-bold uppercase tracking-wider max-w-full">
@@ -166,13 +176,13 @@ export default function HeroHome({ scrollToSection }) {
             </div>
 
             {/* Title */}
-            <h2 className="text-lg sm:text-3xl lg:text-4xl font-black leading-tight tracking-tight text-white">
+            <h2 className="text-xl sm:text-3xl lg:text-4xl font-black leading-tight tracking-tight text-white">
               Hey there, I'm <span className="text-cybergreen">Bishal Mondal</span>
             </h2>
 
             {/* Description */}
             <p className="text-xs sm:text-sm lg:text-base leading-relaxed font-normal text-gray-300">
-              A passionate Software Developer & Web Designer with research experience at IIT Kharagpur, focusing on impactful web applications and custom software.
+              A passionate Software Developer & Web Designer with research experience at <strong className="text-white font-semibold">IIT Kharagpur</strong>, specializing in scalable web systems, algorithm design, and custom desktop automation.
             </p>
 
             {/* Pills */}
@@ -180,7 +190,7 @@ export default function HeroHome({ scrollToSection }) {
               {['IIT KGP Intern', 'Python / C++ / JS', 'Kolkata, India'].map((pill, pIdx) => (
                 <span
                   key={pIdx}
-                  className="bg-cybergreen/10 text-cybergreen border border-cybergreen/30 text-[10px] sm:text-xs font-mono font-bold px-2.5 py-1 rounded-full"
+                  className="bg-cybergreen/10 text-cybergreen border border-cybergreen/30 text-[10px] sm:text-xs font-mono font-bold px-3 py-1 rounded-full shadow-sm"
                 >
                   {pill}
                 </span>
@@ -191,14 +201,14 @@ export default function HeroHome({ scrollToSection }) {
             <div className="flex flex-row flex-wrap gap-2.5 pt-2">
               <button
                 onClick={() => scrollToSection('projects')}
-                className="bg-cybergreen hover:bg-emerald-400 text-black font-extrabold py-2.5 px-4 sm:px-5 rounded-xl shadow-lg shadow-cybergreen/30 transition duration-300 hover:scale-105 text-xs sm:text-sm text-center cursor-pointer flex items-center gap-1.5"
+                className="bg-gradient-to-r from-cybergreen via-emerald-400 to-cybergreen text-black font-extrabold py-2.5 px-5 sm:px-6 rounded-xl shadow-lg shadow-cybergreen/30 hover:shadow-cybergreen/50 transition-all duration-300 hover:scale-105 text-xs sm:text-sm text-center cursor-pointer flex items-center gap-1.5"
               >
-                <span>View My Work</span>
+                <span>Explore Work</span>
                 <ArrowUpRight className="w-4 h-4" />
               </button>
               <button
                 onClick={() => scrollToSection('contact')}
-                className="bg-gray-900 border border-gray-700 text-white font-semibold py-2.5 px-4 sm:px-5 rounded-xl hover:bg-gray-800 transition duration-300 text-xs sm:text-sm text-center cursor-pointer"
+                className="bg-white/[0.05] hover:bg-white/[0.1] border border-white/15 hover:border-cybergreen/50 text-white font-semibold py-2.5 px-5 sm:px-6 rounded-xl transition duration-300 text-xs sm:text-sm text-center cursor-pointer backdrop-blur-md"
               >
                 Get In Touch
               </button>
@@ -207,7 +217,7 @@ export default function HeroHome({ scrollToSection }) {
         </div>
       </div>
 
-      {/* 3. Bottom Navigation Links */}
+      {/* 3. Bottom Navigation Links & Scroll Indicator */}
       <div className="absolute bottom-3 sm:bottom-4 left-6 right-6 flex justify-between items-center z-25 font-mono text-[10px] sm:text-xs text-gray-400 pointer-events-auto">
         <div className="flex items-center gap-3 sm:gap-6">
           <a
@@ -226,6 +236,14 @@ export default function HeroHome({ scrollToSection }) {
             RESUME
           </button>
         </div>
+
+        <button
+          onClick={() => scrollToSection('about')}
+          className="hidden sm:flex items-center gap-2 text-gray-400 hover:text-cybergreen transition uppercase tracking-widest cursor-pointer group"
+        >
+          <span>SCROLL TO EXPLORE</span>
+          <span className="text-cybergreen group-hover:translate-y-0.5 transition-transform">↓</span>
+        </button>
       </div>
     </section>
   );

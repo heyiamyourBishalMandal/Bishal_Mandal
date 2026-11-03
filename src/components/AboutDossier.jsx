@@ -58,7 +58,7 @@ export default function AboutDossier({ scrollToSection }) {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-40px' }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="relative bg-gray-50/90 dark:bg-[#0d1117]/95 backdrop-blur-2xl border border-gray-200 dark:border-gray-800/90 rounded-[2rem] sm:rounded-[2.5rem] lg:rounded-[3rem] p-6 sm:p-10 lg:p-14 shadow-[0_30px_70px_rgba(0,0,0,0.8),0_0_40px_rgba(0,230,118,0.12)] overflow-hidden transition-all duration-500 hover:border-cybergreen/40 space-y-6 sm:space-y-8"
+          className="relative bg-gray-50/90 dark:bg-[#0b0f15]/90 backdrop-blur-2xl border border-gray-200 dark:border-white/[0.08] rounded-[2rem] sm:rounded-[2.5rem] lg:rounded-[3rem] p-6 sm:p-10 lg:p-14 shadow-[0_30px_70px_rgba(0,0,0,0.8),0_0_50px_rgba(0,230,118,0.08)] overflow-hidden transition-all duration-500 hover:border-cybergreen/40 space-y-6 sm:space-y-8"
         >
           {/* Header Title & Badge */}
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 border-b border-gray-200 dark:border-gray-800/80 pb-5 sm:pb-6">
@@ -92,7 +92,7 @@ export default function AboutDossier({ scrollToSection }) {
               </h4>
             </div>
             <p className="text-xs sm:text-base text-gray-600 dark:text-gray-300 leading-relaxed font-normal">
-              Successfully completed a research internship in <strong className="text-gray-900 dark:text-white font-semibold">Web Development & Frontend Engineering</strong> to showcase <strong class="text-cybergreen font-semibold">Indoor Air Pollution (IAP) Frameworks</strong> under the guidance of <strong class="text-gray-900 dark:text-white font-semibold">Prof. Sandip Chakraborty</strong>, Department of Computer Science & Engineering (CSE), IIT Kharagpur.
+              Successfully completed a research internship in <strong className="text-gray-900 dark:text-white font-semibold">Web Development & Frontend Engineering</strong> to showcase <strong className="text-cybergreen font-semibold">Indoor Air Pollution (IAP) Frameworks</strong> under the guidance of <strong className="text-gray-900 dark:text-white font-semibold">Prof. Sandip Chakraborty</strong>, Department of Computer Science & Engineering (CSE), IIT Kharagpur.
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3 pt-1 sm:pt-2">
               <div className="flex items-center gap-2 text-xs sm:text-sm text-gray-600 dark:text-gray-300 font-mono">

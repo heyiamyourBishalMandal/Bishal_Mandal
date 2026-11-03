@@ -107,6 +107,17 @@ export default function App() {
                 Bishal Mondal
               </h2>
             </div>
+
+            {/* Back to Top Quick Action */}
+            <div className="pt-8 z-10">
+              <button
+                onClick={() => scrollToSection('hero')}
+                className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 hover:border-cybergreen/40 text-xs font-mono text-gray-400 hover:text-cybergreen transition-all duration-300 cursor-pointer group"
+              >
+                <span>BACK TO TOP</span>
+                <span className="text-cybergreen group-hover:-translate-y-0.5 transition-transform font-bold">↑</span>
+              </button>
+            </div>
           </footer>
         </>
       )}
