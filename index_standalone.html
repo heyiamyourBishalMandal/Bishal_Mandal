@@ -32,6 +32,8 @@
 
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Canvas Confetti -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.4/dist/confetti.browser.min.js"></script>
 
   <style>
     /* Custom Scrollbar */
@@ -352,11 +354,417 @@
     </div>
   </section>
 
-  <!-- 5. SKILLS SECTION -->
-  <section id="skills" class="py-24 px-4 sm:px-8 bg-gray-50 dark:bg-[#080c10] relative z-10 border-t border-gray-800/60 text-center">
-    <div class="container mx-auto max-w-6xl">
-      <h2 class="text-4xl md:text-6xl font-extrabold text-white mb-4">My Technical<span class="text-cybergreen"> Gyan.</span></h2>
-      <p class="text-xs font-mono text-gray-400 uppercase tracking-widest mb-16">Programming languages integrated directly into my neural networks.</p>
+  <!-- 5. SKILLS SECTION: INTERACTIVE OVERHEAD PULL-CORD LIGHT SWITCH & 12 SKILL POWER GRID -->
+  <section id="skills" class="py-24 sm:py-32 px-4 sm:px-8 bg-[#05080c] relative z-10 overflow-hidden border-t border-gray-800/60 transition-colors duration-500">
+    <!-- Dynamic Overhead Conical Light Beam (radiates down when energized) -->
+    <div id="skills-light-beam" class="absolute inset-0 pointer-events-none opacity-0 transition-opacity duration-1000" style="background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(0, 230, 118, 0.16) 0%, rgba(0, 230, 118, 0.05) 45%, transparent 75%);"></div>
+
+    <!-- Cyber Grid Subtle Background Matrix -->
+    <div class="absolute inset-0 pointer-events-none opacity-[0.03] dark:opacity-[0.05]" style="background-image: linear-gradient(to right, #00E676 1px, transparent 1px), linear-gradient(to bottom, #00E676 1px, transparent 1px); background-size: 40px 40px;"></div>
+
+    <div class="container mx-auto max-w-6xl relative z-10">
+      <!-- Section Header -->
+      <div class="text-center max-w-3xl mx-auto mb-8">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cybergreen/10 border border-cybergreen/30 text-cybergreen text-xs font-mono font-bold uppercase tracking-widest mb-3">
+          <i data-lucide="zap" class="w-3.5 h-3.5 text-cybergreen"></i>
+          <span>INTERACTIVE QUANTUM REACTOR</span>
+        </div>
+        <h2 class="text-3xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight">
+          Technical <span class="text-cybergreen">Power Grid.</span>
+        </h2>
+        <p class="text-xs sm:text-sm text-gray-400 font-mono uppercase tracking-[0.2em] mt-3">
+          Pull the hanging overhead switch to energize and illuminate technical modules.
+        </p>
+      </div>
+
+      <!-- INTERACTIVE HANGING OVERHEAD CYBER-LAMP & PULL CORD -->
+      <div class="relative flex flex-col items-center justify-center mb-12 sm:mb-16 select-none">
+        <!-- Ceiling Power Conduit Cable -->
+        <div class="w-1.5 h-6 bg-gradient-to-b from-gray-700 to-gray-900 border-x border-gray-600 rounded-t"></div>
+
+        <!-- Overhead Industrial Cyber Lamp Fixture -->
+        <div id="skills-lamp" class="relative max-w-xs sm:max-w-md w-full h-10 sm:h-12 rounded-2xl border transition-all duration-500 flex items-center justify-between px-4 sm:px-6 z-20 bg-[#0b0e14] border-gray-800 shadow-xl">
+          <!-- Left Status LED -->
+          <div class="flex items-center gap-2">
+            <span id="skills-lamp-led" class="w-2 h-2 rounded-full transition-colors duration-300 bg-red-500/80"></span>
+            <span id="skills-voltage-text" class="font-mono text-[10px] text-gray-400 font-semibold tracking-wider">STANDBY 0V</span>
+          </div>
+
+          <!-- Center Neon Plasma Tube -->
+          <div class="flex-1 mx-4 h-3 rounded-full overflow-hidden bg-black/60 border border-gray-800 flex items-center p-0.5">
+            <div id="skills-plasma-tube" class="w-full h-full rounded-full transition-all duration-500 bg-gray-800/50"></div>
+          </div>
+
+          <!-- Right Circuit Label & Sound Toggle -->
+          <div class="flex items-center gap-2">
+            <span class="text-[10px] font-mono text-gray-400 font-bold uppercase tracking-widest hidden sm:inline">GRID.SYS</span>
+            <button id="skills-sound-btn" class="text-gray-500 hover:text-cybergreen transition-colors p-1" title="Toggle audio">
+              <i data-lucide="volume-2" id="skills-sound-icon" class="w-3.5 h-3.5"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- DANGLING PULL CORD / ROPE WITH INTERACTION -->
+        <div id="skills-pull-assembly" class="relative flex flex-col items-center cursor-pointer group pt-0.5">
+          <div id="skills-cord-element" class="flex flex-col items-center origin-top transition-transform duration-300">
+            <!-- Vertical Segmented Metallic Cord Line -->
+            <div class="w-0.5 h-16 sm:h-20 bg-gradient-to-b from-gray-400 via-gray-300 to-gray-500 shadow-[0_0_6px_rgba(0,0,0,0.9)]"></div>
+            <!-- Connecting Ring Link -->
+            <div class="w-2.5 h-2.5 rounded-full border border-gray-400 bg-gray-700 shadow-md -my-0.5"></div>
+            <!-- Heavy Chrome/Brass Toggle Handle -->
+            <div id="skills-cord-handle" class="relative w-6 h-10 sm:w-7 sm:h-11 rounded-full border flex flex-col items-center justify-between py-1.5 shadow-2xl transition-all duration-300 bg-gradient-to-b from-gray-200 via-gray-400 to-gray-600 border-gray-400 shadow-[0_4px_15px_rgba(0,0,0,0.8)] hover:scale-110 active:scale-90">
+              <div class="w-3 h-0.5 bg-black/40 rounded-full"></div>
+              <div class="w-3.5 h-1 bg-black/30 rounded-full"></div>
+              <div class="w-2 h-0.5 bg-black/40 rounded-full"></div>
+            </div>
+          </div>
+
+          <!-- Interactive Pull Instruction Beacon -->
+          <div class="mt-3.5 flex flex-col items-center pointer-events-auto">
+            <button id="skills-pull-btn" class="px-4 py-1.5 rounded-full text-xs font-mono font-bold uppercase tracking-widest flex items-center gap-2 border transition-all duration-300 shadow-lg cursor-pointer bg-white/10 text-white border-white/20 hover:border-cybergreen/60 hover:text-cybergreen animate-bounce">
+              <i data-lucide="zap" id="skills-btn-zap" class="w-3.5 h-3.5 text-amber-400 animate-pulse"></i>
+              <span id="skills-btn-text">PULL ROOF CORD TO IGNITE &darr;</span>
+            </button>
+            <span id="skills-hint-text" class="text-[10px] font-mono text-gray-400 tracking-wider mt-1.5">Click handle or button to surge electricity</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- CATEGORY FILTER TABS -->
+      <div id="skills-category-tabs" class="flex flex-wrap justify-center gap-2 sm:gap-3 mb-10">
+        <button class="skills-filter-btn active px-4 sm:px-5 py-2 rounded-full font-mono text-xs font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer bg-cybergreen text-black shadow-[0_0_20px_rgba(0,230,118,0.35)] scale-105" data-category="all">All Modules (12)</button>
+        <button class="skills-filter-btn px-4 sm:px-5 py-2 rounded-full font-mono text-xs font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer bg-white/[0.04] text-gray-300 border border-white/10 hover:border-cybergreen/40 hover:text-white" data-category="languages">Core Languages</button>
+        <button class="skills-filter-btn px-4 sm:px-5 py-2 rounded-full font-mono text-xs font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer bg-white/[0.04] text-gray-300 border border-white/10 hover:border-cybergreen/40 hover:text-white" data-category="web">Full-Stack Web</button>
+        <button class="skills-filter-btn px-4 sm:px-5 py-2 rounded-full font-mono text-xs font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer bg-white/[0.04] text-gray-300 border border-white/10 hover:border-cybergreen/40 hover:text-white" data-category="systems">Databases &amp; APIs</button>
+        <button class="skills-filter-btn px-4 sm:px-5 py-2 rounded-full font-mono text-xs font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer bg-white/[0.04] text-gray-300 border border-white/10 hover:border-cybergreen/40 hover:text-white" data-category="ai">AI &amp; Systems GUI</button>
+      </div>
+
+      <!-- THE 12 ILLUMINATED SKILL MODULES -->
+      <div id="skills-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
+        <!-- 1. Python 3.11 -->
+        <div class="skill-card relative rounded-3xl p-5 sm:p-6 backdrop-blur-2xl transition-all duration-500 overflow-hidden group border bg-[#080b0f]/60 border-white/[0.03] opacity-45" data-category="languages" data-power="95">
+          <div class="flex items-center justify-between mb-4">
+            <div class="flex items-center gap-3">
+              <div class="skill-icon-box w-11 h-11 rounded-2xl flex items-center justify-center transition-all duration-500 border bg-white/[0.03] border-white/5 text-gray-600">
+                <i class="devicon-python-plain text-2xl"></i>
+              </div>
+              <div>
+                <span class="text-[9px] font-mono tracking-widest text-gray-500 uppercase block font-bold">SYSTEMS &amp; AUTOMATION</span>
+                <h3 class="skill-title text-base sm:text-lg font-bold tracking-tight text-gray-500 transition-colors duration-300">Python 3.11</h3>
+              </div>
+            </div>
+            <span class="skill-power-badge font-mono text-xs font-bold px-2.5 py-1 rounded-full border bg-gray-900 text-gray-600 border-gray-800 transition-all duration-500">OFFLINE</span>
+          </div>
+          <p class="skill-desc text-xs sm:text-sm leading-relaxed mb-4 text-gray-600 font-light transition-colors duration-300">Core engine for desktop assistants, automation pipelines, and algorithmic frameworks.</p>
+          <div class="space-y-1.5 pt-2 border-t border-white/[0.06]">
+            <div class="flex justify-between items-center text-[10px] font-mono">
+              <span class="text-gray-400 font-semibold truncate pr-2">PyQt6 &amp; Desktop Tooling</span>
+              <span class="skill-status-text text-gray-600">STANDBY</span>
+            </div>
+            <div class="w-full h-1.5 bg-gray-800/80 rounded-full overflow-hidden border border-gray-700/40">
+              <div class="skill-progress-bar h-full rounded-full bg-gradient-to-r from-emerald-500 via-cybergreen to-emerald-300 shadow-[0_0_10px_#00E676] transition-all duration-1000" style="width: 0%;"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. C++ -->
+        <div class="skill-card relative rounded-3xl p-5 sm:p-6 backdrop-blur-2xl transition-all duration-500 overflow-hidden group border bg-[#080b0f]/60 border-white/[0.03] opacity-45" data-category="languages" data-power="90">
+          <div class="flex items-center justify-between mb-4">
+            <div class="flex items-center gap-3">
+              <div class="skill-icon-box w-11 h-11 rounded-2xl flex items-center justify-center transition-all duration-500 border bg-white/[0.03] border-white/5 text-gray-600">
+                <i class="devicon-cplusplus-plain text-2xl"></i>
+              </div>
+              <div>
+                <span class="text-[9px] font-mono tracking-widest text-gray-500 uppercase block font-bold">OBJECT ORIENTED</span>
+                <h3 class="skill-title text-base sm:text-lg font-bold tracking-tight text-gray-500 transition-colors duration-300">C++</h3>
+              </div>
+            </div>
+            <span class="skill-power-badge font-mono text-xs font-bold px-2.5 py-1 rounded-full border bg-gray-900 text-gray-600 border-gray-800 transition-all duration-500">OFFLINE</span>
+          </div>
+          <p class="skill-desc text-xs sm:text-sm leading-relaxed mb-4 text-gray-600 font-light transition-colors duration-300">High-performance computing, memory optimization, and algorithmic efficiency.</p>
+          <div class="space-y-1.5 pt-2 border-t border-white/[0.06]">
+            <div class="flex justify-between items-center text-[10px] font-mono">
+              <span class="text-gray-400 font-semibold truncate pr-2">Algorithms &amp; Data Structures</span>
+              <span class="skill-status-text text-gray-600">STANDBY</span>
+            </div>
+            <div class="w-full h-1.5 bg-gray-800/80 rounded-full overflow-hidden border border-gray-700/40">
+              <div class="skill-progress-bar h-full rounded-full bg-gradient-to-r from-emerald-500 via-cybergreen to-emerald-300 shadow-[0_0_10px_#00E676] transition-all duration-1000" style="width: 0%;"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. JavaScript (ES6+) -->
+        <div class="skill-card relative rounded-3xl p-5 sm:p-6 backdrop-blur-2xl transition-all duration-500 overflow-hidden group border bg-[#080b0f]/60 border-white/[0.03] opacity-45" data-category="languages" data-power="92">
+          <div class="flex items-center justify-between mb-4">
+            <div class="flex items-center gap-3">
+              <div class="skill-icon-box w-11 h-11 rounded-2xl flex items-center justify-center transition-all duration-500 border bg-white/[0.03] border-white/5 text-gray-600">
+                <i class="devicon-javascript-plain text-2xl"></i>
+              </div>
+              <div>
+                <span class="text-[9px] font-mono tracking-widest text-gray-500 uppercase block font-bold">MODERN WEB</span>
+                <h3 class="skill-title text-base sm:text-lg font-bold tracking-tight text-gray-500 transition-colors duration-300">JavaScript (ES6+)</h3>
+              </div>
+            </div>
+            <span class="skill-power-badge font-mono text-xs font-bold px-2.5 py-1 rounded-full border bg-gray-900 text-gray-600 border-gray-800 transition-all duration-500">OFFLINE</span>
+          </div>
+          <p class="skill-desc text-xs sm:text-sm leading-relaxed mb-4 text-gray-600 font-light transition-colors duration-300">Modern ES6+ syntax, async event-driven orchestration, and interactive UI systems.</p>
+          <div class="space-y-1.5 pt-2 border-t border-white/[0.06]">
+            <div class="flex justify-between items-center text-[10px] font-mono">
+              <span class="text-gray-400 font-semibold truncate pr-2">Asynchronous Architecture</span>
+              <span class="skill-status-text text-gray-600">STANDBY</span>
+            </div>
+            <div class="w-full h-1.5 bg-gray-800/80 rounded-full overflow-hidden border border-gray-700/40">
+              <div class="skill-progress-bar h-full rounded-full bg-gradient-to-r from-emerald-500 via-cybergreen to-emerald-300 shadow-[0_0_10px_#00E676] transition-all duration-1000" style="width: 0%;"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. HTML5 & CSS3 -->
+        <div class="skill-card relative rounded-3xl p-5 sm:p-6 backdrop-blur-2xl transition-all duration-500 overflow-hidden group border bg-[#080b0f]/60 border-white/[0.03] opacity-45" data-category="web" data-power="98">
+          <div class="flex items-center justify-between mb-4">
+            <div class="flex items-center gap-3">
+              <div class="skill-icon-box w-11 h-11 rounded-2xl flex items-center justify-center transition-all duration-500 border bg-white/[0.03] border-white/5 text-gray-600">
+                <i class="devicon-html5-plain text-2xl"></i>
+              </div>
+              <div>
+                <span class="text-[9px] font-mono tracking-widest text-gray-500 uppercase block font-bold">SEMANTIC UI</span>
+                <h3 class="skill-title text-base sm:text-lg font-bold tracking-tight text-gray-500 transition-colors duration-300">HTML5 &amp; CSS3</h3>
+              </div>
+            </div>
+            <span class="skill-power-badge font-mono text-xs font-bold px-2.5 py-1 rounded-full border bg-gray-900 text-gray-600 border-gray-800 transition-all duration-500">OFFLINE</span>
+          </div>
+          <p class="skill-desc text-xs sm:text-sm leading-relaxed mb-4 text-gray-600 font-light transition-colors duration-300">Semantic DOM architecture, hardware-accelerated animations, and responsive accessibility.</p>
+          <div class="space-y-1.5 pt-2 border-t border-white/[0.06]">
+            <div class="flex justify-between items-center text-[10px] font-mono">
+              <span class="text-gray-400 font-semibold truncate pr-2">Pixel-Perfect Layouts</span>
+              <span class="skill-status-text text-gray-600">STANDBY</span>
+            </div>
+            <div class="w-full h-1.5 bg-gray-800/80 rounded-full overflow-hidden border border-gray-700/40">
+              <div class="skill-progress-bar h-full rounded-full bg-gradient-to-r from-emerald-500 via-cybergreen to-emerald-300 shadow-[0_0_10px_#00E676] transition-all duration-1000" style="width: 0%;"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5. Tailwind CSS -->
+        <div class="skill-card relative rounded-3xl p-5 sm:p-6 backdrop-blur-2xl transition-all duration-500 overflow-hidden group border bg-[#080b0f]/60 border-white/[0.03] opacity-45" data-category="web" data-power="96">
+          <div class="flex items-center justify-between mb-4">
+            <div class="flex items-center gap-3">
+              <div class="skill-icon-box w-11 h-11 rounded-2xl flex items-center justify-center transition-all duration-500 border bg-white/[0.03] border-white/5 text-gray-600">
+                <i class="devicon-tailwindcss-plain text-2xl"></i>
+              </div>
+              <div>
+                <span class="text-[9px] font-mono tracking-widest text-gray-500 uppercase block font-bold">DESIGN SYSTEM</span>
+                <h3 class="skill-title text-base sm:text-lg font-bold tracking-tight text-gray-500 transition-colors duration-300">Tailwind CSS</h3>
+              </div>
+            </div>
+            <span class="skill-power-badge font-mono text-xs font-bold px-2.5 py-1 rounded-full border bg-gray-900 text-gray-600 border-gray-800 transition-all duration-500">OFFLINE</span>
+          </div>
+          <p class="skill-desc text-xs sm:text-sm leading-relaxed mb-4 text-gray-600 font-light transition-colors duration-300">Utility-first rapid prototyping, responsive layouts, and cyber-green dark themes.</p>
+          <div class="space-y-1.5 pt-2 border-t border-white/[0.06]">
+            <div class="flex justify-between items-center text-[10px] font-mono">
+              <span class="text-gray-400 font-semibold truncate pr-2">Modern Glassmorphic Systems</span>
+              <span class="skill-status-text text-gray-600">STANDBY</span>
+            </div>
+            <div class="w-full h-1.5 bg-gray-800/80 rounded-full overflow-hidden border border-gray-700/40">
+              <div class="skill-progress-bar h-full rounded-full bg-gradient-to-r from-emerald-500 via-cybergreen to-emerald-300 shadow-[0_0_10px_#00E676] transition-all duration-1000" style="width: 0%;"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 6. PHP -->
+        <div class="skill-card relative rounded-3xl p-5 sm:p-6 backdrop-blur-2xl transition-all duration-500 overflow-hidden group border bg-[#080b0f]/60 border-white/[0.03] opacity-45" data-category="web" data-power="88">
+          <div class="flex items-center justify-between mb-4">
+            <div class="flex items-center gap-3">
+              <div class="skill-icon-box w-11 h-11 rounded-2xl flex items-center justify-center transition-all duration-500 border bg-white/[0.03] border-white/5 text-gray-600">
+                <i class="devicon-php-plain text-2xl"></i>
+              </div>
+              <div>
+                <span class="text-[9px] font-mono tracking-widest text-gray-500 uppercase block font-bold">BACKEND SERVICES</span>
+                <h3 class="skill-title text-base sm:text-lg font-bold tracking-tight text-gray-500 transition-colors duration-300">PHP</h3>
+              </div>
+            </div>
+            <span class="skill-power-badge font-mono text-xs font-bold px-2.5 py-1 rounded-full border bg-gray-900 text-gray-600 border-gray-800 transition-all duration-500">OFFLINE</span>
+          </div>
+          <p class="skill-desc text-xs sm:text-sm leading-relaxed mb-4 text-gray-600 font-light transition-colors duration-300">Secure server-side logic, session management, database CRUD, and MVC architectures.</p>
+          <div class="space-y-1.5 pt-2 border-t border-white/[0.06]">
+            <div class="flex justify-between items-center text-[10px] font-mono">
+              <span class="text-gray-400 font-semibold truncate pr-2">Server-Side &amp; Auth Logic</span>
+              <span class="skill-status-text text-gray-600">STANDBY</span>
+            </div>
+            <div class="w-full h-1.5 bg-gray-800/80 rounded-full overflow-hidden border border-gray-700/40">
+              <div class="skill-progress-bar h-full rounded-full bg-gradient-to-r from-emerald-500 via-cybergreen to-emerald-300 shadow-[0_0_10px_#00E676] transition-all duration-1000" style="width: 0%;"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 7. MySQL -->
+        <div class="skill-card relative rounded-3xl p-5 sm:p-6 backdrop-blur-2xl transition-all duration-500 overflow-hidden group border bg-[#080b0f]/60 border-white/[0.03] opacity-45" data-category="systems" data-power="90">
+          <div class="flex items-center justify-between mb-4">
+            <div class="flex items-center gap-3">
+              <div class="skill-icon-box w-11 h-11 rounded-2xl flex items-center justify-center transition-all duration-500 border bg-white/[0.03] border-white/5 text-gray-600">
+                <i class="devicon-mysql-plain text-2xl"></i>
+              </div>
+              <div>
+                <span class="text-[9px] font-mono tracking-widest text-gray-500 uppercase block font-bold">RELATIONAL DATABASE</span>
+                <h3 class="skill-title text-base sm:text-lg font-bold tracking-tight text-gray-500 transition-colors duration-300">MySQL</h3>
+              </div>
+            </div>
+            <span class="skill-power-badge font-mono text-xs font-bold px-2.5 py-1 rounded-full border bg-gray-900 text-gray-600 border-gray-800 transition-all duration-500">OFFLINE</span>
+          </div>
+          <p class="skill-desc text-xs sm:text-sm leading-relaxed mb-4 text-gray-600 font-light transition-colors duration-300">Relational data modeling, ACID transactions, complex indexed queries, and data integrity.</p>
+          <div class="space-y-1.5 pt-2 border-t border-white/[0.06]">
+            <div class="flex justify-between items-center text-[10px] font-mono">
+              <span class="text-gray-400 font-semibold truncate pr-2">Schema &amp; Query Optimization</span>
+              <span class="skill-status-text text-gray-600">STANDBY</span>
+            </div>
+            <div class="w-full h-1.5 bg-gray-800/80 rounded-full overflow-hidden border border-gray-700/40">
+              <div class="skill-progress-bar h-full rounded-full bg-gradient-to-r from-emerald-500 via-cybergreen to-emerald-300 shadow-[0_0_10px_#00E676] transition-all duration-1000" style="width: 0%;"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 8. RESTful APIs -->
+        <div class="skill-card relative rounded-3xl p-5 sm:p-6 backdrop-blur-2xl transition-all duration-500 overflow-hidden group border bg-[#080b0f]/60 border-white/[0.03] opacity-45" data-category="systems" data-power="92">
+          <div class="flex items-center justify-between mb-4">
+            <div class="flex items-center gap-3">
+              <div class="skill-icon-box w-11 h-11 rounded-2xl flex items-center justify-center transition-all duration-500 border bg-white/[0.03] border-white/5 text-gray-600">
+                <i data-lucide="globe" class="w-5 h-5"></i>
+              </div>
+              <div>
+                <span class="text-[9px] font-mono tracking-widest text-gray-500 uppercase block font-bold">SYSTEM INTEGRATION</span>
+                <h3 class="skill-title text-base sm:text-lg font-bold tracking-tight text-gray-500 transition-colors duration-300">RESTful APIs</h3>
+              </div>
+            </div>
+            <span class="skill-power-badge font-mono text-xs font-bold px-2.5 py-1 rounded-full border bg-gray-900 text-gray-600 border-gray-800 transition-all duration-500">OFFLINE</span>
+          </div>
+          <p class="skill-desc text-xs sm:text-sm leading-relaxed mb-4 text-gray-600 font-light transition-colors duration-300">Microservice endpoints, webhook listeners, environmental telemetry, and real-time fetch.</p>
+          <div class="space-y-1.5 pt-2 border-t border-white/[0.06]">
+            <div class="flex justify-between items-center text-[10px] font-mono">
+              <span class="text-gray-400 font-semibold truncate pr-2">JSON Data Pipelines</span>
+              <span class="skill-status-text text-gray-600">STANDBY</span>
+            </div>
+            <div class="w-full h-1.5 bg-gray-800/80 rounded-full overflow-hidden border border-gray-700/40">
+              <div class="skill-progress-bar h-full rounded-full bg-gradient-to-r from-emerald-500 via-cybergreen to-emerald-300 shadow-[0_0_10px_#00E676] transition-all duration-1000" style="width: 0%;"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 9. Git & GitHub -->
+        <div class="skill-card relative rounded-3xl p-5 sm:p-6 backdrop-blur-2xl transition-all duration-500 overflow-hidden group border bg-[#080b0f]/60 border-white/[0.03] opacity-45" data-category="systems" data-power="94">
+          <div class="flex items-center justify-between mb-4">
+            <div class="flex items-center gap-3">
+              <div class="skill-icon-box w-11 h-11 rounded-2xl flex items-center justify-center transition-all duration-500 border bg-white/[0.03] border-white/5 text-gray-600">
+                <i class="devicon-git-plain text-2xl"></i>
+              </div>
+              <div>
+                <span class="text-[9px] font-mono tracking-widest text-gray-500 uppercase block font-bold">VERSION CONTROL</span>
+                <h3 class="skill-title text-base sm:text-lg font-bold tracking-tight text-gray-500 transition-colors duration-300">Git &amp; GitHub</h3>
+              </div>
+            </div>
+            <span class="skill-power-badge font-mono text-xs font-bold px-2.5 py-1 rounded-full border bg-gray-900 text-gray-600 border-gray-800 transition-all duration-500">OFFLINE</span>
+          </div>
+          <p class="skill-desc text-xs sm:text-sm leading-relaxed mb-4 text-gray-600 font-light transition-colors duration-300">Branching workflows, version tracking, rebasing, merge resolution, and automated deployments.</p>
+          <div class="space-y-1.5 pt-2 border-t border-white/[0.06]">
+            <div class="flex justify-between items-center text-[10px] font-mono">
+              <span class="text-gray-400 font-semibold truncate pr-2">Collaborative DevOps</span>
+              <span class="skill-status-text text-gray-600">STANDBY</span>
+            </div>
+            <div class="w-full h-1.5 bg-gray-800/80 rounded-full overflow-hidden border border-gray-700/40">
+              <div class="skill-progress-bar h-full rounded-full bg-gradient-to-r from-emerald-500 via-cybergreen to-emerald-300 shadow-[0_0_10px_#00E676] transition-all duration-1000" style="width: 0%;"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 10. PyQt6 GUI -->
+        <div class="skill-card relative rounded-3xl p-5 sm:p-6 backdrop-blur-2xl transition-all duration-500 overflow-hidden group border bg-[#080b0f]/60 border-white/[0.03] opacity-45" data-category="ai" data-power="92">
+          <div class="flex items-center justify-between mb-4">
+            <div class="flex items-center gap-3">
+              <div class="skill-icon-box w-11 h-11 rounded-2xl flex items-center justify-center transition-all duration-500 border bg-white/[0.03] border-white/5 text-gray-600">
+                <i data-lucide="terminal" class="w-5 h-5"></i>
+              </div>
+              <div>
+                <span class="text-[9px] font-mono tracking-widest text-gray-500 uppercase block font-bold">DESKTOP APPLICATION</span>
+                <h3 class="skill-title text-base sm:text-lg font-bold tracking-tight text-gray-500 transition-colors duration-300">PyQt6 GUI</h3>
+              </div>
+            </div>
+            <span class="skill-power-badge font-mono text-xs font-bold px-2.5 py-1 rounded-full border bg-gray-900 text-gray-600 border-gray-800 transition-all duration-500">OFFLINE</span>
+          </div>
+          <p class="skill-desc text-xs sm:text-sm leading-relaxed mb-4 text-gray-600 font-light transition-colors duration-300">Desktop voice assistant framework, multi-threaded event dispatchers, and modern dark GUIs.</p>
+          <div class="space-y-1.5 pt-2 border-t border-white/[0.06]">
+            <div class="flex justify-between items-center text-[10px] font-mono">
+              <span class="text-gray-400 font-semibold truncate pr-2">J.E.R.V.I.S Voice Architecture</span>
+              <span class="skill-status-text text-gray-600">STANDBY</span>
+            </div>
+            <div class="w-full h-1.5 bg-gray-800/80 rounded-full overflow-hidden border border-gray-700/40">
+              <div class="skill-progress-bar h-full rounded-full bg-gradient-to-r from-emerald-500 via-cybergreen to-emerald-300 shadow-[0_0_10px_#00E676] transition-all duration-1000" style="width: 0%;"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 11. Data Structures & Algorithms -->
+        <div class="skill-card relative rounded-3xl p-5 sm:p-6 backdrop-blur-2xl transition-all duration-500 overflow-hidden group border bg-[#080b0f]/60 border-white/[0.03] opacity-45" data-category="ai" data-power="88">
+          <div class="flex items-center justify-between mb-4">
+            <div class="flex items-center gap-3">
+              <div class="skill-icon-box w-11 h-11 rounded-2xl flex items-center justify-center transition-all duration-500 border bg-white/[0.03] border-white/5 text-gray-600">
+                <i data-lucide="cpu" class="w-5 h-5"></i>
+              </div>
+              <div>
+                <span class="text-[9px] font-mono tracking-widest text-gray-500 uppercase block font-bold">COMPUTATIONAL LOGIC</span>
+                <h3 class="skill-title text-base sm:text-lg font-bold tracking-tight text-gray-500 transition-colors duration-300">Data Structures &amp; Algorithms</h3>
+              </div>
+            </div>
+            <span class="skill-power-badge font-mono text-xs font-bold px-2.5 py-1 rounded-full border bg-gray-900 text-gray-600 border-gray-800 transition-all duration-500">OFFLINE</span>
+          </div>
+          <p class="skill-desc text-xs sm:text-sm leading-relaxed mb-4 text-gray-600 font-light transition-colors duration-300">Graph traversals, dynamic programming, sorting &amp; searching, and algorithmic space complexity.</p>
+          <div class="space-y-1.5 pt-2 border-t border-white/[0.06]">
+            <div class="flex justify-between items-center text-[10px] font-mono">
+              <span class="text-gray-400 font-semibold truncate pr-2">Time &amp; Space Efficiency</span>
+              <span class="skill-status-text text-gray-600">STANDBY</span>
+            </div>
+            <div class="w-full h-1.5 bg-gray-800/80 rounded-full overflow-hidden border border-gray-700/40">
+              <div class="skill-progress-bar h-full rounded-full bg-gradient-to-r from-emerald-500 via-cybergreen to-emerald-300 shadow-[0_0_10px_#00E676] transition-all duration-1000" style="width: 0%;"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 12. React.js & Vite -->
+        <div class="skill-card relative rounded-3xl p-5 sm:p-6 backdrop-blur-2xl transition-all duration-500 overflow-hidden group border bg-[#080b0f]/60 border-white/[0.03] opacity-45" data-category="web" data-power="92">
+          <div class="flex items-center justify-between mb-4">
+            <div class="flex items-center gap-3">
+              <div class="skill-icon-box w-11 h-11 rounded-2xl flex items-center justify-center transition-all duration-500 border bg-white/[0.03] border-white/5 text-gray-600">
+                <i class="devicon-react-original text-2xl"></i>
+              </div>
+              <div>
+                <span class="text-[9px] font-mono tracking-widest text-gray-500 uppercase block font-bold">MODERN FRONTEND</span>
+                <h3 class="skill-title text-base sm:text-lg font-bold tracking-tight text-gray-500 transition-colors duration-300">React.js &amp; Vite</h3>
+              </div>
+            </div>
+            <span class="skill-power-badge font-mono text-xs font-bold px-2.5 py-1 rounded-full border bg-gray-900 text-gray-600 border-gray-800 transition-all duration-500">OFFLINE</span>
+          </div>
+          <p class="skill-desc text-xs sm:text-sm leading-relaxed mb-4 text-gray-600 font-light transition-colors duration-300">Component lifecycles, hooks, Framer Motion transitions, and ultra-fast Vite module bundling.</p>
+          <div class="space-y-1.5 pt-2 border-t border-white/[0.06]">
+            <div class="flex justify-between items-center text-[10px] font-mono">
+              <span class="text-gray-400 font-semibold truncate pr-2">Reactive State &amp; Scrollytelling</span>
+              <span class="skill-status-text text-gray-600">STANDBY</span>
+            </div>
+            <div class="w-full h-1.5 bg-gray-800/80 rounded-full overflow-hidden border border-gray-700/40">
+              <div class="skill-progress-bar h-full rounded-full bg-gradient-to-r from-emerald-500 via-cybergreen to-emerald-300 shadow-[0_0_10px_#00E676] transition-all duration-1000" style="width: 0%;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section Diagnostic Footer Bar -->
+      <div class="mt-14 pt-8 border-t border-white/[0.06] flex flex-wrap items-center justify-between gap-4 text-xs font-mono text-gray-500">
+        <div class="flex items-center gap-2">
+          <span id="skills-status-led" class="w-2 h-2 rounded-full bg-gray-600"></span>
+          <span id="skills-status-label">SYSTEM STATUS: AWAITING USER INPUT</span>
+        </div>
+        <button id="skills-toggle-link" class="hover:text-cybergreen transition-colors cursor-pointer flex items-center gap-1.5">
+          <span id="skills-toggle-label">ENGAGE POWER GRID</span>
+          <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+        </button>
+      </div>
     </div>
   </section>
 
@@ -746,6 +1154,297 @@
       else if (scrollPct < 0.75) updateStepUI(2);
       else updateStepUI(3);
     }, { passive: true });
+
+    // ==========================================
+    // SKILLS SECTION INTERACTIVE PULL-CORD LOGIC
+    // ==========================================
+    let skillsPowerOn = false;
+    let skillsSoundEnabled = true;
+    let skillsIsPulling = false;
+
+    const skillsLamp = document.getElementById('skills-lamp');
+    const skillsLampLed = document.getElementById('skills-lamp-led');
+    const skillsVoltageText = document.getElementById('skills-voltage-text');
+    const skillsPlasmaTube = document.getElementById('skills-plasma-tube');
+    const skillsLightBeam = document.getElementById('skills-light-beam');
+    const skillsCordElement = document.getElementById('skills-cord-element');
+    const skillsCordHandle = document.getElementById('skills-cord-handle');
+    const skillsPullBtn = document.getElementById('skills-pull-btn');
+    const skillsBtnZap = document.getElementById('skills-btn-zap');
+    const skillsBtnText = document.getElementById('skills-btn-text');
+    const skillsHintText = document.getElementById('skills-hint-text');
+    const skillsStatusLed = document.getElementById('skills-status-led');
+    const skillsStatusLabel = document.getElementById('skills-status-label');
+    const skillsToggleLabel = document.getElementById('skills-toggle-label');
+    const skillsToggleLink = document.getElementById('skills-toggle-link');
+    const skillsCards = document.querySelectorAll('.skill-card');
+
+    function playSwitchAudio(turnOn) {
+      if (!skillsSoundEnabled) return;
+      try {
+        const AudioCtx = window.AudioContext || window.webkitAudioContext;
+        if (!AudioCtx) return;
+        const ctx = new AudioCtx();
+
+        if (turnOn) {
+          // 1. Mechanical Click
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(140, ctx.currentTime);
+          osc.frequency.exponentialRampToValueAtTime(30, ctx.currentTime + 0.07);
+          gain.gain.setValueAtTime(0.35, ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.07);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start();
+          osc.stop(ctx.currentTime + 0.07);
+
+          // 2. Transformer Neon Hum
+          setTimeout(() => {
+            try {
+              const hum = ctx.createOscillator();
+              const hGain = ctx.createGain();
+              hum.type = 'sawtooth';
+              hum.frequency.setValueAtTime(60, ctx.currentTime);
+              hum.frequency.linearRampToValueAtTime(110, ctx.currentTime + 0.12);
+              hGain.gain.setValueAtTime(0.08, ctx.currentTime);
+              hGain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.35);
+              hum.connect(hGain);
+              hGain.connect(ctx.destination);
+              hum.start();
+              hum.stop(ctx.currentTime + 0.35);
+            } catch (_) {}
+          }, 40);
+        } else {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(90, ctx.currentTime);
+          osc.frequency.exponentialRampToValueAtTime(25, ctx.currentTime + 0.09);
+          gain.gain.setValueAtTime(0.25, ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.09);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start();
+          osc.stop(ctx.currentTime + 0.09);
+        }
+      } catch (_) {}
+    }
+
+    function triggerSparkBurst() {
+      if (typeof confetti !== 'function' || !skillsLamp) return;
+      const rect = skillsLamp.getBoundingClientRect();
+      const x = (rect.left + rect.width / 2) / window.innerWidth;
+      const y = (rect.top + rect.height / 2) / window.innerHeight;
+      confetti({
+        particleCount: 28,
+        spread: 70,
+        startVelocity: 18,
+        origin: { x, y },
+        colors: ['#00E676', '#69F0AE', '#B9F6CA', '#FFFFFF', '#00E5FF'],
+        ticks: 45,
+        gravity: 0.9,
+        scalar: 0.7,
+        disableForReducedMotion: true,
+      });
+    }
+
+    function toggleSkillsPower() {
+      if (skillsIsPulling) return;
+      skillsIsPulling = true;
+      const nextState = !skillsPowerOn;
+      playSwitchAudio(nextState);
+
+      // Spring recoil animation
+      if (skillsCordElement) {
+        skillsCordElement.style.transform = 'translateY(36px)';
+        setTimeout(() => {
+          skillsCordElement.style.transform = 'translateY(-6px)';
+          setTimeout(() => {
+            skillsCordElement.style.transform = 'translateY(0px)';
+          }, 150);
+        }, 180);
+      }
+
+      setTimeout(() => {
+        skillsPowerOn = nextState;
+        if (skillsPowerOn) {
+          triggerSparkBurst();
+
+          // Lamp ON
+          skillsLamp.classList.remove('bg-[#0b0e14]', 'border-gray-800');
+          skillsLamp.classList.add('bg-[#0d171e]', 'border-cybergreen/80', 'shadow-[0_0_40px_rgba(0,230,118,0.4),0_0_80px_rgba(0,230,118,0.15)]');
+          skillsLampLed.className = 'w-2 h-2 rounded-full transition-colors duration-300 bg-cybergreen shadow-[0_0_8px_#00E676] animate-pulse';
+          skillsVoltageText.textContent = '480V ACTIVE';
+          skillsPlasmaTube.className = 'w-full h-full rounded-full transition-all duration-500 bg-gradient-to-r from-cybergreen via-emerald-300 to-cybergreen shadow-[0_0_18px_#00E676]';
+          skillsLightBeam.classList.remove('opacity-0');
+          skillsLightBeam.classList.add('opacity-100');
+
+          // Handle active state
+          skillsCordHandle.className = 'relative w-6 h-10 sm:w-7 sm:h-11 rounded-full border flex flex-col items-center justify-between py-1.5 shadow-2xl transition-all duration-300 bg-gradient-to-b from-emerald-300 via-cybergreen to-emerald-600 border-white/60 shadow-[0_0_20px_rgba(0,230,118,0.7)] hover:scale-110 active:scale-90';
+          skillsPullBtn.className = 'px-4 py-1.5 rounded-full text-xs font-mono font-bold uppercase tracking-widest flex items-center gap-2 border transition-all duration-300 shadow-lg cursor-pointer bg-cybergreen/15 text-cybergreen border-cybergreen/50 shadow-[0_0_20px_rgba(0,230,118,0.25)] hover:bg-cybergreen/25';
+          skillsBtnZap.className = 'w-3.5 h-3.5 text-cybergreen';
+          skillsBtnZap.classList.remove('animate-pulse');
+          skillsBtnText.textContent = 'POWER: ONLINE (CLICK TO TOGGLE)';
+          skillsHintText.style.display = 'none';
+
+          skillsStatusLed.className = 'w-2 h-2 rounded-full bg-cybergreen animate-pulse';
+          skillsStatusLabel.textContent = 'SYSTEM STATUS: GRID SYNCHRONIZED (100% YIELD)';
+          skillsToggleLabel.textContent = 'SWITCH TO DARK MODE';
+
+          // Sequential Cascading Card Reveal (staggered delay)
+          skillsCards.forEach((card, idx) => {
+            setTimeout(() => {
+              card.classList.remove('bg-[#080b0f]/60', 'border-white/[0.03]', 'opacity-45');
+              card.classList.add('bg-[#0b0f15]/90', 'border-white/[0.08]', 'hover:border-cybergreen/60', 'shadow-xl', 'hover:shadow-[0_20px_45px_rgba(0,230,118,0.14)]', 'opacity-100');
+
+              const iconBox = card.querySelector('.skill-icon-box');
+              if (iconBox) {
+                iconBox.classList.remove('bg-white/[0.03]', 'border-white/5', 'text-gray-600');
+                iconBox.classList.add('bg-cybergreen/10', 'border-cybergreen/40', 'text-cybergreen', 'shadow-[0_0_15px_rgba(0,230,118,0.2)]');
+              }
+
+              const title = card.querySelector('.skill-title');
+              if (title) {
+                title.classList.remove('text-gray-500');
+                title.classList.add('text-white', 'group-hover:text-cybergreen');
+              }
+
+              const badge = card.querySelector('.skill-power-badge');
+              const powerVal = card.getAttribute('data-power') || '90';
+              if (badge) {
+                badge.classList.remove('bg-gray-900', 'text-gray-600', 'border-gray-800');
+                badge.classList.add('bg-cybergreen/15', 'text-cybergreen', 'border-cybergreen/40', 'shadow-[0_0_10px_rgba(0,230,118,0.2)]');
+                badge.textContent = `${powerVal}%`;
+              }
+
+              const desc = card.querySelector('.skill-desc');
+              if (desc) {
+                desc.classList.remove('text-gray-600', 'font-light');
+                desc.classList.add('text-gray-300', 'font-normal');
+              }
+
+              const statusText = card.querySelector('.skill-status-text');
+              if (statusText) {
+                statusText.classList.remove('text-gray-600');
+                statusText.classList.add('text-cybergreen', 'font-bold');
+                statusText.textContent = 'ENERGIZED';
+              }
+
+              const bar = card.querySelector('.skill-progress-bar');
+              if (bar) {
+                bar.style.width = `${powerVal}%`;
+              }
+            }, idx * 75);
+          });
+        } else {
+          // Lamp OFF
+          skillsLamp.classList.remove('bg-[#0d171e]', 'border-cybergreen/80', 'shadow-[0_0_40px_rgba(0,230,118,0.4),0_0_80px_rgba(0,230,118,0.15)]');
+          skillsLamp.classList.add('bg-[#0b0e14]', 'border-gray-800');
+          skillsLampLed.className = 'w-2 h-2 rounded-full transition-colors duration-300 bg-red-500/80';
+          skillsVoltageText.textContent = 'STANDBY 0V';
+          skillsPlasmaTube.className = 'w-full h-full rounded-full transition-all duration-500 bg-gray-800/50';
+          skillsLightBeam.classList.remove('opacity-100');
+          skillsLightBeam.classList.add('opacity-0');
+
+          skillsCordHandle.className = 'relative w-6 h-10 sm:w-7 sm:h-11 rounded-full border flex flex-col items-center justify-between py-1.5 shadow-2xl transition-all duration-300 bg-gradient-to-b from-gray-200 via-gray-400 to-gray-600 border-gray-400 shadow-[0_4px_15px_rgba(0,0,0,0.8)] hover:scale-110 active:scale-90';
+          skillsPullBtn.className = 'px-4 py-1.5 rounded-full text-xs font-mono font-bold uppercase tracking-widest flex items-center gap-2 border transition-all duration-300 shadow-lg cursor-pointer bg-white/10 text-white border-white/20 hover:border-cybergreen/60 hover:text-cybergreen animate-bounce';
+          skillsBtnZap.className = 'w-3.5 h-3.5 text-amber-400 animate-pulse';
+          skillsBtnText.innerHTML = 'PULL ROOF CORD TO IGNITE &darr;';
+          skillsHintText.style.display = '';
+
+          skillsStatusLed.className = 'w-2 h-2 rounded-full bg-gray-600';
+          skillsStatusLabel.textContent = 'SYSTEM STATUS: AWAITING USER INPUT';
+          skillsToggleLabel.textContent = 'ENGAGE POWER GRID';
+
+          // Turn off all cards
+          skillsCards.forEach((card) => {
+            card.classList.remove('bg-[#0b0f15]/90', 'border-white/[0.08]', 'hover:border-cybergreen/60', 'shadow-xl', 'hover:shadow-[0_20px_45px_rgba(0,230,118,0.14)]', 'opacity-100');
+            card.classList.add('bg-[#080b0f]/60', 'border-white/[0.03]', 'opacity-45');
+
+            const iconBox = card.querySelector('.skill-icon-box');
+            if (iconBox) {
+              iconBox.classList.remove('bg-cybergreen/10', 'border-cybergreen/40', 'text-cybergreen', 'shadow-[0_0_15px_rgba(0,230,118,0.2)]');
+              iconBox.classList.add('bg-white/[0.03]', 'border-white/5', 'text-gray-600');
+            }
+
+            const title = card.querySelector('.skill-title');
+            if (title) {
+              title.classList.remove('text-white', 'group-hover:text-cybergreen');
+              title.classList.add('text-gray-500');
+            }
+
+            const badge = card.querySelector('.skill-power-badge');
+            if (badge) {
+              badge.classList.remove('bg-cybergreen/15', 'text-cybergreen', 'border-cybergreen/40', 'shadow-[0_0_10px_rgba(0,230,118,0.2)]');
+              badge.classList.add('bg-gray-900', 'text-gray-600', 'border-gray-800');
+              badge.textContent = 'OFFLINE';
+            }
+
+            const desc = card.querySelector('.skill-desc');
+            if (desc) {
+              desc.classList.remove('text-gray-300', 'font-normal');
+              desc.classList.add('text-gray-600', 'font-light');
+            }
+
+            const statusText = card.querySelector('.skill-status-text');
+            if (statusText) {
+              statusText.classList.remove('text-cybergreen', 'font-bold');
+              statusText.classList.add('text-gray-600');
+              statusText.textContent = 'STANDBY';
+            }
+
+            const bar = card.querySelector('.skill-progress-bar');
+            if (bar) {
+              bar.style.width = '0%';
+            }
+          });
+        }
+        skillsIsPulling = false;
+      }, 280);
+    }
+
+    if (skillsCordHandle) skillsCordHandle.addEventListener('click', toggleSkillsPower);
+    if (skillsPullBtn) skillsPullBtn.addEventListener('click', toggleSkillsPower);
+    if (skillsToggleLink) skillsToggleLink.addEventListener('click', toggleSkillsPower);
+
+    // Sound toggle
+    const skillsSoundBtn = document.getElementById('skills-sound-btn');
+    if (skillsSoundBtn) {
+      skillsSoundBtn.addEventListener('click', () => {
+        skillsSoundEnabled = !skillsSoundEnabled;
+        const icon = document.getElementById('skills-sound-icon');
+        if (icon) {
+          icon.setAttribute('data-lucide', skillsSoundEnabled ? 'volume-2' : 'volume-x');
+          lucide.createIcons();
+        }
+      });
+    }
+
+    // Category Filtering
+    const skillsFilterBtns = document.querySelectorAll('.skills-filter-btn');
+    skillsFilterBtns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        skillsFilterBtns.forEach((b) => {
+          b.classList.remove('bg-cybergreen', 'text-black', 'shadow-[0_0_20px_rgba(0,230,118,0.35)]', 'scale-105');
+          b.classList.add('bg-white/[0.04]', 'text-gray-300', 'border', 'border-white/10');
+        });
+        btn.classList.remove('bg-white/[0.04]', 'text-gray-300', 'border', 'border-white/10');
+        btn.classList.add('bg-cybergreen', 'text-black', 'shadow-[0_0_20px_rgba(0,230,118,0.35)]', 'scale-105');
+
+        const cat = btn.getAttribute('data-category');
+        skillsCards.forEach((card) => {
+          const cardCat = card.getAttribute('data-category');
+          if (cat === 'all' || cardCat === cat) {
+            card.style.display = '';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+    lucide.createIcons();
   </script>
 </body>
 </html>
