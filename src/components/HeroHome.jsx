@@ -9,21 +9,23 @@ export default function HeroHome({ scrollToSection }) {
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const ctx = canvas.getContext('2d', { alpha: false });
+    const ctx = canvas.getContext('2d', { alpha: false, desynchronized: true });
 
     let width = window.innerWidth;
     let height = window.innerHeight;
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+    const basePath = import.meta.env.BASE_URL || './';
+    const prefix = basePath.endsWith('/') ? basePath : basePath + '/';
 
     const img = new Image();
     img.decoding = 'async';
-    img.src = 'fram/ezgif-frame-080.jpg';
+    img.src = `${prefix}fram/ezgif-frame-080.jpg`;
 
     const render = () => {
       width = window.innerWidth;
       height = window.innerHeight;
       const isMobile = width < 768;
-      const isDesktopWidescreen = width >= 1024 && width > height;
+      const isWidescreen = width > height && width >= 800;
 
       const activeDpr = isMobile
         ? Math.min(window.devicePixelRatio || 1, 1.25)
@@ -48,25 +50,25 @@ export default function HeroHome({ scrollToSection }) {
         const imgRatio = sourceW / sourceH;
         let drawW, drawH, drawX, drawY;
 
-        if (isDesktopWidescreen) {
-          // Widescreen Desktop / Laptop: 3D portrait on left stage
-          const targetH = Math.max(height * 1.04, width / imgRatio);
+        if (isWidescreen) {
+          // Widescreen Desktop / Laptop / Landscape Tablet: 3D portrait on left stage
+          const targetH = Math.max(height * 1.05, width / imgRatio);
           drawH = targetH;
           drawW = targetH * imgRatio;
           drawX = - (drawW * 0.12);
           drawY = (height - drawH) / 2;
         } else {
-          // Tablet, Mobile Phone, & Mobile "Desktop site" mode:
+          // Portrait Tablet (iPad Air), Mobile Phone, & Mobile "Desktop site" mode:
           // Centered 3D portrait framing in upper stage
-          const targetH = Math.min(height * 0.52, width * 0.85);
+          const targetH = width >= 640 ? height * 0.56 : height * 0.48;
           drawH = targetH;
           drawW = targetH * imgRatio;
           drawX = (width - drawW) / 2;
-          drawY = (height * 0.28) - (drawH * 0.35);
+          drawY = width >= 640 ? height * 0.08 : height * 0.07;
         }
 
         ctx.imageSmoothingEnabled = true;
-        ctx.imageSmoothingQuality = isDesktopWidescreen ? 'high' : 'medium';
+        ctx.imageSmoothingQuality = isWidescreen ? 'high' : 'medium';
 
         ctx.drawImage(
           img,
@@ -80,10 +82,10 @@ export default function HeroHome({ scrollToSection }) {
           Math.round(drawH)
         );
 
-        // Deep Obsidian Black Gradient Edge Fade Mask on Widescreen Monitors
-        if (isDesktopWidescreen) {
-          const fadeStart = width * 0.38;
-          const fadeWidth = width * 0.30;
+        if (isWidescreen) {
+          // Deep Obsidian Black Gradient Edge Fade Mask on Widescreen Monitors (fades rightwards)
+          const fadeStart = width * 0.36;
+          const fadeWidth = width * 0.28;
           const gradient = ctx.createLinearGradient(fadeStart, 0, fadeStart + fadeWidth, 0);
 
           gradient.addColorStop(0, 'rgba(8, 12, 16, 0)');
@@ -94,6 +96,23 @@ export default function HeroHome({ scrollToSection }) {
 
           ctx.fillStyle = '#080c10';
           ctx.fillRect(Math.round(fadeStart + fadeWidth), 0, Math.round(width - (fadeStart + fadeWidth)), Math.round(height));
+        } else {
+          // Portrait / Tablet / Mobile: Smooth vertical gradient edge fade at the bottom of the portrait
+          const fadeTop = drawY + drawH * 0.68;
+          const fadeH = drawH * 0.32;
+          const vGradient = ctx.createLinearGradient(0, fadeTop, 0, fadeTop + fadeH);
+
+          vGradient.addColorStop(0, 'rgba(8, 12, 16, 0)');
+          vGradient.addColorStop(1, 'rgba(8, 12, 16, 1)');
+
+          ctx.fillStyle = vGradient;
+          ctx.fillRect(0, Math.round(fadeTop), Math.round(width), Math.round(fadeH));
+
+          const bottomSolid = fadeTop + fadeH;
+          if (bottomSolid < height) {
+            ctx.fillStyle = '#080c10';
+            ctx.fillRect(0, Math.round(bottomSolid), Math.round(width), Math.round(height - bottomSolid));
+          }
         }
       }
 
@@ -104,7 +123,11 @@ export default function HeroHome({ scrollToSection }) {
     if (img.complete) render();
 
     window.addEventListener('resize', render, { passive: true });
-    return () => window.removeEventListener('resize', render);
+    window.addEventListener('orientationchange', render, { passive: true });
+    return () => {
+      window.removeEventListener('resize', render);
+      window.removeEventListener('orientationchange', render);
+    };
   }, []);
 
   return (
@@ -118,17 +141,17 @@ export default function HeroHome({ scrollToSection }) {
       </div>
 
       {/* 1. Huge Brand Display Title */}
-      <div className="absolute top-16 left-5 sm:top-24 sm:left-10 lg:left-14 z-25 pointer-events-none select-none">
+      <div className="absolute top-8 sm:top-12 lg:top-20 left-5 sm:left-10 lg:left-14 z-25 pointer-events-none select-none">
         <span className="text-[10px] sm:text-xs font-mono font-bold tracking-widest text-cybergreen uppercase drop-shadow-[0_2px_10px_rgba(0,0,0,0.95)]">
           WELCOME TO
         </span>
-        <h1 className="text-2xl sm:text-6xl lg:text-7xl font-black tracking-tighter text-white uppercase leading-none mt-1 drop-shadow-[0_4px_30px_rgba(0,0,0,0.98)]">
+        <h1 className="text-2xl sm:text-5xl lg:text-7xl font-black tracking-tighter text-white uppercase leading-none mt-1 drop-shadow-[0_4px_30px_rgba(0,0,0,0.98)]">
           BISHAL<br />MONDAL
         </h1>
       </div>
 
       {/* 2. Floating Brief Intro Panel Container */}
-      <div className="relative z-30 w-full max-w-7xl mx-auto px-4 sm:px-8 md:px-12 lg:px-16 h-full flex flex-col justify-end lg:justify-center items-center lg:items-end pointer-events-none pb-12 lg:pb-0">
+      <div className="relative z-30 w-full max-w-7xl mx-auto px-4 sm:px-8 md:px-12 lg:px-16 h-full flex flex-col justify-end lg:justify-center items-center lg:items-end pointer-events-none pb-8 sm:pb-12 lg:pb-0">
         <div className="w-full max-w-sm sm:max-w-md lg:max-w-md text-left lg:ml-auto lg:mr-10">
           <motion.div
             initial={{ opacity: 0, y: 25 }}
