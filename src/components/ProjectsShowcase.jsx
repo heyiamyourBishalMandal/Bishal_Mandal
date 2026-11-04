@@ -14,7 +14,7 @@ export default function ProjectsShowcase() {
       description:
         'A high-performance personal portfolio built with 80-frame kinetic 3D Canvas motion sequence scrubbing, Framer Motion step panels, glassmorphism UI, and ultra-fluid responsiveness.',
       tech: ['React.js', 'Framer Motion', 'HTML5 Canvas 3D', 'Tailwind CSS', 'Vite'],
-      github: 'https://github.com/heyiamyourbishalmandal/Bishal_Mandal',
+      github: '#', // EDIT HERE: Replace '#' with your GitHub repo URL (e.g., 'https://github.com/heyiamyourbishalmandal/Bishal_Mandal')
     },
     {
       id: 'food-ordering',
@@ -24,7 +24,7 @@ export default function ProjectsShowcase() {
       description:
         'A full-stack application featuring user authentication, seamless menu browsing, and robust payment integration.',
       tech: ['HTML5', 'CSS', 'JS', 'PHP', 'MYSQL'],
-      github: 'https://github.com/heyiamyourbishalmandal',
+      github: '#', // EDIT HERE: Replace '#' with your GitHub repo URL
     },
     {
       id: 'blog-platform',
@@ -34,7 +34,7 @@ export default function ProjectsShowcase() {
       description:
         'A dynamic platform allowing users to create, edit, and publish posts, featuring a rich text editor and engagement mechanics.',
       tech: ['HTML', 'CSS', 'JS'],
-      github: 'https://github.com/heyiamyourbishalmandal',
+      github: '#', // EDIT HERE: Replace '#' with your GitHub repo URL
     },
     {
       id: 'weather-dashboard',
@@ -44,7 +44,7 @@ export default function ProjectsShowcase() {
       description:
         'A single-page application displaying real-time climate data via a third-party REST API with geolocation support.',
       tech: ['HTML', 'Tailwind', 'JavaScript', 'REST API'],
-      github: 'https://github.com/heyiamyourbishalmandal',
+      github: '#', // EDIT HERE: Replace '#' with your GitHub repo URL
     },
   ];
 
@@ -116,15 +116,13 @@ export default function ProjectsShowcase() {
                   <span className="text-[10px] font-mono font-bold tracking-widest text-cybergreen uppercase bg-cybergreen/10 border border-cybergreen/30 px-3 py-1 rounded-full">
                     {project.badge}
                   </span>
-                  <a
-                    href={project.github}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="text-gray-400 hover:text-cybergreen transition-colors p-1"
-                    title="View Source on GitHub"
+                  {/* GitHub Logo Icon (External link turned off for now, logo stays visible) */}
+                  <span
+                    className="text-gray-400 p-1 flex items-center justify-center opacity-80 cursor-default"
+                    title="GitHub Repository"
                   >
                     <Github className="w-4 h-4" />
-                  </a>
+                  </span>
                 </div>
 
                 <h3 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-cybergreen transition-colors">
@@ -148,15 +146,11 @@ export default function ProjectsShowcase() {
                 </div>
 
                 <div className="pt-3 border-t border-gray-200 dark:border-white/[0.06] flex items-center justify-between">
-                  <a
-                    href={project.github}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-cybergreen hover:text-emerald-300 transition-colors cursor-pointer group/link"
-                  >
-                    <span>EXPLORE SOURCE</span>
-                    <ArrowUpRight className="w-3.5 h-3.5 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform" />
-                  </a>
+                  {/* Source indicator (External link off, logo preserved) */}
+                  <span className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-gray-400 cursor-default">
+                    <Github className="w-3.5 h-3.5 text-gray-500" />
+                    <span>SOURCE ARCHIVE</span>
+                  </span>
                   <span className="text-[10px] font-mono text-gray-500 dark:text-gray-400">
                     VERIFIED CODE
                   </span>
