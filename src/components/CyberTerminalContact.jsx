@@ -5,7 +5,7 @@ export default function CyberTerminalContact() {
   const [copied, setCopied] = useState(false);
 
   const handleCopyEmail = () => {
-    navigator.clipboard.writeText('heyiamyourbishalmandal@gmail.com');
+    navigator.clipboard.writeText('bishalmondal.dev@gmail.com');
     setCopied(true);
     setTimeout(() => setCopied(false), 2500);
   };
@@ -62,7 +62,7 @@ export default function CyberTerminalContact() {
                   name="name"
                   required
                   className="w-full px-4 py-3 rounded-xl bg-white/80 dark:bg-black/50 border border-gray-200 dark:border-white/10 text-gray-900 dark:text-white focus:outline-none focus:border-cybergreen focus:ring-1 focus:ring-cybergreen/50 transition-colors placeholder-gray-500 text-sm"
-                  placeholder="e.g. Alex Vance"
+                  placeholder="e.g. Bishal Mondal"
                 />
               </div>
 
@@ -112,7 +112,7 @@ export default function CyberTerminalContact() {
               title="Click to copy email address"
             >
               <Mail className="w-3.5 h-3.5 text-cybergreen" />
-              <span>heyiamyourbishalmandal@gmail.com</span>
+              <span>bishalmondal.dev@gmail.com</span>
               {copied ? (
                 <span className="text-[10px] text-cybergreen font-bold">COPIED!</span>
               ) : (
