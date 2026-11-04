@@ -224,15 +224,16 @@ export default function AboutScrollytelling({ scrollToSection }) {
     {
       stepNum: '#01',
       stepName: 'Software Engineering',
-      badge: 'SYSTEMS & SOFTWARE ARCHITECTURE',
+      badge: 'SOFTWARE DEVELOPER & BCA GRADUATE',
       icon: <Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-cybergreen animate-spin shrink-0" />,
       title: (
         <>
           Software <span className="text-cybergreen">Developer</span>
         </>
       ),
-      description: 'Specializing in Python desktop automation, algorithm design, and full-stack systems engineering built for scalability and performance.',
-      pills: ['Python 3.11', 'Algorithms & DS', 'PyQt6 & Full-Stack'],
+      description:
+        'Based in Kolkata, my engineering foundation bridges mathematical precision, algorithm design, responsive full-stack applications, and Python desktop automation built for high-performance computing.',
+      pills: ['BCA Graduate (2025)', 'Python 3.11', 'Algorithms & DS', 'Kolkata, India'],
       buttons: true,
     },
     {
@@ -246,13 +247,13 @@ export default function AboutScrollytelling({ scrollToSection }) {
         </>
       ),
       description:
-        'Completed research internship on Web Development to Showcase Indoor Air Pollution (IAP) Frameworks under Prof. Sandip Chakraborty, Dept. of CSE, IIT Kharagpur.',
-      pills: ['Dept. of CSE', 'Prof. Sandip Chakraborty', 'IAP Frameworks'],
+        'Successfully completed a research internship in Web Development & Frontend Engineering to showcase Indoor Air Pollution (IAP) Frameworks under the guidance of Prof. Sandip Chakraborty, Department of Computer Science & Engineering (CSE), IIT Kharagpur.',
+      pills: ['Dept. of CSE, IIT KGP', 'Prof. Sandip Chakraborty', 'IAP Telemetry Frameworks', 'Web Architecture'],
     },
     {
       stepNum: '#03',
       stepName: 'J.E.R.V.I.S Assistant',
-      badge: 'INTELLIGENCE MODULE',
+      badge: 'INTELLIGENCE & AUTOMATION MODULE',
       icon: <Terminal className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-cybergreen shrink-0" />,
       title: (
         <>
@@ -260,13 +261,13 @@ export default function AboutScrollytelling({ scrollToSection }) {
         </>
       ),
       description:
-        'Integrating practical AI modules directly into software workflows—most notably engineering J.E.R.V.I.S., a custom desktop voice assistant built for automation.',
-      pills: ['Voice Automation', 'Desktop Tooling', 'PyQt6 GUI'],
+        'Architected and deployed J.E.R.V.I.S., a multi-threaded desktop voice assistant featuring voice recognition algorithms, event dispatchers, and modern dark PyQt6 graphical interfaces.',
+      pills: ['Voice Automation', 'PyQt6 Dark GUI', 'Multi-threaded Engine', 'Desktop Tooling'],
     },
     {
       stepNum: '#04',
       stepName: 'Full-Stack Web',
-      badge: 'DEVELOPMENT STACK',
+      badge: 'FULL-STACK PLATFORM ARCHITECTURE',
       icon: <Cpu className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-cybergreen shrink-0" />,
       title: (
         <>
@@ -274,8 +275,8 @@ export default function AboutScrollytelling({ scrollToSection }) {
         </>
       ),
       description:
-        'Architecting responsive full-stack applications with HTML5, CSS3, Tailwind, JavaScript, PHP, and MySQL for robust digital experiences.',
-      pills: ['HTML5 & CSS3', 'Tailwind CSS', 'PHP & MySQL'],
+        'Architecting responsive full-stack web applications with HTML5, CSS3, Tailwind CSS, JavaScript (ES6+), PHP, and MySQL for robust, enterprise-grade digital experiences.',
+      pills: ['HTML5 & CSS3', 'Tailwind CSS', 'PHP & MySQL', 'RESTful APIs'],
     },
   ];
 
