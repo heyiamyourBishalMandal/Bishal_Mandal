@@ -205,18 +205,18 @@ export default function HeroHome({ scrollToSection }) {
             {/* Luxury Eyebrow Crest Badge */}
             <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 sm:px-3.5 sm:py-1.5 rounded-full bg-gradient-to-r from-cybergreen/15 via-emerald-500/10 to-transparent border border-cybergreen/40 text-cybergreen text-[8px] sm:text-[10px] font-mono font-bold uppercase tracking-[0.15em] sm:tracking-[0.2em] shadow-[0_0_15px_rgba(0,230,118,0.2)]">
               <Sparkles className="w-3 h-3 text-cybergreen animate-spin shrink-0" />
-              <span>PRECISION ARCHITECTURE &bull; IIT KGP ALUMNI</span>
+              <span>PRECISION ARCHITECTURE &bull; IIT KGP INTERN</span>
             </div>
 
-            {/* Main Greeting Headline with Radiant Gradient */}
+            {/* Technical Profile Headline with Radiant Gradient */}
             <div>
               <span className="text-[10px] sm:text-xs font-mono tracking-widest text-gray-400 uppercase block font-semibold mb-0.5 sm:mb-1">
-                EXECUTIVE INTRO
+                TECHNICAL PROFILE
               </span>
               <h2 className="text-xl sm:text-2xl lg:text-4xl font-extrabold leading-tight tracking-tight text-white">
-                Hello, I'm{' '}
+                Full-Stack &{' '}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-emerald-200 to-cybergreen font-black drop-shadow-[0_0_20px_rgba(0,230,118,0.4)]">
-                  Bishal Mondal
+                  Systems Design
                 </span>
               </h2>
             </div>
