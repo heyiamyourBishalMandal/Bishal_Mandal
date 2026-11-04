@@ -103,6 +103,49 @@
     .coding-ninjas-text-shimmer:hover {
       filter: drop-shadow(0 4px 30px rgba(0, 230, 118, 0.35));
     }
+
+    /* Green Animated Developer Watermark Wave */
+    @keyframes developerGreenWave {
+      0% {
+        background-position: 125% 0;
+      }
+      60%, 100% {
+        background-position: -25% 0;
+      }
+    }
+
+    .developer-green-shimmer {
+      display: inline-block;
+      font-weight: 900;
+      letter-spacing: -0.045em;
+      line-height: 0.88;
+      user-select: none;
+      text-align: center;
+      white-space: nowrap;
+      
+      /* Luminous Cyber-Green Base with Glossy Specular Light Beam */
+      background: linear-gradient(
+        115deg,
+        rgba(0, 230, 118, 0.28) 0%,
+        rgba(0, 230, 118, 0.38) 32%,
+        rgba(16, 185, 129, 0.78) 42%,
+        rgba(255, 255, 255, 0.98) 48%,
+        rgba(0, 230, 118, 1) 50%,
+        rgba(52, 211, 153, 0.96) 53%,
+        rgba(255, 255, 255, 0.92) 56%,
+        rgba(0, 230, 118, 0.65) 62%,
+        rgba(0, 230, 118, 0.28) 72%,
+        rgba(0, 230, 118, 0.28) 100%
+      );
+      background-size: 280% 100%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      color: transparent;
+      animation: developerGreenWave 3.6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+      will-change: background-position;
+      filter: drop-shadow(0 0 25px rgba(0, 230, 118, 0.55)) drop-shadow(0 0 55px rgba(0, 230, 118, 0.25));
+    }
   </style>
 </head>
 <body class="bg-slate-100 dark:bg-[#080c10] text-gray-900 dark:text-gray-100 transition-colors duration-500 font-sans selection:bg-cybergreen selection:text-black">
@@ -345,9 +388,9 @@
 
   <!-- 4. GRAND DEVELOPER WATERMARK SHOWCASE TRANSITION -->
   <section id="developer" class="py-16 sm:py-24 md:py-28 px-4 sm:px-8 relative z-10 border-t border-gray-800/60 bg-[#080c10] overflow-hidden transition-colors duration-500">
-    <!-- Giant Omnibuds-Style Watermark Heading (DEVELOPER - Mobile & Laptop Perfected) -->
+    <!-- Giant Green Animated Watermark Heading (DEVELOPER - Under 3D Scrolling Effect End) -->
     <div class="absolute top-2 sm:top-6 left-0 right-0 z-0 pointer-events-none select-none flex justify-center overflow-hidden px-1">
-      <h2 class="text-[15.5vw] sm:text-[13.5vw] font-black uppercase text-transparent bg-clip-text bg-gradient-to-b from-white/35 via-cybergreen/20 to-transparent tracking-[-0.05em] leading-none text-center whitespace-nowrap drop-shadow-[0_4px_30px_rgba(0,0,0,0.6)] select-none">
+      <h2 class="text-[15.5vw] sm:text-[13.5vw] uppercase text-center whitespace-nowrap select-none developer-green-shimmer">
         DEVELOPER
       </h2>
     </div>

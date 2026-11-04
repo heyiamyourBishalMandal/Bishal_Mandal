@@ -12,8 +12,7 @@ export default function DeveloperShowcase({ scrollToSection }) {
   });
 
   const titleY = useTransform(scrollYProgress, [0, 1], [-25, 45]);
-  const titleScale = useTransform(scrollYProgress, [0, 0.5, 1], [0.96, 1.02, 1.06]);
-  const titleOpacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0.35, 0.9, 0.9, 0.3]);
+  const titleScale = useTransform(scrollYProgress, [0, 0.5, 1], [0.96, 1.02, 1.05]);
 
   return (
     <section
@@ -21,15 +20,14 @@ export default function DeveloperShowcase({ scrollToSection }) {
       id="developer"
       className="py-16 sm:py-24 md:py-28 px-4 sm:px-8 relative z-10 border-t border-gray-800/60 bg-[#080c10] overflow-hidden transition-colors duration-500"
     >
-      {/* 1. GIANT OMNIBUDS-STYLE PARALLAX WATERMARK HEADING (DEVELOPER - Mobile & Laptop Perfected) */}
+      {/* 1. GIANT GREEN ANIMATED WATERMARK HEADING (DEVELOPER - Under 3D Scrolling Effect End) */}
       <div className="absolute top-2 sm:top-6 left-0 right-0 z-0 pointer-events-none select-none flex justify-center overflow-hidden px-1">
         <motion.h2
           style={{
             y: titleY,
             scale: titleScale,
-            opacity: titleOpacity,
           }}
-          className="text-[15.5vw] sm:text-[13.5vw] font-black uppercase text-transparent bg-clip-text bg-gradient-to-b from-white/35 via-cybergreen/20 to-transparent tracking-[-0.05em] leading-none text-center whitespace-nowrap drop-shadow-[0_4px_30px_rgba(0,0,0,0.6)] select-none"
+          className="text-[15.5vw] sm:text-[13.5vw] uppercase text-center whitespace-nowrap select-none developer-green-shimmer"
         >
           DEVELOPER
         </motion.h2>

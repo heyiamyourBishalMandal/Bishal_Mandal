@@ -292,12 +292,6 @@ export default function AboutScrollytelling({ scrollToSection }) {
           />
         </div>
 
-        {/* Ambient Cinematic Watermark in 3D Stage */}
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none z-10 overflow-hidden">
-          <span className="text-[18vw] font-black uppercase tracking-[-0.05em] text-transparent bg-clip-text bg-gradient-to-b from-white/[0.04] to-transparent leading-none whitespace-nowrap">
-            DEVELOPER
-          </span>
-        </div>
 
         {/* 1. Huge Brand Display Title in About Section */}
         <div className="absolute top-8 sm:top-12 lg:top-20 left-5 sm:left-10 lg:left-14 z-25 pointer-events-none select-none">
