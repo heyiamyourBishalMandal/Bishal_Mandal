@@ -3,6 +3,7 @@ import Navbar from './components/Navbar';
 import Preloader from './components/Preloader';
 import HeroHome from './components/HeroHome';
 import AboutScrollytelling from './components/AboutScrollytelling';
+import DeveloperShowcase from './components/DeveloperShowcase';
 import SkillsSection from './components/SkillsSection';
 import ProjectsShowcase from './components/ProjectsShowcase';
 import CareerRoadmap from './components/CareerRoadmap';
@@ -27,7 +28,7 @@ export default function App() {
   // Section Observer for Navbar Highlighting
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ['hero', 'about', 'skills', 'projects', 'resume', 'contact'];
+      const sections = ['hero', 'about', 'developer', 'skills', 'projects', 'resume', 'contact'];
       const scrollPos = window.scrollY + 200;
 
       for (const secId of sections) {
@@ -36,7 +37,7 @@ export default function App() {
           const top = el.offsetTop;
           const height = el.offsetHeight;
           if (scrollPos >= top && scrollPos < top + height) {
-            setActiveSection(secId);
+            setActiveSection(secId === 'developer' ? 'about' : secId);
             break;
           }
         }
@@ -74,6 +75,7 @@ export default function App() {
           <main>
             <HeroHome scrollToSection={scrollToSection} />
             <AboutScrollytelling scrollToSection={scrollToSection} />
+            <DeveloperShowcase scrollToSection={scrollToSection} />
             <SkillsSection />
             <ProjectsShowcase />
             <CareerRoadmap />

@@ -292,6 +292,13 @@ export default function AboutScrollytelling({ scrollToSection }) {
           />
         </div>
 
+        {/* Ambient Cinematic Watermark in 3D Stage */}
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none z-10 overflow-hidden">
+          <span className="text-[18vw] font-black uppercase tracking-[-0.05em] text-transparent bg-clip-text bg-gradient-to-b from-white/[0.04] to-transparent leading-none whitespace-nowrap">
+            DEVELOPER
+          </span>
+        </div>
+
         {/* 1. Huge Brand Display Title in About Section */}
         <div className="absolute top-8 sm:top-12 lg:top-20 left-5 sm:left-10 lg:left-14 z-25 pointer-events-none select-none">
           <span className="text-[10px] sm:text-xs font-mono font-bold tracking-widest text-cybergreen uppercase drop-shadow-[0_2px_10px_rgba(0,0,0,0.95)]">
@@ -404,10 +411,10 @@ export default function AboutScrollytelling({ scrollToSection }) {
             <span className="text-cybergreen uppercase font-bold tracking-wider">SCROLL TO ROTATE 3D MODEL</span>
             <span className="text-gray-700">|</span>
             <button
-              onClick={() => scrollToSection('skills')}
+              onClick={() => scrollToSection('developer')}
               className="hover:text-cybergreen transition uppercase cursor-pointer"
             >
-              NEXT: SKILLS &rarr;
+              NEXT: DEVELOPER &rarr;
             </button>
           </div>
         </div>
