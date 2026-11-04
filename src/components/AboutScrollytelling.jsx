@@ -345,35 +345,35 @@ export default function AboutScrollytelling({ scrollToSection }) {
                 return (
                   <motion.div
                     key={idx}
-                    initial={{ opacity: 0, y: 25 }}
+                    initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -25 }}
-                    transition={{ duration: 0.4, ease: 'easeOut' }}
-                    className="space-y-3 sm:space-y-5 pointer-events-auto p-5 sm:p-7 rounded-3xl bg-[#080c10]/85 backdrop-blur-2xl border border-white/[0.08] shadow-[0_20px_50px_rgba(0,0,0,0.9),0_0_40px_rgba(0,230,118,0.06)] hover:border-cybergreen/40 transition-all duration-500"
+                    exit={{ opacity: 0, y: -20 }}
+                    transition={{ duration: 0.35, ease: 'easeOut' }}
+                    className="space-y-2.5 sm:space-y-4 lg:space-y-5 pointer-events-auto p-4 sm:p-6 lg:p-7 rounded-[1.75rem] sm:rounded-3xl bg-[#080c10]/85 backdrop-blur-2xl border border-white/[0.08] shadow-[0_20px_50px_rgba(0,0,0,0.9),0_0_40px_rgba(0,230,118,0.06)] hover:border-cybergreen/40 transition-all duration-500"
                   >
                     {/* Pill Badge */}
-                    <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full bg-cybergreen/10 border border-cybergreen/40 text-cybergreen text-[9px] sm:text-xs font-mono font-bold uppercase tracking-wider max-w-full">
+                    <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 sm:px-3.5 sm:py-1.5 rounded-full bg-cybergreen/10 border border-cybergreen/40 text-cybergreen text-[8px] sm:text-xs font-mono font-bold uppercase tracking-wider max-w-full">
                       {step.icon}
                       <span className="truncate">{step.badge}</span>
                     </div>
 
                     {/* Title */}
-                    <h2 className="text-xl sm:text-3xl lg:text-4xl font-black leading-tight tracking-tight text-white">
+                    <h2 className="text-lg sm:text-2xl lg:text-4xl font-black leading-tight tracking-tight text-white">
                       {step.title}
                     </h2>
 
                     {/* Description */}
-                    <p className="text-xs sm:text-sm lg:text-base leading-relaxed font-normal text-gray-300">
+                    <p className="text-[11px] sm:text-xs lg:text-sm leading-relaxed font-normal text-gray-300">
                       {step.description}
                     </p>
 
                     {/* Pills */}
                     {step.pills && (
-                      <div className="flex flex-wrap gap-1.5 sm:gap-2 pt-1">
+                      <div className="flex flex-wrap gap-1 sm:gap-2 pt-0.5">
                         {step.pills.map((pill, pIdx) => (
                           <span
                             key={pIdx}
-                            className="bg-cybergreen/10 text-cybergreen border border-cybergreen/30 text-[10px] sm:text-xs font-mono font-bold px-2.5 py-1 rounded-full shadow-sm"
+                            className="bg-cybergreen/10 text-cybergreen border border-cybergreen/30 text-[9px] sm:text-xs font-mono font-bold px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-full shadow-sm"
                           >
                             {pill}
                           </span>
@@ -383,16 +383,16 @@ export default function AboutScrollytelling({ scrollToSection }) {
 
                     {/* Action Buttons */}
                     {step.buttons && (
-                      <div className="flex flex-row flex-wrap gap-2.5 pt-2">
+                      <div className="flex flex-row gap-2 pt-1 sm:pt-2">
                         <button
                           onClick={() => scrollToSection('projects')}
-                          className="bg-gradient-to-r from-cybergreen via-emerald-400 to-cybergreen text-black font-extrabold py-2.5 px-5 sm:px-6 rounded-xl shadow-lg shadow-cybergreen/30 hover:shadow-cybergreen/50 transition-all duration-300 hover:scale-105 text-xs sm:text-sm text-center cursor-pointer"
+                          className="bg-gradient-to-r from-cybergreen via-emerald-400 to-cybergreen text-black font-extrabold py-2 px-3 sm:py-2.5 sm:px-6 rounded-xl shadow-lg shadow-cybergreen/30 hover:shadow-cybergreen/50 transition-all duration-300 hover:scale-105 text-xs sm:text-sm text-center cursor-pointer flex-1"
                         >
                           Explore Work
                         </button>
                         <button
                           onClick={() => scrollToSection('contact')}
-                          className="bg-white/[0.05] hover:bg-white/[0.1] border border-white/15 hover:border-cybergreen/50 text-white font-semibold py-2.5 px-5 sm:px-6 rounded-xl transition duration-300 text-xs sm:text-sm text-center cursor-pointer backdrop-blur-md"
+                          className="bg-white/[0.05] hover:bg-white/[0.1] border border-white/15 hover:border-cybergreen/50 text-white font-semibold py-2 px-3 sm:py-2.5 sm:px-6 rounded-xl transition duration-300 text-xs sm:text-sm text-center cursor-pointer backdrop-blur-md flex-1"
                         >
                           Get In Touch
                         </button>
