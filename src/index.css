@@ -133,3 +133,112 @@
   filter: drop-shadow(0 0 25px rgba(0, 230, 118, 0.55)) drop-shadow(0 0 55px rgba(0, 230, 118, 0.25));
 }
 
+/* ==========================================================================
+   MULTI-DEVICE RESPONSIVE LAYOUT ENGINE
+   Guarantees 100% face visibility, zero overlap, and luxury alignment across:
+   - Widescreen Laptops & Desktops (1080p, 1440p, 4K)
+   - Landscape Tablets (iPad Pro 13, iPad Air, Galaxy Tab in landscape)
+   - Portrait Tablets (iPad Pro 13, iPad Air, iPad Mini)
+   - Smartphones in Standard Portrait
+   - Smartphones with "Desktop Mode" Enabled (e.g. 980px-1024px virtual width)
+   - Vertical / Pivot Monitors
+   ========================================================================== */
+
+/* 1. TRUE WIDESCREEN DESKTOP & LAPTOP MONITORS (Width >= 1024px AND Landscape) */
+@media (min-width: 1024px) and (orientation: landscape) {
+  .device-widescreen-only {
+    display: block !important;
+  }
+  .device-widescreen-flex {
+    display: flex !important;
+  }
+  .device-portrait-only {
+    display: none !important;
+  }
+
+  /* Hero Section: Card on Right Side, Vertically Centered */
+  .hero-responsive-container {
+    justify-content: center !important;
+    align-items: flex-end !important;
+    padding-bottom: 0 !important;
+  }
+  .hero-responsive-card-box {
+    margin-left: auto !important;
+    margin-right: 2.5rem !important; /* ~40px from right edge */
+    max-width: 32rem !important; /* max-w-lg */
+  }
+
+  /* About Section: Story Card on Right Side, Vertically Centered */
+  .about-responsive-container {
+    justify-content: center !important;
+    align-items: flex-end !important;
+    padding-bottom: 0 !important;
+  }
+  .about-responsive-card-box {
+    margin-left: auto !important;
+    margin-right: 2.5rem !important;
+    max-width: 28rem !important; /* max-w-md */
+  }
+  .about-responsive-steps {
+    display: block !important;
+  }
+  .about-brand-title {
+    top: 5rem !important;
+    left: 3.5rem !important;
+  }
+  .about-brand-title h2 {
+    font-size: 4.5rem !important; /* text-7xl */
+  }
+}
+
+/* 2. PORTRAIT TABLETS, SMARTPHONES, & MOBILE BROWSERS IN "DESKTOP MODE"
+   Matches ANY screen in portrait orientation (height >= width), OR width < 1024px */
+@media (max-width: 1023px), (orientation: portrait) {
+  .device-widescreen-only {
+    display: none !important;
+  }
+  .device-widescreen-flex {
+    display: none !important;
+  }
+  .device-portrait-only {
+    display: flex !important;
+  }
+
+  /* Hero Section: Card DOCKED AT BOTTOM, Centered Horizontally */
+  .hero-responsive-container {
+    justify-content: flex-end !important;
+    align-items: center !important;
+    padding-bottom: 2.5rem !important;
+  }
+  .hero-responsive-card-box {
+    margin-left: auto !important;
+    margin-right: auto !important;
+    max-width: 30rem !important;
+    width: 100% !important;
+  }
+
+  /* About Section: Story Card DOCKED AT BOTTOM, Centered Horizontally */
+  .about-responsive-container {
+    justify-content: flex-end !important;
+    align-items: center !important;
+    padding-bottom: 2.75rem !important;
+  }
+  .about-responsive-card-box {
+    margin-left: auto !important;
+    margin-right: auto !important;
+    max-width: 28rem !important;
+    width: 100% !important;
+  }
+  .about-responsive-steps {
+    display: none !important;
+  }
+  .about-brand-title {
+    top: 1.5rem !important;
+    left: 1.25rem !important;
+  }
+  .about-brand-title h2 {
+    font-size: 1.75rem !important;
+  }
+}
+
+

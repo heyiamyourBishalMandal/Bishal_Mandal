@@ -140,8 +140,8 @@ export default function HeroHome({ scrollToSection }) {
         />
       </div>
 
-      {/* 1. Desktop Executive Brand Display (Left stage on laptops/monitors) */}
-      <div className="hidden lg:block absolute top-12 lg:top-20 left-10 lg:left-14 z-25 pointer-events-none select-none">
+      {/* 1. Desktop Executive Brand Display (Left stage on widescreen laptops/monitors only) */}
+      <div className="device-widescreen-only absolute top-12 lg:top-20 left-10 lg:left-14 z-25 pointer-events-none select-none">
         {/* Luminous Status Badge */}
         <div className="inline-flex items-center gap-2 mb-3 px-3.5 py-1.5 rounded-full bg-black/60 border border-emerald-500/30 backdrop-blur-xl shadow-[0_0_20px_rgba(0,230,118,0.15)]">
           <span className="relative flex h-2 w-2">
@@ -177,8 +177,8 @@ export default function HeroHome({ scrollToSection }) {
         </p>
       </div>
 
-      {/* 2. Mobile/Tablet Sleek Top Status Pill (Takes only ~32px at top edge so forehead and face are 100% visible) */}
-      <div className="lg:hidden absolute top-4 left-0 right-0 z-25 flex justify-center pointer-events-none select-none px-4">
+      {/* 2. Portrait Tablet & Mobile Sleek Top Status Pill (Takes only ~32px at top edge so forehead and face are 100% visible) */}
+      <div className="device-portrait-only absolute top-4 left-0 right-0 z-25 justify-center pointer-events-none select-none px-4">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/70 border border-emerald-500/30 backdrop-blur-xl shadow-[0_0_15px_rgba(0,230,118,0.2)]">
           <span className="relative flex h-2 w-2">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cybergreen opacity-75"></span>
@@ -190,9 +190,9 @@ export default function HeroHome({ scrollToSection }) {
         </div>
       </div>
 
-      {/* 3. Floating High-End Glassmorphic Executive Intro Card (Docked cleanly at bottom on mobile, preserving full face) */}
-      <div className="relative z-30 w-full max-w-7xl mx-auto px-4 sm:px-8 md:px-12 lg:px-16 h-full flex flex-col justify-end lg:justify-center items-center lg:items-end pointer-events-none pb-10 sm:pb-12 lg:pb-0">
-        <div className="w-full max-w-sm sm:max-w-md lg:max-w-lg text-left lg:ml-auto lg:mr-10">
+      {/* 3. Floating High-End Glassmorphic Executive Intro Card (Docked cleanly at bottom on portrait/mobile, side-by-side on widescreen) */}
+      <div className="hero-responsive-container relative z-30 w-full max-w-7xl mx-auto px-4 sm:px-8 md:px-12 lg:px-16 h-full flex flex-col pointer-events-none">
+        <div className="hero-responsive-card-box w-full text-left">
           <motion.div
             initial={{ opacity: 0, y: 25 }}
             animate={{ opacity: 1, y: 0 }}

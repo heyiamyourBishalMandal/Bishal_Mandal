@@ -146,6 +146,97 @@
       will-change: background-position;
       filter: drop-shadow(0 0 25px rgba(0, 230, 118, 0.55)) drop-shadow(0 0 55px rgba(0, 230, 118, 0.25));
     }
+
+    /* Multi-Device Responsive Layout Engine */
+    @media (min-width: 1024px) and (orientation: landscape) {
+      .device-widescreen-only {
+        display: block !important;
+      }
+      .device-widescreen-flex {
+        display: flex !important;
+      }
+      .device-portrait-only {
+        display: none !important;
+      }
+
+      .hero-responsive-container {
+        justify-content: center !important;
+        align-items: flex-end !important;
+        padding-bottom: 0 !important;
+      }
+      .hero-responsive-card-box {
+        margin-left: auto !important;
+        margin-right: 2.5rem !important;
+        max-width: 32rem !important;
+      }
+
+      .about-responsive-container {
+        justify-content: center !important;
+        align-items: flex-end !important;
+        padding-bottom: 0 !important;
+      }
+      .about-responsive-card-box {
+        margin-left: auto !important;
+        margin-right: 2.5rem !important;
+        max-width: 28rem !important;
+      }
+      .about-responsive-steps {
+        display: block !important;
+      }
+      .about-brand-title {
+        top: 5rem !important;
+        left: 3.5rem !important;
+      }
+      .about-brand-title h2 {
+        font-size: 4.5rem !important;
+      }
+    }
+
+    @media (max-width: 1023px), (orientation: portrait) {
+      .device-widescreen-only {
+        display: none !important;
+      }
+      .device-widescreen-flex {
+        display: none !important;
+      }
+      .device-portrait-only {
+        display: flex !important;
+      }
+
+      .hero-responsive-container {
+        justify-content: flex-end !important;
+        align-items: center !important;
+        padding-bottom: 2.5rem !important;
+      }
+      .hero-responsive-card-box {
+        margin-left: auto !important;
+        margin-right: auto !important;
+        max-width: 30rem !important;
+        width: 100% !important;
+      }
+
+      .about-responsive-container {
+        justify-content: flex-end !important;
+        align-items: center !important;
+        padding-bottom: 2.75rem !important;
+      }
+      .about-responsive-card-box {
+        margin-left: auto !important;
+        margin-right: auto !important;
+        max-width: 28rem !important;
+        width: 100% !important;
+      }
+      .about-responsive-steps {
+        display: none !important;
+      }
+      .about-brand-title {
+        top: 1.5rem !important;
+        left: 1.25rem !important;
+      }
+      .about-brand-title h2 {
+        font-size: 1.75rem !important;
+      }
+    }
   </style>
 </head>
 <body class="bg-slate-100 dark:bg-[#080c10] text-gray-900 dark:text-gray-100 transition-colors duration-500 font-sans selection:bg-cybergreen selection:text-black">
@@ -194,8 +285,8 @@
   <section id="hero" class="relative w-full h-screen overflow-hidden bg-[#080c10] flex items-center justify-center">
     <canvas id="hero-canvas" class="absolute inset-0 w-full h-full object-cover filter contrast-[108%] brightness-[104%] saturate-[105%] pointer-events-none"></canvas>
 
-    <!-- 1. Desktop Executive Brand Display (Left stage on laptops/monitors) -->
-    <div class="hidden lg:block absolute top-12 lg:top-20 left-10 lg:left-14 z-25 pointer-events-none select-none">
+    <!-- 1. Desktop Executive Brand Display (Left stage on widescreen laptops/monitors only) -->
+    <div class="device-widescreen-only absolute top-12 lg:top-20 left-10 lg:left-14 z-25 pointer-events-none select-none">
       <!-- Luminous Status Badge -->
       <div class="inline-flex items-center gap-2 mb-3 px-3.5 py-1.5 rounded-full bg-black/60 border border-emerald-500/30 backdrop-blur-xl shadow-[0_0_20px_rgba(0,230,118,0.15)]">
         <span class="relative flex h-2 w-2">
@@ -231,8 +322,8 @@
       </p>
     </div>
 
-    <!-- 2. Mobile/Tablet Sleek Top Status Pill (Takes only ~32px at top edge so forehead and face are 100% visible) -->
-    <div class="lg:hidden absolute top-4 left-0 right-0 z-25 flex justify-center pointer-events-none select-none px-4">
+    <!-- 2. Portrait Tablet & Mobile Sleek Top Status Pill (Takes only ~32px at top edge so forehead and face are 100% visible) -->
+    <div class="device-portrait-only absolute top-4 left-0 right-0 z-25 justify-center pointer-events-none select-none px-4">
       <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/70 border border-emerald-500/30 backdrop-blur-xl shadow-[0_0_15px_rgba(0,230,118,0.2)]">
         <span class="relative flex h-2 w-2">
           <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-cybergreen opacity-75"></span>
@@ -244,9 +335,9 @@
       </div>
     </div>
 
-    <!-- 3. Floating High-End Glassmorphic Executive Intro Card (Docked cleanly at bottom on mobile, preserving full face) -->
-    <div id="story-panel" class="relative z-30 w-full max-w-7xl mx-auto px-4 sm:px-8 md:px-12 lg:px-16 h-full flex flex-col justify-end lg:justify-center items-center lg:items-end pointer-events-none pb-10 sm:pb-12 lg:pb-0">
-      <div class="w-full max-w-sm sm:max-w-md lg:max-w-lg text-left lg:ml-auto lg:mr-10">
+    <!-- 3. Floating High-End Glassmorphic Executive Intro Card (Docked cleanly at bottom on portrait/mobile, side-by-side on widescreen) -->
+    <div id="story-panel" class="hero-responsive-container relative z-30 w-full max-w-7xl mx-auto px-4 sm:px-8 md:px-12 lg:px-16 h-full flex flex-col pointer-events-none">
+      <div class="hero-responsive-card-box w-full text-left">
         <div class="space-y-2.5 sm:space-y-3.5 lg:space-y-5 pointer-events-auto p-4 sm:p-6 lg:p-8 rounded-[1.75rem] sm:rounded-[2rem] bg-[#080c10]/85 backdrop-blur-3xl border border-white/[0.12] shadow-[0_20px_60px_rgba(0,0,0,0.95),0_0_40px_rgba(0,230,118,0.08)] hover:border-cybergreen/50 transition-all duration-500 relative overflow-hidden group">
           <!-- Ambient Internal Sheen Glow -->
           <div class="absolute top-0 right-0 w-36 sm:w-48 h-36 sm:h-48 bg-cybergreen/10 rounded-full blur-3xl pointer-events-none group-hover:bg-cybergreen/15 transition-all duration-700"></div>
@@ -325,15 +416,15 @@
     <div class="sticky top-0 w-full h-screen overflow-hidden bg-[#080c10] flex items-center justify-center">
       <canvas id="about-canvas" class="absolute inset-0 w-full h-full object-cover filter contrast-[108%] brightness-[104%] saturate-[105%]"></canvas>
 
-      <div class="absolute top-8 sm:top-12 lg:top-20 left-5 sm:left-10 lg:left-14 z-25 pointer-events-none select-none">
-        <span class="text-[10px] sm:text-xs font-mono font-bold tracking-widest text-cybergreen uppercase drop-shadow-[0_2px_10px_rgba(0,0,0,0.95)]">ABOUT THE</span>
-        <h2 class="text-2xl sm:text-5xl lg:text-7xl font-black tracking-tighter text-white uppercase leading-none mt-1 drop-shadow-[0_4px_30px_rgba(0,0,0,0.98)]">
+      <div class="about-brand-title absolute z-25 pointer-events-none select-none">
+        <span class="text-[10px] sm:text-xs font-mono font-bold tracking-widest text-cybergreen uppercase drop-shadow-[0_2px_10px_rgba(0,0,0,0.95)] block">ABOUT THE</span>
+        <h2 class="font-black tracking-tighter text-white uppercase leading-none mt-0.5 sm:mt-1 drop-shadow-[0_4px_30px_rgba(0,0,0,0.98)]">
           DEVELOPER<br />JOURNEY
         </h2>
       </div>
 
-      <!-- Step Indicator List -->
-      <div class="hidden lg:block absolute bottom-16 left-6 sm:bottom-20 sm:left-10 lg:left-14 z-25 pointer-events-auto space-y-2 font-mono text-[11px] sm:text-xs">
+      <!-- Step Indicator List (Widescreen only) -->
+      <div class="about-responsive-steps absolute bottom-16 left-6 sm:bottom-20 sm:left-10 lg:left-14 z-25 pointer-events-auto space-y-2 font-mono text-[11px] sm:text-xs">
         <div id="step-btn-0" class="flex items-center gap-2 text-cybergreen font-bold translate-x-2 scale-105 drop-shadow-[0_0_12px_#00E676] transition-all duration-300 cursor-pointer">
           <span class="text-[10px] opacity-70 font-semibold">#01</span>
           <span>Software Engineering</span>
@@ -352,9 +443,9 @@
         </div>
       </div>
 
-      <!-- Floating Step Story Container -->
-      <div class="relative z-30 w-full max-w-7xl mx-auto px-4 sm:px-8 md:px-12 lg:px-16 h-full flex flex-col justify-end lg:justify-center items-center lg:items-end pointer-events-none pb-8 sm:pb-12 lg:pb-0">
-        <div class="w-full max-w-sm sm:max-w-md lg:max-w-md text-left lg:ml-auto lg:mr-10">
+      <!-- Floating Step Story Container (Docked cleanly at bottom on portrait/mobile, side-by-side on widescreen) -->
+      <div class="about-responsive-container relative z-30 w-full max-w-7xl mx-auto px-4 sm:px-8 md:px-12 lg:px-16 h-full flex flex-col pointer-events-none">
+        <div class="about-responsive-card-box w-full text-left">
           <div id="about-story-card" class="space-y-3 sm:space-y-5 pointer-events-auto p-4 sm:p-6 rounded-3xl bg-[#080c10]/90 backdrop-blur-xl border border-gray-800/80 shadow-[0_10px_30px_rgba(0,0,0,0.9)] transition-all duration-300">
             <div id="about-card-badge" class="inline-flex items-center gap-1.5 sm:gap-2 px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full bg-cybergreen/10 border border-cybergreen/40 text-cybergreen text-[9px] sm:text-xs font-mono font-bold uppercase tracking-wider max-w-full">
               <i data-lucide="sparkles" class="w-3.5 h-3.5 text-cybergreen animate-spin"></i>

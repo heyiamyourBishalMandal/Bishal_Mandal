@@ -293,18 +293,18 @@ export default function AboutScrollytelling({ scrollToSection }) {
         </div>
 
 
-        {/* 1. Huge Brand Display Title in About Section */}
-        <div className="absolute top-8 sm:top-12 lg:top-20 left-5 sm:left-10 lg:left-14 z-25 pointer-events-none select-none">
-          <span className="text-[10px] sm:text-xs font-mono font-bold tracking-widest text-cybergreen uppercase drop-shadow-[0_2px_10px_rgba(0,0,0,0.95)]">
+        {/* 1. Brand Display Title in About Section */}
+        <div className="about-brand-title absolute z-25 pointer-events-none select-none">
+          <span className="text-[10px] sm:text-xs font-mono font-bold tracking-widest text-cybergreen uppercase drop-shadow-[0_2px_10px_rgba(0,0,0,0.95)] block">
             ABOUT THE
           </span>
-          <h2 className="text-2xl sm:text-5xl lg:text-7xl font-black tracking-tighter text-white uppercase leading-none mt-1 drop-shadow-[0_4px_30px_rgba(0,0,0,0.98)]">
+          <h2 className="font-black tracking-tighter text-white uppercase mt-0.5 sm:mt-1 drop-shadow-[0_4px_30px_rgba(0,0,0,0.98)] leading-none">
             DEVELOPER<br />JOURNEY
           </h2>
         </div>
 
-        {/* 2. Interactive Step List (#01 - #04) */}
-        <div className="hidden lg:block absolute bottom-16 left-6 sm:bottom-20 sm:left-10 lg:left-14 z-25 pointer-events-auto space-y-2 font-mono text-[11px] sm:text-xs">
+        {/* 2. Interactive Step List (#01 - #04) - Widescreen only */}
+        <div className="about-responsive-steps absolute bottom-16 left-6 sm:bottom-20 sm:left-10 lg:left-14 z-25 pointer-events-auto space-y-2 font-mono text-[11px] sm:text-xs">
           {storySteps.map((step, sIdx) => {
             const isActive = sIdx === activeStep;
             return (
@@ -330,9 +330,9 @@ export default function AboutScrollytelling({ scrollToSection }) {
           })}
         </div>
 
-        {/* 3. Floating Story Panel Container */}
-        <div className="relative z-30 w-full max-w-7xl mx-auto px-4 sm:px-8 md:px-12 lg:px-16 h-full flex flex-col justify-end lg:justify-center items-center lg:items-end pointer-events-none pb-8 sm:pb-12 lg:pb-0">
-          <div className="w-full max-w-sm sm:max-w-md lg:max-w-md text-left lg:ml-auto lg:mr-10">
+        {/* 3. Floating Story Panel Container (Docked cleanly at bottom on portrait/mobile, side-by-side on widescreen) */}
+        <div className="about-responsive-container relative z-30 w-full max-w-7xl mx-auto px-4 sm:px-8 md:px-12 lg:px-16 h-full flex flex-col pointer-events-none">
+          <div className="about-responsive-card-box w-full text-left">
             <AnimatePresence mode="wait">
               {storySteps.map((step, idx) => {
                 if (idx !== activeStep) return null;
